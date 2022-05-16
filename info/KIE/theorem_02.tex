@@ -1,0 +1,76 @@
+\documentclass[../../main.tex]{subfiles}
+
+\begin{document}
+
+\section{Az objektum-orientált programozás alapjai II}
+
+\begin{fulltheorem}
+	Az objektum-orientált programozás alapjai. Operátorok túlterhelése.
+	C++ IO. new, delete. Osztály hierarchiák.
+\end{fulltheorem}
+
+\subsection{Az operátorok túlterhelése}
+
+Szinte minden \kix{operátor} \kix{túlterhelhető}, kivéve: \tc{::}, \tc{.},
+\tc{.*}, \tc{?}, \texttt{\tc{sizeof}()}, \texttt{\tc{typeid}()}. Új műveleti
+jel nem hozható létre. Egyoperandusú művelet esetén:
+
+\begin{minted}[bgcolor=bg, linenos]{cpp}
+int operator++ ()    { /* ... */ }  // i++   --   Postincrementing
+int operator++ (int) { /* ... */ }  // ++i   --   Preincrementing
+\end{minted}
+
+\subsection{C++ IO}
+
+Az \tc{std} \cix{namespace}-t használjuk, az alábbi fejlécekkel:
+\cix{iostream}, \cix{iomanip}.
+
+\begin{minted}[bgcolor=bg, linenos]{cpp}
+#include <iostream>
+#include <iomanip>
+#include <string>
+
+using namespace std;
+
+cin.get();
+cout.put('\n');
+
+cout << "Hello World"
+string tmp;
+cin >> tmp;
+
+cout.flags(ios_base::hex)
+  // (no)boolalpha, left, right
+  // dec, hex, oct, fixed, scientific
+cout.precision(2)
+
+cout << setw(5) << setprecision(2) << 12.345;
+
+// Overloading
+friend ostream& operator<< (ostream& os, const type& myVar);
+friend istream& operator>> (istream& is, type& myVar);
+\end{minted}
+
+\subsection{new és delete operátorok}
+
+A \cix{new} és \cix{delete} kulcsszavak segítségével \kix{dinamikus példány}okat
+hozhatunk létre, és törölhetünk. Ezek is túlterhelhetőek:
+
+\begin{minted}[bgcolor=bg, linenos]{cpp}
+void* operator new(size_t size){
+  // { ... }
+  return new type[size];
+}
+
+void operator delete (void* p, size_t size){
+  // { ... }
+  ::delete p;
+}
+\end{minted}
+
+\subsection{Osztály hierarchiák}
+
+Az újrahasznosítható szoftver alapja. Többszörös \kix{öröklődés}
+(\cix{inheritance}) lehetséges.
+
+\end{document}

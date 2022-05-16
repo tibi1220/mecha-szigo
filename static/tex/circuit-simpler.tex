@@ -1,0 +1,45 @@
+\documentclass{standalone}
+
+\usepackage{amsmath}
+\usepackage{unicode-math}
+\usepackage{tikz}
+\usepackage{circuitikz}
+
+\begin{document}
+\begin{circuitikz}[european, scale=1]
+  \node[
+    rectangle, draw=black, thick,
+    minimum height = 3cm, minimum width = 2cm,
+    text width = 2cm, align = center
+  ] (fp1) at (-2.5,0) {\scriptsize $M_\text{vill} = k_\text{m} i$ \\ $u_\text{ind} = k_\text{e} \omega$};
+
+  \node[
+    rectangle, draw=black, thick,
+    minimum height = 3cm, minimum width = 2cm,
+    text width = 2cm, align = center
+  ] (fp2) at (2.5,0) {\scriptsize $\omega_\text{r} = N \omega_\text{t}$ \\ $M_\text{t} = N M_\text{r}$};
+
+  \draw[]
+  ($(fp1.west)+(0,1)$)
+  to[R, l_=$Z_\text{a}$] ++(-2,0)
+  to[vsource, l_=$U_\text{be}$] ++(0,-2) coordinate (G1)
+  to[] (G1-|fp1.west)
+  (G1) node[rground] {}
+
+  ($(fp1.east)+(0,1)$)
+  to[] ++(1.375,0) coordinate (A)
+  to[] (A-|fp2.west)
+  (A) to[R, l=$Z_\text{r}$] ++(0,-2) coordinate (G2)
+  ($(fp1.east)-(0,1)$) -- ($(fp2.west)-(0,1)$)
+  (G2) node[rground] {}
+
+  ($(fp2.east)+(0,1)$)
+  to ++(1,0) coordinate (D)
+  to ++(1.5,0) coordinate (E)
+  to[isource, l=$-M_\text{t}$] ++(0,-2) coordinate (G3)
+  to[] (G3-|fp2.east)
+  (D) to[R, l=$Z_\text{t}$] ++(0,-2)
+  (G3) node[rground] {}
+  ;
+\end{circuitikz}
+\end{document}

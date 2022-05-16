@@ -1,0 +1,78 @@
+\documentclass[../main.tex]{subfiles}
+
+\begin{document}
+
+\section{Az operációs rendszerek alapjai II}
+
+\begin{fulltheorem}
+	Az operációs rendszerek alapjai. Holtpont. Holtpont kezelése.
+	Holtpont észlelése. Holtpont megelőzés. Bankár algoritmus.
+\end{fulltheorem}
+
+\subsection{Holtpont}
+
+A \kix{holtpont} egy rendszernek egy olyan állapota, ahonnan külső beavatkozás
+nélkül nem tud elmozdulni. Holtpont akkor fordulhat elő, amikor a folyamatok
+egy adott halmazában minden egyes elem leköt néhány erőforrást, és ugyanakkor
+várakozik is másokra.
+
+\subsection{Holtpont kezelése}
+
+\begin{itemize}
+	\item \kix{Strucc algoritmus}:
+	      nem teszünk semmit.
+
+	\item \kix{Detektálás} és \kix{feloldás}:
+	      észrevesszük, ha holtpont alakult ki, és megpróbáljuk feloldani.
+
+	\item \kix{Megelőzés}:
+	      strukturálisan holtpontmentes rendszert tervezünk.
+\end{itemize}
+
+\subsection{Holtpont észlelése}
+
+Tegyük fel, hogy \texttt{4} \texttt{folyamat}unk és \texttt{10}
+egység \texttt{erőforrás}unk van. A helyzet a következő:
+\begin{table}[H]
+	\centering\begin{tabular}{|p{1.5cm} |p{1.5cm} |p{1.5cm} |}
+		\hline
+		                       & \texttt{foglal} & \texttt{kér}
+		\\ \hline
+		\texttt{\color{red}P1} & \texttt{4}      & \texttt{\color{red}4} \\
+		\texttt{P2}            & \texttt{1}      & \texttt{0}            \\
+		\texttt{\color{red}P3} & \texttt{3}      & \texttt{\color{red}4} \\
+		\texttt{P4}            & \texttt{1}      & \texttt{2}            \\
+		\hline
+	\end{tabular}
+	\caption{Holtponti helyzet}
+	\label{table:deadlock}
+\end{table}
+
+\kix{Radikális} lépés, ha az összes folyamatot felszámoljuk.
+\kix{Kiméletes}, ha megnézzük, van-e menthető folyamat, esetleg
+prioritás, vagy éppen mekkora része lett már az adott
+folyamat feladatának elvűgezve. Minden esetben biztosítani
+kell a folyamatok visszaállíthatóságát.
+
+\subsection{Holtpont megelőzése}
+
+\kix{Biztonságos}[nak] nevezzük azokat a folyamat-erőforrás rendszereket,
+amelyekben létezik a folyamatoknak (legalább egy) olyan sorrendje,
+amely szerint végrehajtva őket, azok maximális erőforrás igénye is kielégíthető.
+Biztonságos állapotban nem lehetséges holtponti állapot kialakulása.
+A biztonságos állapotot \kix{bankár algoritmus}[sal] ellenőrizhetjük.
+(bankban is ilyen módszert alkalmaznak)
+
+\subsection{Bankár algoritmus}
+
+\begin{enumerate}
+	\item adatok mátrixos felírása
+	\item az igények és a szabad erőforrások kiszámítása
+	\item megnézzük, hogy valamelyik folyamat kielégíthető-e
+	\item újraszámítás, folytatás\dots
+\end{enumerate}
+Ha találunk egy olyan sorrendet,
+amelyben a folyamatok erőforrás igénye kielégíthető,
+akkor a rendszer \kix{biztonságos állapot}[ban] van.
+
+\end{document}

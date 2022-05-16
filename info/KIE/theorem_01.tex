@@ -1,0 +1,136 @@
+\documentclass[../../main.tex]{subfiles}
+
+\begin{document}
+
+\section{Az objektum-orientált programozás alapjai I}
+
+\begin{fulltheorem}
+	Az objektum-orientált programozás alapjai. Az objektum fogalma. Az osztály
+	fogalma. Struktúrák. Tagfüggvények. Konstruktor. Destruktor. Statikus tagok.
+	Friend függvények.
+\end{fulltheorem}
+
+\subsection{Az objektum fogalma}
+
+Az \kix{objektum} (\cix{object}) egy rendszer egyedileg azonosítható szereplője
+adatokkal és működéssel.
+
+\subsection{Az osztály fogalma}
+
+Az \kix{osztály} (\cix{class}) megegyező szerkezetű, hasonló viselkedésű
+egyedek mintája. Felhasználó által definiált adattípus. Az osztályhoz tartozó
+\kix{példány} (\cix{instance}) az objektum. Adatszerkezetekből és
+tagfüggvényekből áll, melyek alaphelyzetben nem láthatóak. (\cix{data hiding})
+
+\begin{minted}[bgcolor=bg, linenos]{cpp}
+class MyClass {
+  // private:
+  int hidden_variable;
+  int hidden_function() { return 42; }
+
+public:
+  int public_variable;
+  int public_function() { return 42; }
+};
+\end{minted}
+
+\subsection{Struktúrák}
+
+A \kix{struktúra} (\cix{struct}) adattagjai az osztályokkal ellentétben
+alaphelyzetben láthatóak.
+
+\begin{minted}[bgcolor=bg, linenos]{cpp}
+struct MyStruct {
+  // public:
+  int public_variable;
+  int public_function() { return 42; }
+};
+\end{minted}
+
+\subsection{Tagfüggvények}
+Az \kix{adattípus}sal kapcsolatban álló (az \kix{adattag}okon működő)
+\kix{tagfüggvény}ek lehetnek belül, vagy kívül definiáltak. Lehetnek továbbá
+\cix{inline} függvények. (Hívás helyén lesznek lefordítva.)
+\begin{minted}[bgcolor=bg, linenos]{cpp}
+class MyClass {
+public:
+  int outer();
+  int inner() { return 42; }
+  int inline_outer();
+  inline int inline_inner() { return 42; }
+};
+
+int MyClass::outer() { return 42; }
+inline int MyClass::inline_outer() { return 42; }
+\end{minted}
+
+\subsection{Konstruktor}
+
+A \kix{konstruktor} függvény az objektumok előkészítésére, esetleg
+inicializálása. Ugyanaz a neve mint az osztálynak, nincs típusa, sem
+visszatérési értéke. Létrehozás után nem hívható. Ha nem adjuk meg akkor
+is létezik alapértelmezett. (\cix{default}) Másoló konstruktor megadása
+konstans referenciával lehetséges.
+
+\subsection{Destruktor}
+
+Az objektumok megszűnésekor automatikusan meghívódó függvény.
+Nincsenek paraméterei. Nem terhelhető túl. Statikus \cix{instance} esetén a
+\cix{scope}-on kívül, dinamikus esetben a \cix{delete} kulcsszó esetén
+hívódik meg.
+
+\begin{minted}[bgcolor=bg, linenos]{cpp}
+class MyClass {
+  const x;
+public:
+  MyClass() : x(42) {}
+  MyClass(int x) : x(x) {}
+  MyClass(int x, int y) : x(x) { this->y = y; }
+  ~MyClass() {}
+};
+
+MyClass* dinamic_instance = new MyClass();
+MyClass static_instance();
+delete dinamic_instance;
+\end{minted}
+
+\subsection{Statikus tagok}
+
+A \kix{statikus} (\cix{static}) tagok nem az objektumhoz, hanem az osztályhoz
+vannak kötve. Az osztályban nem definiálható, \kix{névtér} (\cix{namespace})
+szintjén kell ezt megtenni.
+
+\begin{minted}[bgcolor=bg, linenos]{cpp}
+class MyClass {
+public:
+  static int x;
+};
+
+int MyClass::x = 42;
+\end{minted}
+
+\subsection{Friend függvények}
+
+A \cix{friend} függvények segítségével az osztály rejtett tagjai is elérhetőek.
+Lehet külső függvény, egy másik osztály függvénye, vagy akár egy mésik osztály
+is.
+
+\begin{minted}[bgcolor=bg, linenos]{cpp}
+class MyClass {
+  int x;
+
+public:
+  friend int func(MyClass &r);
+  friend int OtherClass::class_func(MyClass &r);
+  friend class OtherClass;
+};
+
+class OtherClass {
+public:
+  int class_func(MyClass &r) { return r.x; }
+};
+
+int func(MyClass &r) { return r.x; }
+\end{minted}
+
+\end{document}

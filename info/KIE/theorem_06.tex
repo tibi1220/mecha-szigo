@@ -1,0 +1,89 @@
+\documentclass[../../main.tex]{subfiles}
+
+\begin{document}
+
+\section{A számítástudomány alapjai}
+
+\begin{fulltheorem}
+	A számítástudomány alapjai. Turing gép. Eljárások, algoritmusok.
+\end{fulltheorem}
+
+\subsection{Turing gép}
+
+A \kix{Turing gép} jellemzői
+
+\begin{itemize}
+	\item Külső adat és tárolóterület:
+	      végtelen szalag, amelynek egymás után cellái vannak,
+	      amelyek vagy üresek, vagy jelöltek.
+
+	\item A gép egyszerre egy cellával foglalkozik.
+	      (Az író/olvasó feje egy cellán áll.)
+
+	\item A szalagon tud jobbra-balra lépni,
+	      tud jelet olvasni, törölni és írni.
+
+	\item A bevitel, a számítás és a kivitel minden
+	      konkrét esetben véges marad, ezen túl a szalag üres.
+
+	\item A gép belső állapotait számozzuk.
+
+	\item A gép működését megadja egy explicit helyettesítési táblázat.
+
+	\item Ha egy \kix{algoritmus} elég mechanikus és világos,
+	      akkor található olyan Turing gép, amely azt végrehajtja.
+
+	\item A Turing gép definiálja mindazt,
+	      amit matematikailag algoritmikus eljárás alatt értünk.
+
+	\item Minden más algoritmikus eljárást végrehajtó rendszer
+	      ekvivalens valamelyik Turing géppel
+
+	\item \kix{Megállási probléma}
+	      -- Nem tudjuk, hogy egy adott programmal megáll-e.
+
+	\item Nincs arra bizonyítási módszerünk,
+	      hogy egy eljárás biztosan algoritmus.
+\end{itemize}
+
+\subsection{Eljárások}
+
+Egy \kix{eljárás} esetén nem garantálható, hogy véges lépésben,
+tehát valaha is választ kapjunk kérdésünkre.
+
+\subsection{Algoritmusok}
+
+Egy \kix{algoritmus} esetén a választ véges számú lépés után mindenképpen
+megkapjuk. Egy véges \kix{utasítássorozat}, amely bármely input esetén
+véges lépésszám után megáll, eredményt ad.
+Minden algoritmus leírható az alábbi logikai struktúrákkal:
+\begin{multicols}{3}
+	\begin{itemize}
+		\item rákövetkeztetés \\ (\kix{konkatenáció})
+		\item választás \\ (\kix{alternáció})
+		\item ciklus \\ (\kix{iteráció})
+	\end{itemize}
+\end{multicols}
+Maga a Turing gép matematikai leírása az algoritmus fogalmának formális
+definíciója. Minden probléma, amelyre eljárás, procedúra szerkeszthető,
+Turing géppel megoldható. Az ember azokra és csakis azokra a kérdésekre
+tud választ adni, amelyekre a Turing-gép is képes. A tartalmazás kérdése
+algoritmikusan eldönthetetlen.
+\begin{multicols}{2}
+	\begin{itemize}
+		\item \kix{bejárás} – elemek keresése
+
+		\item \kix{keresés} – adott értéknek megfelelő elemek kiválasztása
+
+		\item \kix{beszúrás} – új adat beillesztése
+
+		\item \kix{törlés} – adatelem eltávolítása
+
+		\item \kix{rendezés} – elemeket logikai sorrendbe
+
+		\item \kix{összeválogatás} – különböző rendezett
+		      adathalmazokból új elemhalmaz kialakítása
+	\end{itemize}
+\end{multicols}
+
+\end{document}

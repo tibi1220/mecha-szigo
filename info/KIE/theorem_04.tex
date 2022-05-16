@@ -1,0 +1,67 @@
+\documentclass[../../main.tex]{subfiles}
+
+\begin{document}
+
+\section{Az objektum-orientált programozás alapjai IV}
+
+\begin{fulltheorem}
+	Az objektum-orientált programozás alapjai. Polimorfizmus. Virtuális
+	alaposztályok. Abstract osztály. Általánosított osztályok.
+\end{fulltheorem}
+
+\subsection{Polimorfizmus}
+
+A szó jelentése: ugyanaz a metódus más- és másképpen működik a családfa
+szintjein. A \kix{tagfüggvény}[ek] \kix{újradefiniálható}[ak]. Lehet a
+fordításkor korai, statikus kötés, vagy futás közben késői, vagy dinamikus
+kötés. Ősosztály-típusú mutatóval meghívható az ős metódusa a
+leszármazottra. (mint \cix{super})
+
+\begin{minted}[bgcolor=bg, linenos]{cpp}
+class Parent {
+  int x;
+public:
+  Parent(int x) : x(x) {}
+};
+
+class Child : public Parent {
+public:
+  Child(int x) : Parent(x) {}
+};
+\end{minted}
+
+\subsection{Virtuális alaposztályok}
+
+A \cix{virtual} kulcsszót használva a tagfüggvények \kix{átdefiniálható}[ak]
+lesznek a leszármazottakban. \tc{"=0"} esetén tisztán \kix{virtuális} lesz.
+
+\begin{minted}[bgcolor=bg, linenos]{cpp}
+class MyClass {
+  virtual void func() = 0;
+};
+\end{minted}
+
+\subsection{Abstract osztály}
+
+Tisztán virtuális függvényt tartalmazó osztály nem példányosítható.
+Ezeket \kix{abstract osztály}[oknak] hívjuk. Az \kix{interface} olyan absztrakt
+osztály, amely csak tisztán \kix{virtuális függvény}[eket] tartalmaz.
+
+\subsection{Általánosított osztályok}
+
+Az \kix{általánosított osztály}[ok] a \cix{template} kulcsszó segítségével
+hozhatóak létre.
+
+\begin{minted}[bgcolor=bg, linenos]{cpp}
+template<typename T>
+class ClassName{
+  T myFunc (T myVar){
+    // { ... }
+    return myVar;
+  }
+};
+\end{minted}
+
+A \cix{template} minden használó \kix{forrásállomány}[ban] kell.
+
+\end{document}

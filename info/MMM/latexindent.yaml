@@ -1,0 +1,52 @@
+defaultIndent: "  "
+lookForAlignAtDelims:
+  alignat:
+    delimiterRegEx: '(\\(?:&+))'
+lookForAlignAt*Delims:
+  alignat*:
+    delimiterRegEx: '(\\(?:&+))'
+
+modifyLineBreaks:
+  preserveBlankLines: 1
+  condenseMultipleBlankLinesInto: 0
+  textWrapOptions:
+    columns: 120
+
+# specialBeginEnd:
+#   path:
+#     begin: '\\path'
+#     end: ';'
+#     lookForThis: 1
+#   draw:
+#     begin: '\\draw'
+#     end: ';'
+#     lookForThis: 1
+#   specialBeforeCommand: 1
+
+lookForAlignDelims:
+  path:
+    delimiterRegEx: "(edge|node|draw|fill)"
+  draw:
+    delimiterRegEx: "(edge|node|draw|fill)"
+
+noIndentBlock:
+  noindent1:
+    begin: '%.?\begin{noindent}'
+    body: ".*?"
+    end: '%.?\end{noindent}'
+    lookForThis: 1
+  noindent2:
+    begin: "%.?disable.?latexindent"
+    body: ".*?"
+    end: "%.?enable.?latexindent"
+    lookForThis: 1
+  noindent3:
+    begin: "%.?disable.?indent"
+    body: ".*?"
+    end: "%.?enable.?indent"
+    lookForThis: 1
+  noindent4:
+    begin: "%.?noindent"
+    body: ".*?"
+    end: "%.?indent"
+    lookForThis: 1

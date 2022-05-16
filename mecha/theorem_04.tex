@@ -1,0 +1,27 @@
+\documentclass[../main.tex]{subfiles}
+
+\begin{document}
+
+\section{Átviteli függvények I}
+
+\begin{fulltheorem}
+  Milyen összefüggés van az átviteli és frekvencia-átviteli függvény között?
+  Milyen feltétele van annak, hogy az átviteli függvényt egyszerű
+  helyettesítéssel átírjuk frekvencia átviteli függvénnyé?
+\end{fulltheorem}
+
+Az \kix{átviteli függvény} alkalmas egy lineáris időinvariáns rendszer legfontosabb
+tulajdonságainak leírására, de a fizikai hátterét azért nehéz közvetlenül
+elemezni, mert egy komplex változós komplex függvény. Az átviteli függvény
+megegyezik a súlyfüggvény Laplace-transzformáltjával. Ez azért egy fontos
+megállapítás, mert a $\sum a_i s^i = \sum b_j s^j$ alakú differenciálegyenlettel
+leírható rendszerek impulzus válasza (súlyfüggvénye) garantáltan lecsengő,
+ezért létezik Fourier-transzformáltja, vagyis a \kix{frekvencia átviteli függvény}[e]
+(frekvencia karakterisztikája) az átviteli függvényből egyszerű $s = \iu \omega$
+helyettesítéssel megkapható. A frekvencia átviteli függvény fizikailag
+értelmezhető.
+\[
+  W(s) \quad \overset{s = \iu \omega}{\longrightarrow} \quad W(\iu \omega)
+\]
+
+\end{document}

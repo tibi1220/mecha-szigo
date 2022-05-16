@@ -1,0 +1,340 @@
+\documentclass[../../main.tex]{subfiles}
+
+\begin{document}
+
+\section{Relációs adatbázismodell}
+
+\begin{fulltheorem}
+	Relációs adatbázismodell. Relációk jellemzői. A relációs algebra műveletei. SQL alapok.
+\end{fulltheorem}
+
+\subsection{Adatbázis szerkezetek}
+
+A leggyakoribb adatszerkezetek: hierarchikus, hálós, relációs.
+
+\kix{Hierarchikus} esetben csak egy a többhöz (\texttt{1-N}) kapcsolatok
+képezhetőek le. Az adatok a tárolt hierarchia szerint érhetőek el.
+Fastruktúrával szemléltethető, hiszen az adatokat alá-fölérendeltségi
+viszonnyal meghatározható szerkezettel írjuk le.
+
+\kix{Hálós} adatbázismodell esetén a kapcsolatok gráfokkal írhatóak le,
+ahol a csomópontokat élekkel kötjük össze. Csak a tárolt kapcsolat mentén
+járható be. A modellel egy a többhöz (\texttt{1-N}) és több a többhöz
+(\texttt{N-M}) kapcsolatot és leírhatunk.
+
+\subsection{A relációk jellemzői}
+
+\kix{Relációs} modell esetén az adatokat táblázatos formában tároljuk.
+Nincsenek előre meghatározott kapcsolatok. Előnyei, hogy egyszerűen
+értelmezhető és átlátható, rugalmas és könnyen kezelhető, valamint
+a \kix{reláció}[kat] a \kix{relációs algebra} segítségével írhatjuk le.
+
+A reláció egy adattábla, melynek elemei:
+\begin{table}[H]
+	\centering\begin{tabular}{|c c|}
+		\hline
+		\kix{rekord}    & a táblázat sorai              \\
+		\kix{attibútum} & a táblázat oszlopai           \\
+		\kix{mező}      & a sorok és oszlopok metszetei \\ \hline
+	\end{tabular}
+	\caption{A reláció részei}
+	\label{fig:relation}
+\end{table}
+
+A reláció rekordjaiban tároljuk a logikailag összefüggő adatokat.
+A relációban tárolt rekordok száma a reláció számossága.
+Az oszlopokban azonos tulajdonságokra vonatkozó adatok jelennek meg.
+Egy tábla nem tartalmazhat azonos nevű oszlopot.
+Az oszlopok száma a reláció foka.
+Egy relációra vonatkozó követelmények:
+\begin{itemize}
+	\item Minden rekordja különböző.
+	\item Nincs két azonos attribútum.
+	\item Minden rekord mezőszerkezete azonos.
+	\item A rekordok és attribútumok sorrendje tetszőleges.
+\end{itemize}
+
+\subsection{A relációs algebra műveletei}
+
+A műveletek lehetnek:
+
+\begin{enumerate}
+	\item \kix{Adatkezelő}[ műveletek] --
+	      adatbevitel, törlés, módosítás.
+
+	\item \kix{Adatlekérdező}[ műveletek] --
+	      relációs algebra műveleteivel.
+\end{enumerate}
+
+A \kix{relációs algebra} műveletei lehetnek egy-, vagy többoperandusúak.
+Az előbbit egy, az utóbbit pedif több változón végezzük el.
+
+\begin{table}[H]
+	\centering\begin{tabular}{|c c|}
+		\hline
+		\kix{Szelekció}     & rekordokat választunk ki (kiválasztás)         \\
+		\kix{Projekció}     & attribútumokat választunk ki (vetítés)         \\
+		\kix{Kiterjesztés}  & matematikai műveletekkel új oszlop             \\
+		\kix{Csoportosítás} & attribútumok alapján csoport, majd hozzá érték \\
+		\hline
+	\end{tabular}
+	\caption{Egyoperandusú relációs algebra műveletek}
+	\label{fig:rel1}
+\end{table}
+
+\begin{table}[H]
+	\centering\begin{tabular}{|c c|}
+		\hline
+		\kix{Descartes-szorzat}   & 2 reláció sorainak összes kombinációja \\
+		\kix{Összekapcsolás}      & összekapcsolás attribútum alapján      \\
+		\kix{Unió}, \kix{Metszet} & kommutatív, mint halmazelmélet         \\
+		\kix{Különbség}           & nem kommutatív, mint halmazelmélet     \\
+		\hline
+	\end{tabular}
+	\caption{Többoperandusú relációs algebra műveletek}
+	\label{table:rel+}
+\end{table}
+
+Az azonosítás történhet \kix{kulcs} alapján, amely egyértelműen
+azonosítja az egyedet az egyedhalmazon belül. Amennyiben egyetlen
+attribútumból áll, akkor egyszerű, egyébként összetett.
+Megadható több kulcs is, amire szükségünk van az adott feladatnál,
+azt \kix{elsődleges kulcs}[nak] nevezzük, a többi mind másodlagos.
+\kix{Idegen kulcs} egy reláció olyan attribútumai,
+melyek egy másikban elsődlegesek.
+
+\subsection{SQL alapok}
+
+Hogy elkerüljük az \kw{anomáliákat}, az adatbázisokat
+\kw{normalizálni} szokták. Ennek lényege, hogy a
+változtatási anomáliák megszűnjenek. (módosítási, beírási,
+törlési) A normalizálásnak több szintje létezik.
+Minden \kix{relációs séma} megköveteli legalább
+az első normálformát. Gyakorlatban a harmadikig szokták.
+\begin{itemize}
+	\item {1. normál forma}
+	      \begin{itemize}
+		      \item Ha a mezők függéseinek rendszerében
+		            létezik egy olyan kulcs, amelytől minden
+		            más mező függ, azaz minden mezője
+		            funkcionálisan függ a kulcsmező csoporttól.
+	      \end{itemize}
+
+	\item {2. normál forma}
+	      \begin{itemize}
+		      \item Nincs benne részleges függés, azaz bármely nem
+		            kulcs mező a teljes kulcstól függ, de nem függ a
+		            kulcs bármely részhalmazától.
+	      \end{itemize}
+
+	\item {3. normál forma}
+	      \begin{itemize}
+		      \item Nem áll fenn tranzitív függőség, azaz
+		            a nem kulcs mezők nem függnek egymástól,
+		            tehát nincs funkcionális függőség a \textbf{nem}
+		            elsődleges attribútumok között.
+	      \end{itemize}
+\end{itemize}
+
+\subsubsection*{Definíció}
+\begin{itemize}
+	\item \bluec{CREATE TABLE} \blackc{table\textunderscore{}name
+		      (column1 datatype cond,\dots);}
+	      \\ \hspace*{\fill}
+	      \orangec{objektum létrehozása}
+
+	\item \bluec{DROP TABLE} \blackc{table\textunderscore{}name;}
+	      \\ \hspace*{\fill}
+	      \orangec{objektum megszűntetése}
+
+	\item \bluec{ALTER TABLE} \blackc{table\textunderscore{}name}
+	      \bluec{ADD|MODIFY} \blackc{(column1 datatype cond|cond);}
+	      \\ \hspace*{\fill}
+	      \orangec{objektum séma módosítása}
+\end{itemize}
+
+\begin{minipage}[c]{0.5\textwidth}
+	\begin{table}[H]
+		\centering\begin{tabular}{|c|}
+			\hline
+			\blackc{PRIMARY KEY}                            \\
+			\blackc{NOT NULL}                               \\
+			\blackc{UNIQUE}                                 \\
+			\blackc{CHECK cond}                             \\
+			\blackc{REFERENCING table\textunderscore{}name} \\
+			\hline
+		\end{tabular}
+		\caption{SQL attribútum feltételek}
+		\label{table:sql-conditions}
+	\end{table}
+\end{minipage}\hfill
+\begin{minipage}[c]{0.5\textwidth}
+	\begin{table}[H]
+		\centering\begin{tabular}{|c|}
+			\hline
+			\blackc{CHAR(n)}
+			\\
+			\blackc{NUMBER(n,m)}
+			\\
+			\blackc{DATE}
+			\\ \hline
+		\end{tabular}
+		\caption{SQL függvények}
+		\label{table:sql-functions}
+	\end{table}
+\end{minipage}\hfill
+
+\subsubsection*{Módosítás}
+\begin{itemize}
+	\item \bluec{INSERT INTO} \blackc{table\textunderscore{}name}
+	      \bluec{VALUES} \blackc{(field=value);}
+	      \\ \hspace*{\fill}
+	      \orangec{rekord felvitele}
+
+	\item \bluec{DELETE FROM} \blackc{table\textunderscore{}name}
+	      \bluec{WHERE} \blackc{cond;}
+	      \\ \hspace*{\fill}
+	      \orangec{rekord törlése}
+
+	\item \bluec{UPDATE} \blackc{table\textunderscore{}name}
+	      \bluec{SET} \blackc{field=value,\dots} \bluec{WHERE} \blackc{cond;}
+	      \\ \hspace*{\fill}
+	      \orangec{rekord módosítása}
+\end{itemize}
+
+\subsubsection*{Adatok lekérdezése}
+\begin{itemize}
+	\item \bluec{SELECT} \blackc{column1, column2, \dots}
+	      \bluec{FROM} \blackc{table\textunderscore{}name1, table\textunderscore{}name2,}
+	      \bluec{WHERE} \blackc{cond;}
+
+	      \vspace{.5em}
+	      \begin{table}[H]
+		      \centering\begin{tabular}{|l r|}
+			      \hline
+			      \bluec{GROUP BY}             & csoportosítás            \\
+			      \bluec{HAVING} \blackc{cond} & \hspace{2em} megszorítás \\
+			      \bluec{ORDER BY}             & rendezés                 \\
+			      \hline
+		      \end{tabular}
+		      \caption{SQL rendezések}
+		      \label{table:sql-order}
+	      \end{table}
+
+	\item \bluec{SELECT} \blackc{column} \bluec{FROM}
+	      \blackc{table\textunderscore{}name;}
+	      \hfill \orangec{projekció}
+
+	\item \bluec{SELECT} \blackc{column} \bluec{FROM}
+	      \blackc{table\textunderscore{}name}
+	      \bluec{WHERE} \blackc{cond;}
+	      \hfill \orangec{szelekció}
+
+	\item \bluec{SELECT} \blackc{*} \bluec{FROM}
+	      \blackc{table\textunderscore{}name1, table\textunderscore{}name2;}
+	      \hfill \orangec{Descartes-szorzat}
+
+	\item \bluec{SELECT} \blackc{expr column,\dots}
+	      \bluec{FROM} \blackc{table\textunderscore{}name;}
+	      \hfill \orangec{kiterjesztés}
+
+	\item \bluec{SELECT} \blackc{aggregation}
+	      \bluec{FROM} \blackc{table\textunderscore{}name;}
+	      \hfill \orangec{aggregáció megadása}
+
+	      \vspace{.5em}
+	      \begin{table}[H]
+		      \centering\begin{tabular}{|c|}
+			      \hline
+			      \bluec{SUM}\blackc{(expr)}   \\
+			      \bluec{COUNT}\blackc{(expr)} \\
+			      \bluec{MIN}\blackc{(expr)}   \\
+			      \bluec{AVG}\blackc{(expr)}   \\
+			      \bluec{MAX}\blackc{(expr)}   \\
+			      \hline
+		      \end{tabular}
+		      \caption{SQL aggregációs függvények}
+		      \label{table:sql-aggregation}
+	      \end{table}
+
+	\item \bluec{SELECT} \blackc{aggregation}
+	      \bluec{FROM} \blackc{table\textunderscore{}name;}
+	      \bluec{GROUP BY} \blackc{expr;}
+	      \\ \hspace*{\fill}
+	      \orangec{aggregáció, csoportképzés}
+
+	\item \bluec{SELECT} \blackc{column}
+	      \bluec{FROM} \blackc{table\textunderscore{}name;}
+	      \bluec{ORDER BY} \blackc{column1 mode1, \dots;}
+	      \\ \hspace*{\fill}
+	      \orangec{eredmény rekordok rendezése}
+
+	      \begin{table}[H]
+		      \centering\begin{tabular}{|c|}
+			      \hline
+			      \bluec{ASC}  \\
+			      \bluec{DESC} \\
+			      \hline
+		      \end{tabular}
+		      \caption{SQL rendezési sorrendek}
+		      \label{table:sql-ascdesc}
+	      \end{table}
+\end{itemize}
+
+\subsubsection*{Adatok lekérdezése}
+
+\begin{table}[H]
+	\centering\begin{tabular}{|l r|}
+		\hline
+		\bluec{=}                               & egyenlő         \\
+		\bluec{\textless\textgreater,\string^=} & nem egyenlő     \\
+		\bluec{\textgreater}                    & nagyobb         \\
+		\bluec{\textgreater=}                   & nagyobb egyenlő \\
+		\bluec{\textless}                       & kisebb          \\
+		\bluec{\textless=}                      & kisebb egyenlő  \\
+		\hline
+	\end{tabular}
+	\caption{SQL operátorok}
+	\label{table:sql-operators}
+\end{table}
+\begin{table}[H]
+	\centering\begin{tabular}{|l r|}
+		\hline
+		\bluec{NOT} & tagadás \\
+		\bluec{AND} & és      \\
+		\bluec{OR}  & vagy    \\
+		\hline
+	\end{tabular}
+	\caption{SQL logikai műveletke}
+	\label{table:sql-logic}
+\end{table}
+\begin{table}[H]
+	\centering\begin{tabular}{|l r|}
+		\hline
+		\bluec{LIKE} \bluec{'a\%'}
+		 & \bluec{'a'}-val kezdődik                     \\
+		\bluec{LIKE} \bluec{'x\textunderscore'}
+		 & \bluec{'x'}-val kezdődik, 2 betű             \\
+		\bluec{LIKE} \bluec{'\%a\%'}
+		 & \bluec{'a'}-t tartalmaz                      \\
+		\bluec{LIKE} \bluec{'\textunderscore{}a\%x'}
+		 & 2. betű \bluec{'a'}, \bluec{'x'}-re végződik \\
+		\hline
+	\end{tabular}
+	\caption{SQL szöveg összehasonlítása}
+	\label{table:sql-string}
+\end{table}
+\begin{table}[H]
+	\centering\begin{tabular}{|l r|}
+		\hline
+		\bluec{BETWEEN}\blackc{ x }\bluec{AND}\blackc{ y}
+		                                   & \hspace{.25em} adott értékek közé esik \\
+		\bluec{IN}\blackc{(a, b, c,\dots)} & értékek között van                     \\
+		\bluec{LIKE} \blackc{sample}       & hasonlít a mintára                     \\
+		\hline
+	\end{tabular}
+	\caption{SQL összehasonlító operátor halmazokra}
+	\label{table:sql-comp}
+\end{table}
+
+\end{document}

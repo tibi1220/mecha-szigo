@@ -1,0 +1,87 @@
+\documentclass{standalone}
+
+\usepackage{amsmath}
+\usepackage{unicode-math}
+\usepackage{tikz}
+\usepackage{circuitikz}
+
+\usetikzlibrary{
+  patterns, patterns.meta,
+  arrows, arrows.meta,
+  bending,
+  positioning,
+  decorations.markings, decorations.pathreplacing,
+  shapes.misc, shapes.geometric
+}
+\tikzset{
+  dot/.style = {circle, fill=red!80!gray, minimum
+      size=#1, draw=black,
+      inner sep=0pt, outer sep=0pt},
+  dot/.default = 5pt, % size of the circle diameter
+  gdot/.style = {dot=#1, fill=white},
+  bdot/.style = {dot=#1, fill=black},
+  gdot/.default = 5pt, % size of the circle diameter
+  bdot/.default = 5pt, % size of the circle diameter
+  extended line/.style={shorten >=-#1,shorten <=-#1},
+  extended line/.default=3mm,
+  rod/.style={double distance=#1, line cap=round, very thick,
+      double=gray!20},
+  rod/.default=4mm,
+  var/.style={rectangle, fill=white},
+  guide/.style={gray, line width=.6pt},
+  dim/.style={latex-latex, teal, thick},
+  edge/.style={
+      postaction=decorate, decoration={
+	  markings,
+	  mark=at position #1 with {\arrow{Latex[round, length=3mm, bend]}}
+	}
+    },
+  edge/.default=.55,
+  generator/.style={midway, gdot=#1, fill opacity=0},
+  generator/.default=10mm,
+}
+
+\begin{document}
+\begin{circuitikz}[european, scale=.85]
+  \node[
+    rectangle, draw=black, thick,
+    minimum height = 3cm, minimum width=2cm,
+    text width = 2cm, align = center
+  ] (fp1) at (0,0) {$M_\text{vill} = k_\text{m} i$ \\ $u_\text{ind} = k_\text{e} \omega_\text{r}$};
+
+  \node[
+    rectangle, draw=black, thick,
+    minimum height = 3cm, minimum width=2cm,
+    text width = 2.2cm, align = center
+  ] (fp2) at (7,0) {$\omega_\text{r} = N \omega_\text{t}$ \\ $M_\text{t} = N M_\text{r}$};
+
+  \draw ($(fp1.west)+(0,1)$)
+  to[R, l_=$sL$] ++(-2,0)
+  to[R, l_=$R$] ++(-2,0)
+  to[vsource, l_=$u_\text{be}$] ++(0,-2) coordinate (G1)
+  to[] (G1-|fp1.west)
+  (G1) to[] ++(0,-.25) node[rground] {}
+  ;
+
+  \draw ($(fp1.east)+(0,1)$)
+  to ++(1,0) coordinate (A)
+  to ++(1.6,0) coordinate (B)
+  to (B-|fp2.west)
+  ;
+  \draw ($(fp1.east)-(0,1)$) coordinate (C) to (C-|fp2.west);
+  \draw
+  (A) to[R, l=$\dfrac{1}{B_\text{r}}$] ++(0,-2) coordinate (G2)
+  (B) to[R, l=$\dfrac{1}{sJ_\text{r}}$] ++(0,-2)
+  (G2) to[] ++(0,-.25) node[rground] {}
+  ;
+
+  \draw ($(fp2.east)+(0,1)$)
+  to ++(1,0) coordinate (D)
+  to ++(1.75,0) coordinate (E)
+  to[isource, l=$-M_\text{t}$] ++(0,-2) coordinate (G3)
+  to[] (G3-|fp2.east)
+  (D) to[R, l=$\dfrac{1}{sJ_\text{t}}$] ++(0,-2)
+  (G3) to[] ++(0,-.25) node[rground] {}
+  ;
+\end{circuitikz}
+\end{document}

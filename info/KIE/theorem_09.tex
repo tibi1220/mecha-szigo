@@ -1,0 +1,179 @@
+
+\documentclass[../../main.tex]{subfiles}
+
+\begin{document}
+
+\section{Az adatbázisok alapjai}
+
+\begin{fulltheorem}
+	Az adatbázisok alapjai. Adatmodellezés. Egyed-kapcsolat modell. Kapcsolatok típusai.
+\end{fulltheorem}
+
+\subsection{Az adatbázis}
+
+Az \kix{adat}[ok] nyers tények, feldolgozatlan információ. Az
+\kix{információ} feldolgozott adat, az információs rendszerek hozzák létre,
+keresik vissza, dolgozzák fel.
+
+Az \kix{adatbázis} adatok gyűjteménye, amelyet egy adatbázis-kezelő rendszer
+kezel, tehát nemcsak az adatok rendezett tárolását, hanem azok kezelését is
+lehetővé teszi, mert kapcsolatok nélkül az adatok eltérően értelmezhetőek.
+
+Alapfunkciói: létrehozás, adatok mentése, lekérdezések, adatvédelem.
+Az adatbázis-kezelő rendszer (DBMS) segítségével lehetséges a tárolt
+adatok definiálása, kezelése, karbantartása, felügyelete.
+
+Követelmények egy adatbázissal szemben:
+\begin{itemize}
+	\item \tc{DDL} -- Új adatok létrehozása adatdefiníciós
+	      nyelv segítségével.
+
+	\item \tc{SQL} – Meglévő adatok lekérdezése, módosítása
+	      lekérdező vagy adatmanipulációs nyelvvel.
+
+	\item Támogassa az adatok hosszú távú, biztonságos tárolását.
+
+	\item Felügyelje a több felhasználó által egy
+	      időben történő hozzáférését.
+
+	\item \kw{adatintegritás} \tabto{4.5cm} -- \tabto{5.5cm}
+	      érvényesség, helyesség, ellentmondás-mentesség
+
+	\item \kw{rugalmasság} \tabto{4.5cm} -- \tabto{5.5cm}
+	      adatok egyszerűen módosíthatóak
+
+	\item \kw{hatékonyság} \tabto{4.5cm} -- \tabto{5.5cm}
+	      gyors és hatékony keresés, módosíthatóság
+
+	\item \kw{adatfüggetlenség} \tabto{4.5cm} -- \tabto{5.5cm}
+	      hardver és szoftverfüggetlenség
+
+	\item \kw{adatbiztonság} \tabto{4.5cm} -- \tabto{5.5cm}
+	      védelem a hardver és szoftverhibák ellen
+
+	\item \kw{adatvédelem} \tabto{4.5cm} -- \tabto{5.5cm}
+	      illetéktelen felhasználókkal szemben
+
+	\item \kw{osztott hozzáférés} \tabto{4.5cm} -- \tabto{5.5cm}
+	      több felhasználó egyidejű hozzáférése
+
+	\item \kw{integritási kényszerek} \tabto{4.5cm} -- \tabto{5.5cm}
+	      szabályok, amiket figyelembe kell venni
+
+	\item \kw{tranzakciók} \tabto{4.5cm} -- \tabto{5.5cm}
+	      felhasználó általi változtatás nem végleges rögtön
+\end{itemize}
+
+\subsection{Adatmodellezés}
+Az \kix{adatmodellezés} segítséget nyújt a környezővilág megértésében és
+leképezésében, a lényeges jellemzők kiemelésében. Az adatmodell az \kix{adat}[ok]
+és az azok közötti összefüggések leírására szolgál.
+
+A \kix{modell} olyan mesteséges rendszer, amely a felépítésében és
+viselkedésében megegyezik a vizsgált környező rendszerrel.
+
+Adatmodellnek nevezzük az adatok struktúrájának (felépítésének) leírására
+szolgáló modelleket.
+
+\subsection{Egyed--kapcsolat modell}
+
+Az \kix{ETK modell} az alábbi három fogalom együttese:
+\begin{itemize}
+	\item \kix{Egyed} -- Az információs rendszert felépítő személyek,
+	      tárgyak, események.
+	      \begin{itemize}
+		      \item Nem elszigetelten, hanem kapcsolatban állnak
+		            egymással és más objetumokkal.
+	      \end{itemize}
+
+	\item \kix{Tulajdonság} -- Az egyedeket jellemzi, egy érték,
+	      melynek tulajdonságtípusa van.
+	      \begin{itemize}
+		      \item \kw{azonosító}
+		            \tabto{5.5cm} – \tabto{6.5cm}
+		            egyedi, nem ismétlődhet (\blackc{ID})
+
+		      \item \kw{leíró tulajdonság}
+		            \tabto{5.5cm} – \tabto{6.5cm}
+		            ismétlődhet (\blackc{név})
+
+		      \item \kw{gyengén jellemző tulajdonság}
+		            \tabto{5.5cm} – \tabto{6.5cm}
+		            lehet üres is (\blackc{kedvenc szín})
+
+		      \item \kw{kapcsoló tulajdonság}
+		            \tabto{5.5cm} – \tabto{6.5cm}
+		            itt leíró, ott azonosító (\blackc{szül hely})
+	      \end{itemize}
+
+	\item \kix{Kapcsolat} -- Két egyed közötti viszony.
+	      \begin{itemize}
+		      \item Lehet többszintű, bonyolult, melyben
+		            több rendszer is kapcsolatban áll egymással.
+	      \end{itemize}
+\end{itemize}
+
+\subsection{Kapcsolatok típusai}
+
+\begin{itemize}
+	\item (\texttt{1-1}) – "{egy az egyhez}"
+	      \begin{itemize}
+		      \item Egy egyedtípus egy egyedéhez egy másik
+		            egyedtípus csak egyetlen egyede kapcsolódhat,
+		            és fordítva is igaz.
+		            (\texttt{osztály–osztályfőnök})
+	      \end{itemize}
+
+	\item (\texttt{1-N}) – "{egy a többhöz}"
+	      \begin{itemize}
+		      \item Egy egyedtípus egy egyedéhez egy másik
+		            egyedtípus több egyede is kapcsolódhat,
+		            de fordítva nem igaz.
+		            (\texttt{osztály–tanuló})
+	      \end{itemize}
+
+	\item (\texttt{N-M}) – "{több a többhöz}"
+	      \begin{itemize}
+		      \item Egy egyedtípus egy egyedéhez egy másik
+		            egyedtípus több egyede is kapcsolódhat,
+		            de fordítva is igaz.
+		            (\texttt{osztály–tanár})
+	      \end{itemize}
+
+	\item Az \kix{adatbázis} fogalma a kapcsolatok alapján:
+	      \begin{itemize}
+		      \item Véges számú egyedek és azok véges számú tulajdonságainak
+		            és kapcsolatainak adatmodell szerinti szervezett együttese.
+	      \end{itemize}
+
+	      \begin{figure}[H]
+		      \flushright
+		      \begin{tikzpicture}[node distance=8em]
+			      \node[entity] (ent1) {Egyed${}_1$};
+			      \node[relationship] (rel1) [right of=ent1] {Kapcsolat${}_1$} edge[thick] (ent1);
+			      \node[attribute] (attr1) [below left of=rel1] {\underline{Kulcstul}} edge[<-, thick] (rel1);
+			      \node[attribute] (attr2) [below of=rel1] {Többértékű} edge[<<-, thick] (rel1);
+			      \node[attribute] (attr3) [below right of=rel1] {\xcancel{Összetett}} edge[<-,thick] (rel1);
+			      \node[entity] (ent2) [right of=rel1] {Egyed${}_2$} edge[thick] (rel1);
+			      \node[relationship] (rel2) [right of=ent2] {Kapcsolat${}_2$} edge[thick] (ent2);
+			      \node[attribute] (attr4) [below of=rel2] {Egyszerű} edge[<-, thick] (rel2);
+			      \node[attribute] (attr5) [below right of=rel2] {Egyértékű} edge[<-, thick] (rel2);
+		      \end{tikzpicture}
+		      \caption{A kapcsolatok szemléltetése}
+	      \end{figure} %tikz
+
+	\item a \kix{kapcsolat foka} lehet:
+\end{itemize}
+\begin{table}[H]
+	\centering\begin{tabular}{|c c|}
+		\hline
+		\kix{Unáris}   & rekurzív         \\
+		\kix{Bináris}  & két résztvevős   \\
+		\kix{Trináris} & három résztvevős \\
+		\hline
+	\end{tabular}
+	\caption{Adatok közötti kapcsolatok foka}
+	\label{fig:datadeg}
+\end{table}
+
+\end{document}

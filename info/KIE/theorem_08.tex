@@ -1,0 +1,98 @@
+\documentclass[../../main.tex]{subfiles}
+
+\begin{document}
+
+\section{Algoritmusok}
+
+\begin{fulltheorem}
+	Algoritmusok. Bejárás, keresés, rendezés.
+	Algoritmusok bonyolultsága. Rekurzió.
+\end{fulltheorem}
+
+\subsection{Bejárás}
+
+Tömb bejárása \cix{for} ciklussal lehetséges. Bonyolultsága: $\mathcal{O}(n)$.
+
+\subsection{Keresés}
+
+Ha a tömb nincsen rendezve, akkor \kix{szekvenciális keresés}[t] tudunk
+alkalmazni, amely egy sima \cix{for} ciklusos keresés, bonyolultsága
+ennélfogva: $\mathcal{O}(n)$.
+
+Ha a tömb rendezve van, akkor \kix{bináris keresés}[t] is tudunk alkalmazni.
+Ez egy felezéses keresési algoritmus, bonyolultsága: $\mathcal{O}(\log_2n)$.
+
+\subsection{Rendezés}
+
+A legegyszerűbb \kix{rendezés}[i algoritmus] a \kix{buborékrendezés}.
+Ez egy dupla \cix{for} ciklusos rendezés, bonyolultsága: $\mathcal{O}(n^2)$
+
+Ha effektívebben szeretnénk a mintákat rendezni, akkor választhatjuk
+például a \kix{quick sort} algoritmust. Ez egy for ciklusos felezgetős
+rendezés, melynek bonyolultsága: $\mathcal(O)(n \cdot \log_2n)$
+
+\subsection{Algoritmusok bonyolultsága}
+
+A $B(n)$ \kix{bonyolultság} algoritmusokat jellemez futási idő, vagy
+helyigény szempontjából az adatok számának függvényében. Az eddig tárgyalt
+algoritmusokat a futási idő bonyolultságával írtuk le. Mivel egyik
+algoritmus sem tárhely igényes, ezért ebből a szempontból minegyik
+$\mathcal{O}(1)$-es.
+
+Problémáink lehetnek továbbá:
+\begin{itemize}
+	\item \kix{polinomidőben megoldható}[ak] $(P)$, vagyis a gyakorlatban
+	      hatékonyan megoldható problémák, valamint
+	\item \kix{polinomidőben verifikálható}[ak] $(NP)$, vagyis a lehetséges megoldások
+	      polinomidőben előállíthatók nemdeterminisztikus Turing géppel,
+	      majd determinisztikusan polinomidőben ellenőrizhető az,
+	      hogy az előállított lehetséges megoldás valóban megoldás-e.
+\end{itemize}
+Megoldatlan probléma, hogy $N \overset{?}{=} NP$.
+
+Az \kix{utazó ügynök probléma}:
+\begin{itemize}
+	\item Célja a legkisebb költségű út megtalálása városok között, minden
+	      várost pontosan egyszer érintve és visszatérve a kiindulási pontba.
+
+	\item A városok közötti költség az Euklideszi távolságon alapul,
+	      a probléma szimmetrikus, a költségek konstansok.
+
+	\item $NP$ nehéz probléma, azaz ha találnánk egy hatékony algoritmust,
+	      amely optimális megoldást nyújt polinom számú lépésben, akkor hatékony
+	      algoritmust tudnánk találni más bonyolult $NP$-beli problémákra.
+\end{itemize}
+
+\subsection{Rekurzió}
+
+\kix{Rekurzió} esetén a függvényben, általában a visszatérésénél meghívjuk
+saját magát. Számos probléma megoldható rekurzívan, ám ez általában növeli
+az algoritmusunk bonyolultságát:
+
+\begin{minted}[bgcolor=bg, linenos]{cpp}
+// Faktoriális
+int factorial(int n){
+  if(n == 0) return 1;
+  return n * factorial(n-1);
+}
+
+// Az aranymetszés
+int golden_ratio(int n){
+  if(n == 1 || n == 2) return 1;
+  return golden_ratio(n-1) + golden_ratio(n-2);
+}
+
+// Hanoi tornyai
+void hanoi(int n, char from, char to, char tmp){
+  if(n == 1){
+    cout << "\nTedd at az 1. lemezt a(z) "
+         << from << "rudrol a(z)" << to << " rudra.";
+  }
+  hanoi(n-1, from, tmp, to);
+  cout << "\nTedd at a(z) " << n << " lemezt a(z) "
+        << from << "rudrol a(z)" << to << " rudra.";
+  hanoi(n-1, tmp, to, from);
+}
+\end{minted}
+
+\end{document}

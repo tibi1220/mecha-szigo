@@ -1,0 +1,21 @@
+\documentclass{standalone}
+
+\usepackage{amsmath}
+\usepackage{unicode-math}
+\usepackage{tikz}
+\usepackage{circuitikz}
+
+\begin{document}
+\begin{circuitikz}[european, scale = 1, straight voltages]
+  \draw[dashed, gray] (-1.5,-.75) rectangle (2.25,2.75);
+
+  \draw (4,0) coordinate(A)
+  to[short, o-] (0,0)
+  to[vsource, l=$\dfrac{U_\text{be}}{k_\text{e}}$] (0,2)
+  to[R=$Z_\text{a} / (k_\text{e} k_\text{m})$] (2,2)
+  to[short, -o] (4,2) coordinate(B)
+  (3.25,0) to[R=$Z_\text{r}$] ++(0,2)
+  (B) to[open, v^>=$\itOmega_\text{r}$] (A)
+  ;
+\end{circuitikz}
+\end{document}

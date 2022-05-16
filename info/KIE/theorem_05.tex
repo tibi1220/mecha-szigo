@@ -1,0 +1,315 @@
+\documentclass[../../main.tex]{subfiles}
+
+\begin{document}
+
+\section{Az objektum-orientált programozás alapjai V}
+
+\begin{fulltheorem}
+	Standard Template Library. Tárolók. Bejárók. Algoritmusok. Függvényobjektumok.
+\end{fulltheorem}
+
+\subsection{Standard Template Library}
+
+Adatstruktúrákat és algoritmusokat tartalmaz \cix{C++} nyelvhez.
+
+\subsection{Tárolók}
+
+Soros és asszociatív tárolókat tartalmaz az \cix{STL}.
+A \kix{soros tároló}[k] jellemzője, hogy megőrzik az elemek beviteli
+sorrendjét. Az \kix{asszociatív tároló}[k] elemei egy kulcs alapján érhetőek
+el. Lehetnek rendezettek, illetve rendezetlenek. Mindegyiknek van \cix{default}
+és \cix{copy} konstruktora, \blackc{=} operátora.
+
+\subsubsection*{Soros tárolók}
+
+\paragraph*{Array}
+
+Az \cix{array} adott méretű és típusú tárolótömb folytonos memóriaterületen.
+\cix{for} ciklussal bejárható.
+
+\begin{minted}[bgcolor=bg, linenos]{cpp}
+#include <array>
+
+array<type, size> myArr { {myVar1, myVar2, myVar3} };
+
+myArr[0] = 12; // feltöltés [] operátorral
+
+front(); back(), data(); at(); []         // elem elérés
+begin(); end(); rbegin(); rend();         // iterator
+empty(); size(); max_size()               // méretek
+swap(); fill(); reverse(); accumulate();  // műveletek
+\end{minted}
+
+\paragraph*{Allocator}
+
+Az allokátorobjectumok (\cix{allocator}) a tárolók számára lefoglalt
+memóriaterületet kezelik.
+
+\begin{minted}[bgcolor=bg, linenos]{cpp}
+#include <memory>
+
+allocator<type> myAlloc;
+
+allocate(<size_t> n);
+construct(<pointer> p, <const reference> r);
+deallocate(<pointer> p, <size_t> n);
+destroy();
+\end{minted}
+
+\paragraph*{Vector}
+
+A \cix{vector} \kix{dinamikus tömb}[ökkel] megvalósított soros tároló.
+Folytonos adatterületen pointerrel és bejáróval is bejárható.
+Automatikusan növekszik és csökken a tárolási mérete. Az elemek könnyen
+elérhetők pozíció alapján (állandó idővel). Elemek sorban bejárhatóak
+(lineáris idővel). Elemek illeszthetők/törölhetők a végéről (konstans idővel).
+Elemek be is illeszthetőek/törölhetőek, de erre más tárolók (\cix{deque},
+\cix{list}) jobb időt produkálnak.
+
+\begin{minted}[bgcolor=bg, linenos]{cpp}
+#include <vector>
+
+vector<type> myVector1 (count, myVar);
+vector<type> myVector2 (myVector1.begin(), myVector1.end());
+vector<type> myVector3 (myVector1);
+
+begin(); end(); rbegin(); rend();   // bejárok
+[]; at(); front(); back();          // tulajdonságok
+size(); resize();                   // méretek (össz)
+capacity(), reverse();              // méretek (hátralévő)
+push_back(), pop_back();            // módosítók
+iterator insert();                  // beszúrás (nem hatékony)
+
+// Bejáras
+for(i = myVec.begin(); i != myVec.end(); i++);
+for(int i = 0; i < myVec.size(); i++);
+for(auto i : myVec);
+for(auto& i : myVec);
+\end{minted}
+
+\paragraph*{String} A \cix{string} is STL tároló.
+
+\begin{minted}[bgcolor=bg, linenos]{cpp}
+#include <string>
+
+at(); []; front(); back(); data();
+begin(); end(); rbegin(); rend();
+empty(); size(), max_size();
+push_back(); copy(); c_str();
+find(); find_first(); insert(); replace();
+\end{minted}
+
+\paragraph*{Deque}
+
+A \cix{deque} egy kétvégű sor, amely mindkét végén növelhető.
+Konstans idő alatt adhatunk hozzá, illetve távolíthatunk el elemet a sor végeiről.
+Nem folytonos adatterületen helyezkedik el. (nincs \texttt{\tc{capacity}()} és
+\texttt{\tc{reverse}()}) Egydimenziós tömböt tartalmazó listában tárolódik.
+Az elemek könnyen elérhetőek pozíció alapján. (állandó idővel)
+(\texttt{[], \tc{at}(), \tc{front}(), \tc{back}()}) Elemek sorban bejárhatóak
+(lineáris idővel). Lassabb, mint a sor (\cix{queue}).
+
+\begin{minted}[bgcolor=bg, linenos]{cpp}
+#include <deque>
+
+deque<type> myDQ1(count, myVar);
+deque<type> myDQ2{myVar1, myVar2, ...};
+deque<type> myDQ3(myDQ1.begin(), myDQ1.end());
+deque<type> myDQ4(myDQ1);
+
+// Konstans idővel elem hozzáadása / törlése
+push_front(); pop_front();
+push_back(); pop_back();
+\end{minted}
+
+\paragraph*{List}
+
+A listák (\cix{list}) esetén nincsen direkt elérés (\texttt{\tc{at}(), []}).
+Kétirányban láncolt lista. Gyors beszúrás törlés, sorbarakás összefésülés.
+\begin{minted}[bgcolor=bg, linenos]{cpp}
+#include <list>
+
+front(); back(); push_front(); push_back(); pop_front(); pop_back();
+iterator insert();
+sort(); merge(); splice();
+\end{minted}
+
+\paragraph*{Forward{}\textunderscore{}list}
+
+Az egy irányban láncolt listák (\cix{forward{}\textunderscore{}list})
+esetén nincs \texttt{\tc{push{}\textunderscore{}back}()} és
+\texttt{\tc{pop{}\textunderscore{}back}()}, viszont van
+\texttt{\tc{insert{}\textunderscore{}after}()}.
+
+\begin{minted}[bgcolor=bg, linenos]{cpp}
+#include <forward_list>
+\end{minted}
+
+\subsubsection*{Asszociatív tárolók}
+
+Az asszociatív tárolók (\cix{map}, \cix{set}) absztrakt adattípusok.
+
+\paragraph*{Set}
+
+A \cix{set} egyetlen elem sort tartalmaz, ami a kulcs egyben. Nincsen
+\blackc{[]} operátor.
+
+\begin{minted}[bgcolor=bg, linenos]{cpp}
+#include <set>
+
+type array[] = {var1, var2, var3}
+set<type> mySet1(array, array+3)
+set<type> mySet2(mySet1.begin(), mySet1.end())
+set<type> mySet3(mySet1)
+
+begin(); end(); rbegin(); rend();
+::iterator; size(); max_size(); insert();
+empty(); erase(); clear(); find();
+\end{minted}
+
+\paragraph*{Map}
+
+A \cix{map} kulcs--érték adatpárokat tartalmaz. (a \cix{pair} sablon szerint)
+Lehet definiálni az összehasonlítást kulcsra és értékre is. Van \blackc{[]}
+operátor (kulcs kell).
+
+\begin{minted}[bgcolor=bg, linenos]{cpp}
+#include<map>
+
+map<type1, type2> myMap1;
+map<type1, type2> myMap2(myMap1.begin(), myMap1.end());
+map<type1, type2> myMap3(myMap1);
+
+begin(); end(); rbegin(); rend();
+::iterator; size(); max_size(); insert();
+empty(); erase(); clear(); find();
+\end{minted}
+
+Léteznek kulcsismétlést megengedő változatok
+(\cix{multiset}, \cix{multimap}),
+a keresés ebben az esetben lineáris végrehajtási idejű.
+Mindegyiknek van rendezetlen változata is.
+(\tc{unordered\textunderscore{}xxx})
+
+\subsubsection*{Konténer adapterek}
+
+\paragraph*{Stack}
+
+A verem (\cix{stack}) \tc{FILO} típusú tároló.
+Interface minden standardnak, aminek van
+\texttt{\tc{back}()}, \texttt{\tc{push\textunderscore{}back}()}
+és \texttt{\tc{pop\textunderscore{}back}()} művelete.
+(\cix{vector}, \cix{deque}, \cix{list})
+
+\begin{minted}[bgcolor=bg, linenos]{cpp}
+ #include <stack>
+
+stack<type, container<type>>;
+
+empty(); push(); pop(); top(); size()
+\end{minted}
+
+\paragraph*{Queue}
+
+A sor (\cix{queue}) \tc{FIFO} típusú tároló.
+Interface minden standardnak, aminek van
+\texttt{\tc{back}()}, \texttt{\tc{push\textunderscore{}back}()}
+és \texttt{\tc{pop\textunderscore{}back}()} művelete.
+(\cix{vector}, \cix{deque}, \cix{list})
+
+\begin{minted}[bgcolor=bg, linenos]{cpp}
+#include <queue>
+
+queue<type, container<type>>;
+
+empty(); push(); pop(); front(); back(); size();
+\end{minted}
+
+\paragraph*{Priority{}\textunderscore{}queue}
+
+A prioritásos sor (\cix{priotity\textunderscore{}queue})
+interface minden standardnak, aminek van
+\texttt{\tc{back}()}, \texttt{\tc{push\textunderscore{}back}()}
+és \texttt{\tc{pop\textunderscore{}back}()} művelete.
+(\cix{vector}, \cix{deque}, \cix{list})
+
+\begin{minted}[bgcolor=bg, linenos]{cpp}
+#include <queue>
+
+queue<type, container<type>>;
+
+empty(); push(); pop(); front(); size();
+\end{minted}
+
+\subsection{Bejárók}
+
+A \kix{bejáró}[k] (\cix{iterator}) \cix{pointer} szerű, tároló független
+objektumok. Teljes bejárás esetén a \texttt{\tc{begin}()}/\texttt{\tc{rbegin}()}
+és \texttt{\tc{end}()}/\texttt{\tc{rend}()} használatos. Egy pozíciót
+határoznak meg a tárolóban. Iteratorokra alkalmazható függvénysablonok:
+
+\begin{minted}[bgcolor=bg, linenos]{cpp}
+begin(); end();
+advance(<int>count);
+distance(iterator1, iterator2);
+next(iterator, <int>count=1);
+prev(iterator, <int>count=1);
+\end{minted}
+
+\subsection{Algoritmusok}
+
+\kix{Algoritmus}[ok] a konténerek adatainak kezelésére
+(sorbarakás, keresés, szélsőértékek \dots)
+
+\subsection{Függvényobjektumok}
+
+\kix{Függvényobjektum}[ok] megvalósítják a függvényhívás \blackc{()} operátorát
+az algoritmusokban. Hívásakor az osztály objektumát adjuk át.
+
+\begin{minted}[bgcolor=bg, linenos]{cpp}
+#include <vector>
+
+class Even {
+public:
+  bool operator() (int i) const {
+    return (x % 2) == 0;
+  }
+};
+vector<int> numbers{2, 3, 6, 9};
+vector<int>::iterator i = find_if(
+  begin(numbers), end(numbers), Even
+);
+\end{minted}
+
+\cix{C++11} óta általánosított függvényobjektumok is elérhetőek.
+Szintén ettől a szabványtól használatosak a névtelen (\kix{lambda})
+függvények.
+\bgroup
+\def\arraystretch{1.2}
+\begin{table}[H]
+	\centering\begin{tabular}{|c c|}
+		\hline
+		\blackc{[]\{\};}             &
+		nem használ a hívó hatókörében változókat
+		\\
+		\blackc{[=]\{\};}            &
+		a hívó hatókörében definiált változók másolatát látja
+		\\
+		\blackc{[\&]\{\};}           &
+		a hívó hatókörében definiált változók referenciát látja
+		\\
+		\blackc{[\&,\tc{i}]\{\};}    &
+		a hívó hatókörében definiált változók referenciát,
+		\tc{i} másolatát látja
+		\\
+		\blackc{[=,\&{}\tc{i}]\{\};} &
+		a hívó hatókörében definiált változók másolatát,
+		\tc{i} referenciát látja
+		\\ \hline
+	\end{tabular}
+	\caption{Lambda függvények}
+	\label{fig:anonymus-fns}
+\end{table}
+\egroup
+
+\end{document}

@@ -1,0 +1,176 @@
+\documentclass[../../main.tex]{subfiles}
+
+\begin{document}
+
+\section{Adatszerkezetek}
+
+\begin{fulltheorem}
+	Adatszerkezetek. Tömbök, kapcsolt listák, gráf, fa, verem, sor.
+\end{fulltheorem}
+
+Az \kix{adatszerkezetek} egyszerű, vagy összetett alapadatok rendszerének
+matematikai, logikai modellje, amely elég egyszerű a kezeléshez, és elég jó
+a valós kapcsolatok tükrözésére.
+
+\subsection{Tömbök}
+
+\begin{itemize}
+	\item Egy \kix{tömb} lehet lineáris, egy vagy többdimenziós.
+
+	\item $n$ darab azonos típusú \kix{adatelem}[ből] áll.
+
+	\item Az elemekre \kix{indexhalmaz}[zal] hivatkozunk.
+
+	\item Az elemeket egymást követő memóriahelyek tárolják.
+
+	\item Az elemekhez bejárás nélkül férünk hozzá.
+\end{itemize}
+
+\subsection{Kapcsolt listák}
+
+\begin{itemize}
+	\item A \kix{kapcsolt lista} vagy \kix{egyirányú lista}
+	      adatelemek, vagy csomópontok lineáris gyűjteménye,
+	      ahol az elemek sorrendjét \kix{mutatók} rögzítik.
+	      \begin{itemize}
+		      \item A mutatókat tároló elemeket \kix{kapcsolómező}[nek] hívjuk.
+	      \end{itemize}
+
+	\item A \kix{kétirányú lista} mindkét irányban bejárható.
+
+	\item A \kix{ciklikusan kapcsolt lista} nem rendelkezik
+	      első és utolsó elemmel, hiszen az "első" az "utolsóra" mutat.
+\end{itemize}
+
+\subsection{Gráf}
+
+\begin{itemize}
+	\item A \kix{gráf} két halmazzal jellemezhető adatszerkezet.
+	      \begin{itemize}
+		      \item a \kix{csomópont}[ok] sorszámozott halmazza
+
+		      \item az elemeket összekötő számpárral jellemzett \kix{él}[ek] halmaza
+	      \end{itemize}
+
+	\item Az összekötött csomópontokat \kw{szomszéd}oknak hívjuk.
+
+	\item $\deg(u)$ -- a csomópont \kw{fok}a a befutó élek száma.
+	      \begin{itemize}
+		      \item Ha $\deg(u) = 0$, akkor a csomópont \kw{izolált}.
+	      \end{itemize}
+
+	\item A $v_0$-ból $v_n$-be mutató élek halmazát
+	      útnak nevezzük – $P \left( v_0; v_1; \dots ;v_n \right)$.
+	      \begin{itemize}
+		      \item Az út \kw{zárt}, ha $v_0 = v_n$
+		      \item Az út \kw{egyszerű}, ha minden pontja különbözik
+		      \item Az út \kw{kör}, ha legalább 3 hosszú, egyszerű
+	      \end{itemize}
+
+	\item Egy $G$ gráf \kw{összefüggő},
+	      ha bármely 2 pontja között létezik egyszerű út.
+
+	\item Egy $G$ gráf \kw{teljes},
+	      ha minden csomópontja minden csomópontjával össze van kötve.
+
+	\item Egy $G$ gráf \kw{címkézett}, ha éleihez adatokat rendelünk.
+	      \begin{itemize}
+		      \item egy $G$ gráf \kw{súlyozott},
+		            ha éleihez rendelt adatok nemnegatívak
+	      \end{itemize}
+
+	\item Egy $G$ gráf \kw{irányított}, ha az éleknek irányítottságuk van.
+
+	\item Rendelhetünk hozzájuk mátrixokat:
+	      \begin{itemize}
+		      \item \kix{szomszédsági mátrix} – $a_{ij} = 1$,
+		            ha $i$-ből $j$ felé halad él
+
+		      \item \kix{útmátrix} – $a_{ij} = 1$,
+		            ha $i$-ből $j$-be halad valamilyen út
+	      \end{itemize}
+\end{itemize}
+
+\subsection{Fa}
+
+\begin{itemize}
+	\item A \kix{fa} köröket nem tartalmazó összefüggő gráf.
+
+	\item A \kix{bináris fa} elemek véges halmaza, mely:
+	      \begin{itemize}
+		      \item vagy üres, vagy egyetlen $\mathbf{T}$ elemhez (\kw{gyökér})
+		            kapcsolt két diszjunkt $\mathbf{T}_1$ és $\mathbf{T}_2$
+		            részfa alkotja. (\kix{szukcesszor})
+
+		      \item A \kw{zárócsomópont}nak nincsen szukcesszora
+		            (\kw{levél}), az utolsó élet \kw{ág}nak nevezzük.
+
+		      \item Egy \kw{generáció}ba az azonos \kw{szintszámú} elemek tartoznak.
+		            (gyökér szintszáma 0)
+
+		      \item A \kw{mélység} az azonos ágon elhelyezkedő elemek maximális száma.
+
+		      \item A fa \kw{teljes}, ha az utolsó szintet kivéve
+		            a csomópontok száma maximális.
+
+		      \item Ábrázolhatóak:
+		            \begin{itemize}
+			            \item[$\circ$] kapcsolt szerkezettel,
+			            \item[$\circ$] tömbökkel,
+			            \item[$\circ$] szekvenciálisan. ($2k$ helyek eltolva)
+		            \end{itemize}
+
+		      \item A bejárás történhet pl. irányítás szerint.
+	      \end{itemize}
+
+	\item Az \kix{általános fa} esetén nem csak 2 szukcesszor engedélyezett.
+	      \begin{itemize}
+		      \item Elemek véges halmaza ($\mathbf{T}$), amely \dots
+		            \begin{itemize}
+			            \item[$\circ$] tartalmaz egy kitüntetett
+				            $\mathbf{R}$ gyökérelemet,
+			            \item[$\circ$] a többi elem nem nulla diszjunkt
+				            részfája $\mathbf{T}$-nek.
+		            \end{itemize}
+	      \end{itemize}
+
+	\item A \kix{minimális feszítőfa}[ probléma]
+	      (minimum spanning tree)
+	      \begin{itemize}
+		      \item minden csúcsot érintő, összefüggő,
+		            körmentes élhalmaz
+
+		      \item bemenet: összefüggő, súlyozott,
+		            irányítatlan $G = (V; E)$ gráf, ahol $k(u; v)$
+		            a súly, az $(u;v)$ az élköltséget fejezi ki
+
+		      \item kimenet: egy $\mathbf{F}$ feszítőfa,
+		            melyre az élköltség minimális:
+		            \[k(\mathbf{F}) = \sum_{(u;v) \in \mathbf{F}} k(u;v)\]
+		      \item megoldás \kix{Kruskal algoritmus}[sal], amely egy
+		            \kix{mohó algoritmus}
+		            \begin{itemize}
+			            \item[$\circ$] minden pillanatban a leghatékonyabb megoldást válassza ki
+		            \end{itemize}
+	      \end{itemize}
+\end{itemize}
+
+\subsection{Verem}
+
+\begin{itemize}
+	\item A \kix{verem} (\cix{stack}) \tc{LIFO}
+	      típusú tároló.
+
+	\item \cix{push} és \cix{pop} függvényekkel rendelkezik.
+\end{itemize}
+
+\subsection{Sor}
+
+\begin{itemize}
+	\item A \kix{sor} (\cix{queue}) \tc{FIFO}
+	      típusú tároló.
+
+	\item \cix{push} és \cix{pop} függvényekkel rendelkezik
+\end{itemize}
+
+\end{document}

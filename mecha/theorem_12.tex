@@ -1,0 +1,62 @@
+\documentclass[../main.tex]{subfiles}
+
+\begin{document}
+
+\section{Struktúragráf}
+
+\begin{fulltheorem}
+  Egy adott, tanult példa kapcsán ismertesse a struktúra gráf felrajzolásának
+  lépéseit. Milyen feltételek teljesülése esetén és hogyan lehet csatolt
+  kétpólus elemmel összekapcsolt rendszereket egy oldalra redukálni?
+\end{fulltheorem}
+
+A \kix{struktúragráf} felrajzolásakor először állapítsuk meg, hogy a modellezendő
+renszernek milyen potenciáljai vannak. Vegyünk például egy villamos hajtást
+áttétellel. A villamos oldalt egy feszültségforrás, tekercs és ellenállás
+sorbakapcsolásával modellezhetjük, tehát máris 3 potenciálunk van a referencián
+kívül. Mivel a hajtás oldalon a rugalmasságot elhanyagoljuk, ezért áttét előtt
+és után is csak egy-egy potenciált kell felvennünk (minden ugyanolyan sebességgel
+forog). A rendszerek között váltó kapcsolat van, vagyis 2 transzformátorra is
+szükségünk lesz.
+\begin{figure}[H]
+  \centering
+  \includegraphics[scale=.85]{../static/tex/build/structure-graph-og.pdf}
+  \caption{A modell struktúragráfja}
+  \label{fig:structure-graph-og}
+\end{figure}
+
+A gráf és a tanult analógiák alapján felrajzolható az impedanciahálózat.
+\begin{figure}[H]
+  \centering
+  \includegraphics[scale=.85]{../static/tex/build/circuit-og.pdf}
+  \caption{A modell impedanciahálózata}
+  \label{fig:circuit-og}
+\end{figure}
+
+A hálózat a mindenkori áramköri átalakításokkal egyszerűsíthető.
+\begin{figure}[H]
+  \centering
+  \includegraphics[scale=.85]{../static/tex/build/circuit-simpler.pdf}
+  \caption{Az egyszerűsített impedanciahálózat}
+  \label{fig:circuit-simpler}
+\end{figure}
+
+Tudjuk, hogy: $\itOmega = k_m I$ és $M = U / k_e$. Ebből következik, hogy:
+\[
+  Z_\text{mech}
+  = \frac{\itOmega}{M}
+  = \frac{1}{k_m k_e} \frac{U}{I}
+  = \frac{Z_\text{vill}}{k_m k_e}
+\]
+
+Vagyis, ha az elektromos elemeket az első négypólus jobb oldalára akarjuk
+áthozni, akkor az áramköri elemek a változók közötti kapcsolat arányában
+változnak meg.
+\begin{figure}[H]
+  \centering
+  \includegraphics{../static/tex/build/circuit-elimination.pdf}
+  \caption{Első négypólus eliminálása}
+  \label{fig:circuit-elimination}
+\end{figure}
+
+\end{document}

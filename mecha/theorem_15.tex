@@ -1,0 +1,148 @@
+\documentclass[../main.tex]{subfiles}
+
+\begin{document}
+
+\section{Átviteli karakterisztikák}
+
+\begin{fulltheorem}
+  Ismertesse, hogy mit ábrázol a Bode és Nyquist diagram. Méréssel hogyan
+  állítható elő? Rajzolja fel az egy-, két- és háromtárolós, valamint
+  integráló és a holtidős tag Bode és Nyquist diagramját.
+\end{fulltheorem}
+
+A \kix{Bode diagram} és a \kix{Nyquist diagram} segítségével
+frekvencia-átviteli karakterisztikákat ábrázolhatunk.
+
+\subsection{A Bode diagram}
+
+A \kix{Bode diagram}[on] az amplitudót és a szögeltolást ábrázolhatjuk a frekvencia
+logaritmusának függvényében. Az ábrázolásmód olyan tekintetben hasznos,
+hogy átviteli függvények szorzata a logaritmikus azonosságok miatt
+összeadássá redukálódik.
+
+Az ábrázolandó függvényeket megkapjuk az $s = \iu \omega$ helyettesítéssel:
+\[
+  A_r = \left| W(\iu \omega) \right|
+  \quad \rightarrow \quad
+  B = 20 \lg A_r
+\]\[
+  \varphi = \arg W(\iu \omega)
+\]
+
+A $W(\iu \omega)$ \kix{frekvencia átviteli függvény} egy olyan komplex függvény,
+amely a nem negatív körfrekvenciákhoz egy olyan komplex számot rendel hozzá,
+amelynek az abszolút értéke a kimenőjel állandósult állapotbeli amplitúdójának
+és bemenőjel amplitúdójának aránya, a szöge megegyezik a kimenőjel állandósult
+állapotbeli fáziseltolódásával a bemenőjelhez képest (az adott körfrekvencián).
+
+\begin{figure}[htb]
+  \centering
+  \includegraphics{../static/tex/build/bode-general.pdf} 
+  \caption{Bode diagram általános alakja}
+  \label{fig:bode-general}
+\end{figure}
+
+\subsection{A Nyquist diagram}
+
+A \kix{Nyquist diagram}[on] a frekvencia átviteli függvény valós és képzetes
+részét ábrázoljuk.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics{../static/tex/build/nyquist-general.pdf} 
+  \caption{A Nyquist diagram általános alakja}
+  \label{fig:nyquist}
+\end{figure}
+
+\subsubsection*{Arányos tag}
+
+\kix{Arányos tag} esetén az átviteli függvény: $W(s) = P \; \rightarrow \; W(\iu \omega) = P$.
+\[
+  |W(\iu \omega)| = P
+  \qquad
+  \arg W(\iu \omega) = 0^\circ
+\]
+
+\begin{figure}[H]
+  \centering
+  \includegraphics{../static/tex/build/bode-P.pdf} 
+  \caption{Arányos tag Bode diagramja ($P=10 \; \rightarrow \; 20\lg P = 20$)}
+  \label{fig:bode-P}
+\end{figure}
+% \begin{figure}[H]
+%   \centering
+%   % noindent
+%   \NyquistZPK[%
+%     plot/{black,samples=1000}
+%   ]%
+%   { z/{0}, p/{0}, k/10 }
+%   {-30}{30}
+%   % indent
+%   \caption{Arányos tag Nyquist diagramja}
+%   \label{fig:nyquist-P}
+% \end{figure}
+
+
+\subsubsection*{Deriváló tag}
+
+\kix{Deriváló tag} esetén az átviteli függvény: $W(s) = s \; \rightarrow \; W(\iu \omega) = \iu \omega$.
+\[
+  |W(\iu \omega)| = \omega
+  \qquad
+  \arg W(\iu \omega) = 90^\circ
+\]
+
+\begin{figure}[H]
+  \centering
+  \includegraphics{../static/tex/build/bode-diff.pdf} 
+  \caption{Deriváló tag Bode diagramja}
+  \label{fig:bode-diff}
+\end{figure}
+
+\subsubsection*{Integráló tag}
+
+\kix{Integráló tag} esetén az átviteli függvény: $W(s) = 1/s \; \rightarrow \; W(\iu \omega) = -\iu / \omega$.
+\[
+  |W(\iu \omega)| = 1 / \omega
+  \qquad
+  \arg W(\iu \omega) = -90^\circ
+\]
+
+\begin{figure}[H]
+  \centering
+  \includegraphics{../static/tex/build/bode-int.pdf} 
+  \caption{Integráló tag Bode diagramja}
+  \label{fig:bode-int}
+\end{figure}
+
+\subsubsection*{Egytárolós tag}
+
+\paragraph*{Tiszta zérus}
+
+\kix{Tiszta zérus} esetén az átviteli függvény: $W(s) = 1 + sT \; \rightarrow \; W(\iu \omega) = 1 + \iu \omega T$.
+\[
+  |W(\iu \omega)| = \sqrt{1 + \omega^2 T^2}
+\]
+
+\begin{figure}[H]
+  \centering
+  \includegraphics{../static/tex/build/bode-z1.pdf} 
+  \caption{Tiszta zérus Bode diagramja ($T = 1$)}
+  \label{fig:bode-1z}
+\end{figure}
+
+\paragraph*{Tiszta pólus}
+
+\kix{Tiszta pólus} esetén az átviteli függvény: $W(s) = 1/(1 + sT) \; \rightarrow \; W(\iu \omega) =  1/(1 + \iu \omega T)$.
+\[
+  |W(\iu \omega)| = 1 / \sqrt{1 + \omega^2 T^2}
+\]
+
+\begin{figure}[H]
+  \centering
+  \includegraphics{../static/tex/build/bode-p1.pdf} 
+  \caption{Tiszta pólus Bode diagramja ($T = 1$)}
+  \label{fig:bode-1p}
+\end{figure}
+
+\end{document}

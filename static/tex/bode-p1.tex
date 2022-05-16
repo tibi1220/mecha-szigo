@@ -1,0 +1,53 @@
+\documentclass{standalone}
+
+\usepackage{bodeplot}
+\usepackage{amsmath}
+
+\pgfkeys{/pgf/plot/gnuplot call={cd build && gnuplot}}
+\pgfplotsset{
+  freq/.style={
+      xlabel={Frequency [1/s]}, ylabel={Phase [$^{\circ}$]},
+      height=3cm, width=5cm,
+      ytick distance=40,
+      enlarge y limits,
+      ytick distance=45,
+    },
+  amp/.style={
+      xlabel={Frequency [1/s]}, ylabel={Gain [dB]},
+      height=3cm, width=5cm,
+      ytick distance=40,
+      enlarge y limits=0.1,
+      ytick distance=20,
+    },
+}
+\tikzset{
+  dot/.style = {circle, fill=red!80!gray, minimum
+      size=#1, draw=black,
+      inner sep=0pt, outer sep=0pt},
+  dot/.default = 5pt, % size of the circle diameter 
+  wdot/.style = {dot=#1, fill=white},
+  wdot/.default = 5pt, % size of the circle diameter 
+  bdot/.style = {dot=#1, fill=black},
+  bdot/.default = 5pt, % size of the circle diameter 
+}
+
+\begin{document}
+\begin{BodePlot}[amp]{0.01}{100}
+  \addBodeZPKPlots[
+  true/{black,thick},
+  linear/{red,dashed,thick},
+  asymptotic/{blue,dotted,thick}]
+  {magnitude}
+  {z/{0},p/{0,-1},k/1}
+  \coordinate (A) at (axis cs:1,0);
+  \draw[bdot] (A) node[bdot=3pt] {} node [right=2mm] {\scriptsize$1/T$};
+\end{BodePlot}
+\begin{BodePlot}[freq]{0.01}{100}
+  \addBodeZPKPlots[
+  true/{black,thick},
+  linear/{red,dashed,thick},
+  asymptotic/{blue,dotted,thick}]
+  {phase}
+  {z/{0},p/{0,-1},k/1}
+\end{BodePlot}
+\end{document}

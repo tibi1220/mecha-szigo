@@ -1,0 +1,124 @@
+\documentclass[../main.tex]{subfiles}
+
+\begin{document}
+
+\section{Vizsgálójelek}
+
+\begin{fulltheorem}
+	Milyen vizsgálójeleket ismer? Mi a feltétele annak, hogy egy rendszer
+	működését vizsgáló jelek segítségével analizáljunk? Mi e módszer lényege?
+	Egy magyarázó ábra segítségével ismertesse, hogy a súlyfüggvény
+	(impulzus válasz) ismeretében miként számítható ki egy tetszőleges bemenő
+	jelre adott válasz a folytonos időtartományban (konvolúció).
+\end{fulltheorem}
+
+A \kix{vizsgálójel}[ek] lehetnek:
+\begin{itemize}
+	\item $\hc(t)$ -- Egységugrás (Heaviside) függvény
+	\item $\dirac(t)$ -- Dirac-delta
+\end{itemize}
+
+Ezek definíciója diszkrét időben:
+\[
+	\dirac[k] = \begin{cases}
+		1 \text{ ,ha } k = 0    \\
+		0 \text{ ,ha } k \neq 0 \\
+	\end{cases}
+	\qquad
+	\hc[k] = \begin{cases}
+		1 \text{ ,ha } k \geq 0 \\
+		0 \text{ ,ha } k < 0    \\
+	\end{cases}
+\]
+
+Definíció folytonos időben:
+\[
+	\dirac(t) = \begin{cases}
+		+ \infty \text{ ,ha } t = 0 \\
+		0 \text{ egyébként}
+	\end{cases}
+	\qquad
+	\hc(t) = \begin{cases}
+		1 \text{ ,ha } t \geq 0 \\
+		0 \text{ ,ha } t < 0    \\
+	\end{cases}
+\]
+
+A vizsgálójelek Laplace-transzformáltja:
+\[
+	\Laplace \left\{ \dirac(t) \right\}(s) = 1
+	\qquad
+	\Laplace \left\{ \hc(t) \right\} (s) = 1 / s
+\]
+
+\subsection{A súlyfüggvény}
+
+A \kix{súlyfüggvény} a rendszer \kix{Dirac-delta} függvényre adott válasza.
+Az \kix{átviteli függvény} segítségével egyszerűen számolható:
+\[
+	w(t) = \Laplace^{-1} \left\{ W(s) \right\}(t)
+\]
+
+\kix{Egytárolós tag} \kix{időállandós  alak}[jából] számítva:
+\[
+	w(t)
+	= \Laplace^{-1} \left\{ \frac{A}{1 + sT} \right\} (t)
+	= \Laplace^{-1} \left\{ \frac{A}{T} \frac{1}{s + 1/T} \right\} (t)
+	= \frac{A}{T} e^{-t / T}
+\]
+
+\kix{Kéttárolós tag} esetén:
+\[
+	w(t)
+	= \Laplace^{-1} \left\{ \frac{A \omega_n^2}{s^2 + 2 \zeta \omega_n  s + \omega_n^2} \right\} (t)
+	= \frac{A \omega_n^2}{\omega_d} e^{-\zeta \omega_n t } \sin \omega_d t
+\]
+
+\subsection{Az átmeneti függvény}
+
+Az \kix{átmeneti függvény} a rendszer \kix{egységugrás} függvényre adott válasza.
+Az \kix{átviteli függvény} segítségével egyszerűen számolható:
+\[
+	v(t) = \Laplace^{-1} \left\{ W(s) / s\right\}(t)
+\]
+
+\kix{Egytárolós tag} \kix{időállandós  alak}[jából] számítva:
+\[
+	v(t)
+	= \Laplace^{-1} \left\{ \frac{1}{s} \frac{A}{1 + sT} \right\} (t)
+	= \Laplace^{-1} \left\{ \frac{A}{s} -  \frac{AT}{1 + sT} \right\} (t)
+	= a \left( 1 - e^{-t/T} \right)
+\]
+
+\kix{Kéttárolós tag} esetén:
+\[
+	v(t)
+	= \Laplace^{-1} \left\{ \frac{1}{s} \frac{A \omega_n^2}{s^2 + 2 \zeta \omega_n  s + \omega_n^2} \right\} (t)
+	= A \left( 1 - e^{-\zeta \omega_n t} \left( \frac{\zeta}{\sqrt{1 - \zeta^2}} \sin \omega_d t + \cos \omega_d t \right) \right)
+\]\[
+	v(t) = A \left( 1 - \frac{e^{-\zeta \omega_n t}}{\sqrt{1 - \zeta^2}} \sin \left( \omega_d t + \varphi \right) \right)
+	\qquad
+	\varphi = \arccos \zeta
+\]
+
+\subsection{Kimenet megadása a súlyfüggvény segítségével}
+
+Tetszőleges \kix{bemenet}[re] felírhatjuk a \kix{kimenet}[et] a súlyfüggvény
+segítségével a konvolúció segítségével
+
+\subsubsection*{Operátor tartományban}
+\[
+	Y(s) = W(s)U(s)
+\]
+
+\subsubsection*{Folytonos időben}
+\[
+	y(t) = (w * u)(t) = \int_{0^-}^\infty w(t - \tau) u(\tau) \, \mathrm{d} \tau
+\]
+
+\subsubsection*{Diszkrét időben}
+\[
+	y[k] = \sum_{i=0}^k w [k - i] u[i]
+\]
+
+\end{document}

@@ -1,0 +1,121 @@
+\documentclass[../main.tex]{subfiles}
+
+\begin{document}
+
+\section{Az operációs rendszerek alapjai III}
+
+\begin{fulltheorem}
+	Az operációs rendszerek alapjai. Ütemezési algoritmusok.
+	Előbb jött -- előbb fut algoritmus. A legrövidebb előnyben algoritmus.
+	Körbenforgó algoritmus.
+\end{fulltheorem}
+
+\subsection{Ütemezési algoritmusok}
+
+\kix{Többfeladatos} (\cix{multitask}) rendszereknél a folyamatok közötti
+átkapcsolást, azaz a környezetváltást az alacsony szintű ütemezési algoritmusok
+végzik. Általában a gyakorlatban többféle módszer kombinációját alkalmazzák.
+Alap algoritmusok:
+\begin{itemize}
+	\item \cix{FCFS} \tabto{1.2cm} – \tabto{1.8cm}
+	      First Come First Served
+
+	\item \cix{SJF} \tabto{1.1cm} – \tabto{1.8cm}
+	      Shortest Job First
+
+	\item \cix{RR} \tabto{1cm} – \tabto{1.8cm}
+	      Round Robin
+\end{itemize}
+
+\subsection{Előbb jött -- előbb fut algoritmus}
+
+Az \cix{FCFS} algoritmus esetén a folyamatok érkezési sorrendjükben kapják meg
+a processzort. Előnye, hogy ez a legegyszerűbb. Hátránya, hogy a várakozási
+idő nagymértékben függ az érkezési időtől.
+(csorda hatás, lassú kamion effektus)
+
+\begin{table}[H]
+	\centering
+	\begin{tabular}{|c|c|c|c|c|c|}
+		% {|p{1cm} | p{1.5cm}| p{1.5cm}| p{1.8cm}| p{1.8cm}| p{2.2cm}|}
+		\hline
+		            & \texttt{érk. idő} & \texttt{CPU igény} & \texttt{kezd. időpont} & \texttt{bef. időpont} & \texttt{várakozási idő}
+		\\ \hline
+		\texttt{P1} & \texttt{0}        & \texttt{14}        & \texttt{0}             & \texttt{14}           & \texttt{0}              \\
+		\texttt{P2} & \texttt{7}        & \texttt{8}         & \texttt{14}            & \texttt{22}           & \texttt{7}              \\
+		\texttt{P3} & \texttt{11}       & \texttt{36}        & \texttt{22}            & \texttt{58}           & \texttt{11}             \\
+		\texttt{P4} & \texttt{20}       & \texttt{10}        & \texttt{58}            & \texttt{68}           & \texttt{38}             \\
+		\hline
+	\end{tabular}
+	\caption{Az \cix{FCFS} algoritmus működése}
+	\label{table:fcfs}
+\end{table}
+
+Jelen esetben az átlagos várakozási idő:
+$\mathtt{0 + 7 + 11 + 38 = 56}
+	\hspace*{1em}\rightarrow\hspace*{1em}
+	\mathtt{56/4 = 14}$.
+
+\subsection{A legrövidebb előnyben algortmus}
+
+Az \cix{SJF} algoritmus esetén a \cix{CPU}-t egy folyamat befejezése után a
+legrövidebbnek adja oda. Előnye, hogy így a legrövidebb a várakozási idő.
+Hátránya, hogy tudni kell előre a folyamatok hosszát, illetve hogy
+\kix{kiéheztet}[i] a hosszú folyamatokat.
+
+\begin{table}[H]
+	\centering
+	\begin{tabular}{|c|c|c|c|c|c|}
+		% {|p{1cm} | p{1.5cm}| p{1.5cm}| p{1.8cm}| p{1.8cm}| p{2.2cm}|}
+		\hline
+		            & \texttt{érk. idő} & \texttt{CPU igény} & \texttt{kezd. időpont} & \texttt{bef. időpont} & \texttt{várakozási idő}
+		\\ \hline
+		\texttt{P1} & \texttt{0}        & \texttt{14}        & \texttt{0}             & \texttt{14}           & \texttt{0}              \\
+		\texttt{P2} & \texttt{7}        & \texttt{8}         & \texttt{14}            & \texttt{22}           & \texttt{7}              \\
+		\texttt{P4} & \texttt{20}       & \texttt{10}        & \texttt{22}            & \texttt{32}           & \texttt{2}              \\
+		\texttt{P3} & \texttt{11}       & \texttt{36}        & \texttt{32}            & \texttt{68}           & \texttt{21}             \\
+		\hline
+	\end{tabular}
+	\caption{A \cix{SJF} algoritmus működése}
+	\label{table:sjf}
+\end{table}
+
+Jelen esetben az átlagos várakozási idő:
+$\mathtt{0 + 7 + 2 + 21 = 30}
+	\hspace*{1em}\rightarrow\hspace*{1em}
+	\mathtt{30/4 = 7,5}$.
+
+\subsection{Körbenforgó algoritmus}
+
+Az \cix{RR} algoritmus esetén a folyamatokat egy zárt körbe szervezzük, és
+minden folyamat egy előre rögzített maximális időre kapja meg a processzort,
+majd visszaáll a sor végére. Kombinálható prioritások bevezetésével.
+(minden prioritási szintnek "saját köre" van) Előnye, hogy egyszerű, és
+nincsen kiéheztetés. Hátránya, hogy az időszeletek lejártakor a folyamat
+állapotát el kell menteni. (időveszteség)
+
+\begin{table}[H]
+	\centering
+	\begin{tabular}{|c|c|c|c|c|c|}
+		% {|p{1cm} | p{1.5cm}| p{1.5cm}| p{1.8cm}| p{1.8cm}| p{2.2cm}|}
+		\hline
+		              & \texttt{érk. idő} & \texttt{CPU igény} & \texttt{kezd. időpont} & \texttt{bef. időpont} & \texttt{várakozási idő}
+		\\ \hline
+		\texttt{P1}   & \texttt{0}        & \texttt{14}        & \texttt{0}             & \texttt{10}           & \texttt{0}              \\
+		\texttt{P2}   & \texttt{7}        & \texttt{8}         & \texttt{10}            & \texttt{18}           & \texttt{3}              \\
+		(\texttt{P1}) & \texttt{10}       & \texttt{4}         & \texttt{18}            & \texttt{22}           & \texttt{8}              \\
+		\texttt{P3}   & \texttt{11}       & \texttt{36}        & \texttt{22}            & \texttt{32}           & \texttt{11}             \\
+		\texttt{P4}   & \texttt{20}       & \texttt{10}        & \texttt{32}            & \texttt{42}           & \texttt{12}             \\
+		(\texttt{P3}) & \texttt{32}       & \texttt{26}        & \texttt{42}            & \texttt{52}           & \texttt{10}             \\
+		(\texttt{P3}) & \texttt{42}       & \texttt{16}        & \texttt{52}            & \texttt{62}           & \texttt{0}              \\
+		(\texttt{P3}) & \texttt{52}       & \texttt{6}         & \texttt{62}            & \texttt{68}           & \texttt{0}              \\
+		\hline
+	\end{tabular}
+	\caption{A \cix{RR} algoritmus működése}
+	\label{table:rr}
+\end{table}
+
+Jelen esetben az átlagos várakozási idő:
+$\mathtt{44/4 = 11}$. (Az időszelet: \texttt{10})
+
+\end{document}

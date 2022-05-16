@@ -1,0 +1,97 @@
+\documentclass[../../main.tex]{subfiles}
+
+\begin{document}
+
+\section{Az objektum-orientált programozás alapjai III}
+
+\begin{fulltheorem}
+	Az objektum-orientált programozás alapjai. Öröklődés. Egységbe zárás.
+	Protected osztálytagok. Kompozíció. Aggregáció. Többszörös öröklődés.
+	Barátság.
+\end{fulltheorem}
+
+\subsection{Öröklődés}
+
+\begin{table}[H]
+	\centering\begin{tabular}{| c || c | c | c |}
+		\hline
+		                    & \bluec{public}      & \orangec{protected} & \blackc{private} \\
+		\hline \hline
+		\bluec{public}      & \bluec{public}      & \orangec{protected} & \blackc{-}       \\
+		\hline
+		\orangec{protected} & \orangec{protected} & \orangec{protected} & \blackc{-}       \\
+		\hline
+		\redc{private}      & \redc{private}      & \redc{private}      & \blackc{-}       \\
+		\hline
+	\end{tabular}
+\end{table}
+
+\begin{itemize}
+	\item Az \kix{osztály} más osztályok tulajdonságait/viselkedését
+	      is magába integrálja.
+
+	\item Módosított viselkedésű osztály az eredeti kód másolata,
+	      hivatkozása nélkül.
+
+	\item Minden változás automatikusan végigmegy a hierarchián.
+
+	\item Az ős neve a bázis osztály. (\tc{base/parent class})
+
+	\item Az utód neve leszármazott osztály. (\tc{derived/child class})
+
+	\item A konstruktor, destruktor, barát függvények, illetve
+	      az \tc{operator=} túlterhelése nem öröklődnek,
+	      öröklődnek viszont az adattagok, tagfüggvények és
+	      a többi túlterhelt operátor.
+\end{itemize}
+
+\subsection{Egységbe zárás}
+
+Az \kix{objektum} egységbe zárja (\cix{encapsulation}) az adatokat és a programokat.
+Magába foglalja a külvilág felé mutatott viselkedést. A belső struktúrája,
+állapota, adatai és kezelőfüggvényei kívülről nem láthatóak. (\cix{data hiding})
+
+\subsection{Protected osztálytagok}
+
+A \cix{protected} \kix{tagváltozók} \kix{öröklődés} esetén nyilvánosak az
+utódosztály számára, de kívülről nem elérhetőek.
+
+\subsection{Kompozíció és Aggregáció}
+
+\kix{Kompozíció} esetén egy meglévő osztályt tagobjektumként használunk fel egy
+másik osztályban. (\kix{statikus példány}) \kix{Aggregáció} esetén
+\kix{pointer} vagy \kix{referencia} használatos. (\kix{dinamikus példány})
+A különbség akkor lép fek, ha a felhasznált osztályt módosítani kezdjük.
+
+\begin{minted}[bgcolor=bg, linenos]{cpp}
+class X {};
+
+// Composition
+class Y {
+  X x;   // 'has a' realtion
+};
+
+// Aggregation
+class Z {
+  X& x;  // only reference
+  X* px; // only pointer
+};
+\end{minted}
+
+\subsection{Többszörös öröklődés}
+
+A \kix{többszörös öröklődés} esetén több ős van.
+
+\subsection{Barátság}
+
+Az alaposztály \kix{barát}ja az utódban az öröklött tagokat éri el.
+Az utód barátja az ős public és protected tagjait éri el. 3 fajta
+\cix{friend} lehet.
+
+\begin{minted}[bgcolor=bg, linenos]{cpp}
+friend type myFunc();           // Külső függvény
+friend type MyClass::myFunc();  // Másik osztály publikus tagfüggvénye
+friend MyClass;                 // Másik osztály összes függvénye
+\end{minted}
+
+\end{document}
