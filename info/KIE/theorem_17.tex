@@ -5,8 +5,8 @@
 \section{Az információelmélet alapjai II}
 
 \begin{fulltheorem}
-	Az információelmélet alapjai. Forráskódolás. Huffman-kód. Csatornakódolás.
-	Hamming -- távolság. Hibajelzés.
+  Az információelmélet alapjai. Forráskódolás. Huffman-kód. Csatornakódolás.
+  Hamming -- távolság. Hibajelzés.
 \end{fulltheorem}
 
 \subsection{Forráskódolás}
@@ -21,8 +21,8 @@ $\mathcal{B}$-beli sorozat (kódszó) hossza: ${\ell_i}$.
 Egy $f$ kód \kix{átlagos szóhossz}[a] $\ell_i$,
 \kix{várható érték}[e]:
 \[
-	L(A) = \sum_{i=1}^n p(A_i) \cdot \ell_i =
-	\sum_{i=1}^n p_i \cdot\ell_i
+  L(A) = \sum_{i=1}^n p(A_i) \cdot \ell_i =
+  \sum_{i=1}^n p_i \cdot\ell_i
 \]
 
 \subsubsection*{Shannon forráskódolási tétele}
@@ -34,9 +34,9 @@ kód, amely az egyes forrásszimbólumokhoz rendre
 $\ell_1, \ell_2, \dots, \ell_n$ szóhosszúságú szavakat
 rendel, és \dots
 \[
-	\frac{H(A)}{\log_2(s)}
-	\leq L(A)
-	< \frac{H(A)}{\log_2(s)} + 1
+  \frac{H(A)}{\log_2(s)}
+  \leq L(A)
+  < \frac{H(A)}{\log_2(s)} + 1
 \]
 Az olyan kódok, melyekre ez teljesül, azok \kix{optimális kód}[ok].
 
@@ -44,16 +44,16 @@ A jól tömöríthető eljárásokra igaz, hogy ha $p_i \geq p_j$,
 akkor $\ell_i \leq \ell_j$. Ha az $f$ \kix{bináris kód} \kix{prefix},
 akkor \dots
 \begin{itemize}
-	\item a leggyakoribb forrásábécébeli elemhez
-	      fog a legrövidebb kódszó tartozni
+  \item a leggyakoribb forrásábécébeli elemhez
+        fog a legrövidebb kódszó tartozni
 
-	\item a második leggyakoribbhoz eggyel hosszabb kódszó
+  \item a második leggyakoribbhoz eggyel hosszabb kódszó
 
-	\item \dots
+  \item \dots
 
-	\item a két legritkábban előforduló betűhöz
-	      pedig azonosan hosszú kódszó fog tartozni,
-	      és csak az utolsó karakterben fog e két szó különbözni
+  \item a két legritkábban előforduló betűhöz
+        pedig azonosan hosszú kódszó fog tartozni,
+        és csak az utolsó karakterben fog e két szó különbözni
 \end{itemize}
 
 \subsection{Huffman-kód}
@@ -61,21 +61,21 @@ akkor \dots
 A \kix{Huffman-kód} a legrövidebb átlagos
 szóhosszú \kix{bináris prefix kód}.
 \begin{enumerate}
-	\item valószínűségek szerint sorba rendez
+  \item valószínűségek szerint sorba rendez
 
-	\item a két legkisebb valószínűséhű szimbólumot
-	      összevonja. Az összevont szimbólum valószínűsége
-	      az eredeti két valószínűség összege.
+  \item a két legkisebb valószínűséhű szimbólumot
+        összevonja. Az összevont szimbólum valószínűsége
+        az eredeti két valószínűség összege.
 
-	\item az első 2 lépés ismételgetése
+  \item az első 2 lépés ismételgetése
 
-	\item a kapott gráf minden csomópontja előtti
-	      két élt megcímkézi $0$-val és $1$-gyel
+  \item a kapott gráf minden csomópontja előtti
+        két élt megcímkézi $0$-val és $1$-gyel
 
-	\item a kódfa gyökerétől elindulba megkeresi
-	      az adott szimbólumhoz tartozó útvonalat, kiolvassa
-	      az éleknek megfelelő biteket. A kapott bitsorozatot
-	      rendeli a szimbólumhoz kódszóként.
+  \item a kódfa gyökerétől elindulba megkeresi
+        az adott szimbólumhoz tartozó útvonalat, kiolvassa
+        az éleknek megfelelő biteket. A kapott bitsorozatot
+        rendeli a szimbólumhoz kódszóként.
 \end{enumerate}
 
 \subsection{Csatornakódolás}
@@ -84,7 +84,7 @@ $\mathbb{C}^n$ vektortér, $\rvec{c} \in \mathbb{C}^n$
 és $\rvec{v} \in \mathbb{C}^n$ vektorok. A csatorna a rá
 bocsájtott $\rvec{c} = c^{(1)}, c^{(2)}, \dots, c^{(n)}$
 szimbólumsorozatból egy $\rvec{v} = v^{(1)}, v^{(2)},
-	\dots, v^{(n)}$ szimbólumsorozatot csinál.
+  \dots, v^{(n)}$ szimbólumsorozatot csinál.
 
 \subsection{Hamming-távolság}
 
@@ -95,16 +95,16 @@ $c^{(i)} \neq v^{(i)}$.
 Jele: $\dist \left( \rvec{c}, \rvec{v} \right)$.
 Teljesülnek az alábbiak:
 \[
-	\mathrm{d}\left( \rvec{c}, \rvec{v} \right) \geq 0,
-	\hspace{2.5em}
-	\mathrm{d}\left( \rvec{c}, \rvec{c} \right) = 0
-	\hspace{2.5em}
-	\mathrm{d}\left( \rvec{c}, \rvec{v} \right) =
-	\mathrm{d}\left( \rvec{v}, \rvec{c} \right)
-	\hspace{2.5em}
-	\mathrm{d}\left( \rvec{c}, \rvec{v} \right) \leq
-	\mathrm{d}\left( \rvec{c}, \rvec{w} \right) +
-	\mathrm{d}\left( \rvec{w}, \rvec{v} \right)
+  \mathrm{d}\left( \rvec{c}, \rvec{v} \right) \geq 0,
+  \hspace{2.5em}
+  \mathrm{d}\left( \rvec{c}, \rvec{c} \right) = 0
+  \hspace{2.5em}
+  \mathrm{d}\left( \rvec{c}, \rvec{v} \right) =
+  \mathrm{d}\left( \rvec{v}, \rvec{c} \right)
+  \hspace{2.5em}
+  \mathrm{d}\left( \rvec{c}, \rvec{v} \right) \leq
+  \mathrm{d}\left( \rvec{c}, \rvec{w} \right) +
+  \mathrm{d}\left( \rvec{w}, \rvec{v} \right)
 \]
 
 \subsection{Hibajelzés}
@@ -119,9 +119,9 @@ Legyen $K$ a lehetséges kódszavak halmaza. Ekkor egy $K$ kód kódtávolsága
 a kódszavak közötti \kix{Hamming-távolság} minimuma.
 
 \[
-	d_\mathrm{{min}} = \min_{
-		\rvec{c} \neq \rvec{c'};\rvec{c}, \rvec{c'} \in K
-	} \left\{ \dist \left( \rvec{c}, \rvec{c'} \right) \right\}
+  d_\mathrm{{min}} = \min_{
+    \rvec{c} \neq \rvec{c'};\rvec{c}, \rvec{c'} \in K
+  } \left\{ \dist \left( \rvec{c}, \rvec{c'} \right) \right\}
 \]
 
 \kix{Hibajelzés} lehetséges, ha a $\rvec{c}$ kódszavunkból
@@ -145,14 +145,14 @@ maradékot. Így $\nu \leq d_\mathrm{min} - 1$ törléses hiba javítható.
 Ebben az esetben nem tudjuk a hibák helyét.
 A $\rvec{v}$ hibás vett vektort abba a $\rvec{c}$
 szóba javítjuk amelyre $\mathrm{d} \left\{
-	\rvec{c}, \rvec{v}
-	\right\}$ a legkisebb. Ha több ilyen van,
+  \rvec{c}, \rvec{v}
+  \right\}$ a legkisebb. Ha több ilyen van,
 akkor nem tudunk javítani. A javítóság feltétele:
 \begin{equation*}
-	\mathrm{d} \left( \rvec{c}, \rvec{v} \right)
-	< \mathrm{d} \left( \rvec{c'}, \rvec{v} \right)
-	\hspace*{1.5em} \rightarrow \hspace*{1.5em}
-	\nu \leq \frac{d_\mathrm{min} - 1}{2}
+  \mathrm{d} \left( \rvec{c}, \rvec{v} \right)
+  < \mathrm{d} \left( \rvec{c'}, \rvec{v} \right)
+  \hspace*{1.5em} \rightarrow \hspace*{1.5em}
+  \nu \leq \frac{d_\mathrm{min} - 1}{2}
 \end{equation*}
 
 \end{document}

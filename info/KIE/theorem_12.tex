@@ -5,9 +5,9 @@
 \section{A számítógép architektúrák alapjai II}
 
 \begin{fulltheorem}
-	A számítógép architektúrák alapjai. A számítógép felépítése. Memóriák.
-	CPU részei. Utasítás ciklus. Szubrutinhívás. Interrupt.
-	Közvetlen memória hozzáférés.
+  A számítógép architektúrák alapjai. A számítógép felépítése. Memóriák.
+  CPU részei. Utasítás ciklus. Szubrutinhívás. Interrupt.
+  Közvetlen memória hozzáférés.
 \end{fulltheorem}
 
 \subsection{A számítógép felépítése}
@@ -19,101 +19,101 @@ oldjunk meg egy feladatot, programnak nevezünk.
 \bgroup
 \def\arraystretch{1.2}
 \begin{table}[H]
-	\centering\begin{tabular}{| m{2cm}  >{\centering\arraybackslash}m{10cm} |}
-		\hline
-		\kix{Hardver}  &
-		elektromos áramkörök, mechanikus berendezések,
-		kábelek, csatlakozók, perifériák, önmagában nem működőképesek
-		\\ \hline
-		\kix{Szoftver} &
-		számítógépet működőképessé tevő programok és azok dokumentációi
-		\\ \hline
-		\kix{Firmware} &
-		célprogram, mikrokóddal írt, készülék specifikus,
-		hardverbe ágyazott szoftver, gyakran \kix{Flash ROM}
-		\\ \hline
-	\end{tabular}
-	\caption{A számítógép részei}
-	\label{fig:comp-parts}
+  \centering\begin{tabular}{| m{2cm}  >{\centering\arraybackslash}m{10cm} |}
+    \hline
+    \kix{Hardver}  &
+    elektromos áramkörök, mechanikus berendezések,
+    kábelek, csatlakozók, perifériák, önmagában nem működőképesek
+    \\ \hline
+    \kix{Szoftver} &
+    számítógépet működőképessé tevő programok és azok dokumentációi
+    \\ \hline
+    \kix{Firmware} &
+    célprogram, mikrokóddal írt, készülék specifikus,
+    hardverbe ágyazott szoftver, gyakran \kix{Flash ROM}
+    \\ \hline
+  \end{tabular}
+  \caption{A számítógép részei}
+  \label{fig:comp-parts}
 \end{table}
 \egroup
 
 \subsubsection*{Gépi, nyelvi szintek}
 
 \begin{enumerate}
-	\setcounter{enumi}{-1}
-	\item digitális logikai szint
-	      \begin{itemize}
-		      \item kapuk (\cix{gate})
-	      \end{itemize}
+  \setcounter{enumi}{-1}
+  \item digitális logikai szint
+        \begin{itemize}
+          \item kapuk (\cix{gate})
+        \end{itemize}
 
-	\item mikroarchitektúra  szintje
-	      \begin{itemize}
-		      \item értelmezi a második szintet
-		      \item \cix{ALU}, regiszterek
-	      \end{itemize}
+  \item mikroarchitektúra  szintje
+        \begin{itemize}
+          \item értelmezi a második szintet
+          \item \cix{ALU}, regiszterek
+        \end{itemize}
 
-	\item gépi utasítás szintje (elektronikus áramkörök)
-	      \begin{itemize}
-		      \item itt dől el a kompatibilitás kérdése
-	      \end{itemize}
+  \item gépi utasítás szintje (elektronikus áramkörök)
+        \begin{itemize}
+          \item itt dől el a kompatibilitás kérdése
+        \end{itemize}
 
-	\item operációs rendszer gépi szintje
-	      \begin{itemize}
-		      \item általában értelmezés
-		      \item az utasításait az oprendszer,
-		            vagy közvetlen a 2. szint hajtja végre
-	      \end{itemize}
+  \item operációs rendszer gépi szintje
+        \begin{itemize}
+          \item általában értelmezés
+          \item az utasításait az oprendszer,
+                vagy közvetlen a 2. szint hajtja végre
+        \end{itemize}
 
-	\item assembly nyelvi szint (assembler)
-	      \begin{itemize}
-		      \item szimbolikus leírás
-	      \end{itemize}
+  \item assembly nyelvi szint (assembler)
+        \begin{itemize}
+          \item szimbolikus leírás
+        \end{itemize}
 
-	\item probléma orientált nyelvi szint (fordító program)
-	      \begin{itemize}
-		      \item ezek tényleges nyelvek (\cix{C}, \cix{C++})
-	      \end{itemize}
+  \item probléma orientált nyelvi szint (fordító program)
+        \begin{itemize}
+          \item ezek tényleges nyelvek (\cix{C}, \cix{C++})
+        \end{itemize}
 \end{enumerate}
 
 \subsection*{A Neumann elvű számítógép felépítése}
 
 \begin{itemize}
-	\item A \kix{CPU}
-	      általános vezérlő, műveletvégző, adat-mozgató egység,
-	      végrehajtja a futó programok utasításait.
+  \item A \kix{CPU}
+        általános vezérlő, műveletvégző, adat-mozgató egység,
+        végrehajtja a futó programok utasításait.
 
-	\item A \kix{memória}
-	      a futó programok kódját, adatait tartalmazza.
+  \item A \kix{memória}
+        a futó programok kódját, adatait tartalmazza.
 
-	\item A \kix{háttértárolók}
-	      lehet mágneslemez, merevlemez, optikai tároló,
-	      szalagos tároló, félvezezős tároló.
-	      (flash memória chip)
+  \item A \kix{háttértárolók}
+        lehet mágneslemez, merevlemez, optikai tároló,
+        szalagos tároló, félvezezős tároló.
+        (flash memória chip)
 
-	\item A \kix{perifériák}:
-	      monitor, billentyűzet, egér,
-	      nyomtató, kommunikációs vonalak, stb.
+  \item A \kix{perifériák}:
+        monitor, billentyűzet, egér,
+        nyomtató, kommunikációs vonalak, stb.
 \end{itemize}
 \begin{figure}[H]
-	\centering
-	\begin{tikzpicture}
+  \centering
+  \begin{tikzpicture}
 
-		\draw[thick] (0,0) rectangle ++(4,.75);
-		\draw[thick] (0,-1.5) rectangle ++(4,.75);
-		\draw[] (0,-1.5) rectangle ++(2,.75);
-		\draw[thick] (0,-3) rectangle ++(4,.75);
+    \draw[thick] (0,0) rectangle ++(4,.75);
+    \draw[thick] (0,-1.5) rectangle ++(4,.75);
+    \draw[] (0,-1.5) rectangle ++(2,.75);
+    \draw[thick] (0,-3) rectangle ++(4,.75);
 
-		\draw[implies-implies,double equal sign distance, semithick] (2,0) -- (2,-0.75);
-		\draw[implies-implies,double equal sign distance, semithick] (2,-1.5) -- (2,-2.25);
+    \draw[implies-implies,double equal sign distance, semithick] (2,0) -- (2,-0.75);
+    \draw[implies-implies,double equal sign distance, semithick] (2,-1.5) -- (2,-2.25);
 
-		\node[] at (2, .375) {\kix{háttértárolók}};
-		\node[] at (1, -1.125) {\kix{CPU}};
-		\node[] at (3, -1.125) {\kix{memória}};
-		\node[] at (2, -2.625) {\kix{I/O eszközök}};
-	\end{tikzpicture}
-	\caption{Neumann-elvű számítógép}
-	\label{fig:neumann}
+    \node[] at (2, .375) {\kix{háttértárolók}};
+    \node[] at (1, -1.125) {\kix{CPU}};
+    \node[] at (3, -1.125) {\kix{memória}};
+    \node[] at (2, -2.625) {\kix{I/O eszközök}};
+  \end{tikzpicture}
+  \caption{Neumann-elvű számítógép}
+  \label{fig:neumann}
 \end{figure}
 
 \subsubsection{A számítógépek szokásos felépítése}
@@ -132,24 +132,24 @@ jellemzőit, időzítés adatait, a vezérlőjelek típusait, funkcióit kell me
 A cím lehet memóriacím, vagy IO eszköz is címezhető.
 a vezérlőjelek lehetnek \dots
 \begin{itemize}
-	\item adatátvitelt vezérlő jelek
-	      \begin{itemize}
-		      \item[$\circ$] cím a sínen
-			      \tabto{2.7cm} – \tabto{3.3cm}
-			      memória, periféria (\tc{M}/\tc{IO})
+  \item adatátvitelt vezérlő jelek
+        \begin{itemize}
+          \item[$\circ$] cím a sínen
+            \tabto{2.7cm} – \tabto{3.3cm}
+            memória, periféria (\tc{M}/\tc{IO})
 
-		      \item[$\circ$] adat a sínen
-			      \tabto{2.7cm} – \tabto{3.3cm}
-			      írás, olvasás (\tc{R}/\tc{W})
+          \item[$\circ$] adat a sínen
+            \tabto{2.7cm} – \tabto{3.3cm}
+            írás, olvasás (\tc{R}/\tc{W})
 
-		      \item[$\circ$] átvitel vége
-			      \tabto{2.7cm} – \tabto{3.3cm}
-			      szó, byte átvitel (\tc{WD}/\tc{B})
-	      \end{itemize}
+          \item[$\circ$] átvitel vége
+            \tabto{2.7cm} – \tabto{3.3cm}
+            szó, byte átvitel (\tc{WD}/\tc{B})
+        \end{itemize}
 
-	\item megszakítást vezérlő jelek
-	\item sínvezérlő jelek (kérés, foglalás, visszaigazolás)
-	\item egyéb (órajel, ütemezés, táp)
+  \item megszakítást vezérlő jelek
+  \item sínvezérlő jelek (kérés, foglalás, visszaigazolás)
+  \item egyéb (órajel, ütemezés, táp)
 \end{itemize}
 
 \subsection{Memóriák}
@@ -157,34 +157,34 @@ a vezérlőjelek lehetnek \dots
 \subsubsection*{Memória hierarchia}
 
 \begin{center}
-	regiszter \\
-	gyorsítótár \\
-	központi memória \\
-	mágneslemez \\
-	szalag, optikai lemez
+  regiszter \\
+  gyorsítótár \\
+  központi memória \\
+  mágneslemez \\
+  szalag, optikai lemez
 \end{center}
 
 \subsubsection*{Csoportosítás}
 
 \begin{enumerate}
-	\item információ elérése alapján
-	      \begin{itemize}
-		      \item cím szerinti hozzáférés
+  \item információ elérése alapján
+        \begin{itemize}
+          \item cím szerinti hozzáférés
 
-		      \item tartalom szerinti hozzáférés (\cix{cache})
-	      \end{itemize}
+          \item tartalom szerinti hozzáférés (\cix{cache})
+        \end{itemize}
 
-	\item hozzáférés belső szervezés alapján
-	      \begin{itemize}
-		      \item szekvenciális memóriák
+  \item hozzáférés belső szervezés alapján
+        \begin{itemize}
+          \item szekvenciális memóriák
 
-		      \item tetszőleges sorrendben címezhető memóriák
-		            \begin{itemize}
-			            \item csak olvasható memóriák (\cix{ROM})
+          \item tetszőleges sorrendben címezhető memóriák
+                \begin{itemize}
+                  \item csak olvasható memóriák (\cix{ROM})
 
-			            \item írható-olvasható memóriák (\cix{RAM})
-		            \end{itemize}
-	      \end{itemize}
+                  \item írható-olvasható memóriák (\cix{RAM})
+                \end{itemize}
+        \end{itemize}
 \end{enumerate}
 
 \subsubsection*{ROM típusok}
@@ -196,75 +196,75 @@ vagy speciális műveletet igényel a változtatás.
 (Ellentétben a RAM-mal, melynél könnyű a változtatás)
 
 \begin{itemize}
-	\item \cix{ROM} \tabto{1.7cm} – \tabto{2.5cm}
-	      Read Only Memory
-	      \begin{itemize}
-		      \item a gyártó programozza
-	      \end{itemize}
+  \item \cix{ROM} \tabto{1.7cm} – \tabto{2.5cm}
+        Read Only Memory
+        \begin{itemize}
+          \item a gyártó programozza
+        \end{itemize}
 
-	\item \cix{PROM} \tabto{1.7cm} – \tabto{2.5cm}
-	      Programmable Read Only Memory
-	      \begin{itemize}
-		      \item felhasználó egyszer programozhatja,
-		            azaz megfelelő készülékkel kiégetheti
-		            a cellákban lévő tranzisztorok bekötő vezetékeit
-	      \end{itemize}
+  \item \cix{PROM} \tabto{1.7cm} – \tabto{2.5cm}
+        Programmable Read Only Memory
+        \begin{itemize}
+          \item felhasználó egyszer programozhatja,
+                azaz megfelelő készülékkel kiégetheti
+                a cellákban lévő tranzisztorok bekötő vezetékeit
+        \end{itemize}
 
-	\item \cix{EPROM} \tabto{1.7cm} – \tabto{2.5cm}
-	      Erasable Programmable Read Only Memory
-	      \begin{itemize}
-		      \item UV fénnyel törölhető, majd külön
-		            készülékkel újra írható a tartalma
+  \item \cix{EPROM} \tabto{1.7cm} – \tabto{2.5cm}
+        Erasable Programmable Read Only Memory
+        \begin{itemize}
+          \item UV fénnyel törölhető, majd külön
+                készülékkel újra írható a tartalma
 
-		      \item régebben a \cix{ROM BIOS} ilyen
-		            memóriában helyezkedett el
-	      \end{itemize}
+          \item régebben a \cix{ROM BIOS} ilyen
+                memóriában helyezkedett el
+        \end{itemize}
 
-	\item \cix{EEPROM} \tabto{1.7cm} – \tabto{2.5cm}
-	      Electrically Erasable Programmable Read Only Memory
-	      \begin{itemize}
-		      \item elektromosan törölhető,majd külön
-		            készülékkel újra írható a tartalma
-	      \end{itemize}
+  \item \cix{EEPROM} \tabto{1.7cm} – \tabto{2.5cm}
+        Electrically Erasable Programmable Read Only Memory
+        \begin{itemize}
+          \item elektromosan törölhető,majd külön
+                készülékkel újra írható a tartalma
+        \end{itemize}
 
-	\item \cix{FLASH} \tabto{1.7cm} – \tabto{2.5cm}
-	      Flash/Villanó Memória
-	      \begin{itemize}
-		      \item Olyan \cix{EEPROM}, melyet számítógép
-		            is képes törölni, majd újreírni.
+  \item \cix{FLASH} \tabto{1.7cm} – \tabto{2.5cm}
+        Flash/Villanó Memória
+        \begin{itemize}
+          \item Olyan \cix{EEPROM}, melyet számítógép
+                is képes törölni, majd újreírni.
 
-		      \item Pendrive-okban, fényképezőgépekben
-	      \end{itemize}
+          \item Pendrive-okban, fényképezőgépekben
+        \end{itemize}
 \end{itemize}
 
 \subsubsection*{RAM típusok}
 
 \begin{itemize}
-	\item \cix{SRAM} \tabto{1.7cm} – \tabto{2.5cm}
-	      Static Random Access Memory
-	      \begin{itemize}
-		      \item  a tápfeszültség biztosításával korlátlan
-		            ideig megőrzi az információt
+  \item \cix{SRAM} \tabto{1.7cm} – \tabto{2.5cm}
+        Static Random Access Memory
+        \begin{itemize}
+          \item  a tápfeszültség biztosításával korlátlan
+                ideig megőrzi az információt
 
-		      \item a memóriacellában egy \cix{flip-flop} található
+          \item a memóriacellában egy \cix{flip-flop} található
 
-		      \item kisebb integráltságú
-		            (nagyobb méretű egy cella, mint a \cix{DRAM} esetén)
+          \item kisebb integráltságú
+                (nagyobb méretű egy cella, mint a \cix{DRAM} esetén)
 
-		      \item nagyon gyors: \cix{cache}
-	      \end{itemize}
+          \item nagyon gyors: \cix{cache}
+        \end{itemize}
 
-	\item \cix{DRAM} \tabto{1.7cm} – \tabto{2.5cm}
-	      Dynamic Random Access Memory
-	      \begin{itemize}
-		      \item az információt egy pici
-		            \kix{kondenzátor} tárolja
+  \item \cix{DRAM} \tabto{1.7cm} – \tabto{2.5cm}
+        Dynamic Random Access Memory
+        \begin{itemize}
+          \item az információt egy pici
+                \kix{kondenzátor} tárolja
 
-		      \item a szivárgás miatt rövid időn belül elveszítené a töltését,
-		            ezért időközönként (néhány ms) frissíteni kell a tartalmát
+          \item a szivárgás miatt rövid időn belül elveszítené a töltését,
+                ezért időközönként (néhány ms) frissíteni kell a tartalmát
 
-		      \item nagy integráltságú, a \cix{PC}-k memóriája ilyen
-	      \end{itemize}
+          \item nagy integráltságú, a \cix{PC}-k memóriája ilyen
+        \end{itemize}
 \end{itemize}
 
 \subsection{A CPU részei}
@@ -274,195 +274,195 @@ memóriából olvassa a végrehajtás alatt lévő program bináris utasításai
 Az utasításkészlete fontos jellemzője. A mikroprocesszor egy chipen kialakított
 áramkör, mely a számítógép \cix{CPU}-jának a funkcióját látja el. Részei:
 \begin{itemize}
-	\item \kix{ALU} -- aritmetikai és logikai műveletek végzése
-	      \begin{itemize}
-		      \item összeadás, kivonás,
-		            fixpontos szorzás, osztás (léptetések),
-		            lebegőpontos aritmetikai műveletek (korábban koprocesszor),
-		            egyszerű logikai műveletek
-	      \end{itemize}
+  \item \kix{ALU} -- aritmetikai és logikai műveletek végzése
+        \begin{itemize}
+          \item összeadás, kivonás,
+                fixpontos szorzás, osztás (léptetések),
+                lebegőpontos aritmetikai műveletek (korábban koprocesszor),
+                egyszerű logikai műveletek
+        \end{itemize}
 
-	\item \kix{Utasítás dekódoló és vezérlő egység}
-	      \begin{itemize}
-		      \item Felismeri, elemzi (dekódolja) a gépi nyelvű
-		            program utasításait, az utasítások alapján működteti
-		            a \cix{CPU} többi egységét, illetve képezi a szükséges címeket.
-	      \end{itemize}
+  \item \kix{Utasítás dekódoló és vezérlő egység}
+        \begin{itemize}
+          \item Felismeri, elemzi (dekódolja) a gépi nyelvű
+                program utasításait, az utasítások alapján működteti
+                a \cix{CPU} többi egységét, illetve képezi a szükséges címeket.
+        \end{itemize}
 
-	\item \kix{Regiszter}[ek] --
-	      chipen belüli, közvetlen elérésű tároló elemek
-	      \begin{itemize}
-		      \item feladatuk műveletvégzéskor az operandusok tárolása,
-		            illetve a címek előállítása
-	      \end{itemize}
+  \item \kix{Regiszter}[ek] --
+        chipen belüli, közvetlen elérésű tároló elemek
+        \begin{itemize}
+          \item feladatuk műveletvégzéskor az operandusok tárolása,
+                illetve a címek előállítása
+        \end{itemize}
 \end{itemize}
 
 \subsubsection*{8086 részei}
 
 \begin{itemize}
-	\item \kix{szegmensregiszter}[ek]
-	      \begin{itemize}
-		      \item \tc{CS} – Code Segment
-		            \tabto{4cm} – \tabto{4.6cm}
-		            kódszegmens regiszter
+  \item \kix{szegmensregiszter}[ek]
+        \begin{itemize}
+          \item \tc{CS} – Code Segment
+                \tabto{4cm} – \tabto{4.6cm}
+                kódszegmens regiszter
 
-		      \item \tc{SS} – Stack Segment
-		            \tabto{4cm} – \tabto{4.6cm}
-		            veremszegmens regiszter
+          \item \tc{SS} – Stack Segment
+                \tabto{4cm} – \tabto{4.6cm}
+                veremszegmens regiszter
 
-		      \item \tc{DS} – Data Segment
-		            \tabto{4cm} – \tabto{4.6cm}
-		            adatszegmens regiszter
+          \item \tc{DS} – Data Segment
+                \tabto{4cm} – \tabto{4.6cm}
+                adatszegmens regiszter
 
-		      \item \tc{ES} – Extra Segment
-		            \tabto{4cm} – \tabto{4.6cm}
-		            extra adatszegmens regiszter
-	      \end{itemize}
+          \item \tc{ES} – Extra Segment
+                \tabto{4cm} – \tabto{4.6cm}
+                extra adatszegmens regiszter
+        \end{itemize}
 
-	\item \kix{vezérlő regiszter}[ek]
-	      \begin{itemize}
-		      \item \tc{IP} – Instruction Pointer
-		            \tabto{4.8cm} – \tabto{5.4cm}
-		            utasítás mutató
+  \item \kix{vezérlő regiszter}[ek]
+        \begin{itemize}
+          \item \tc{IP} – Instruction Pointer
+                \tabto{4.8cm} – \tabto{5.4cm}
+                utasítás mutató
 
-		      \item \tc{SP} – Stack Pointer
-		            \tabto{4.8cm} – \tabto{5.4cm}
-		            verem mutató
+          \item \tc{SP} – Stack Pointer
+                \tabto{4.8cm} – \tabto{5.4cm}
+                verem mutató
 
-		      \item \tc{BP} – Base Pointer
-		            \tabto{4.8cm} – \tabto{5.4cm}
-		            bázis mutató
+          \item \tc{BP} – Base Pointer
+                \tabto{4.8cm} – \tabto{5.4cm}
+                bázis mutató
 
-		      \item \tc{SI} – Source Index
-		            \tabto{4.8cm} – \tabto{5.4cm}
-		            forrás index
+          \item \tc{SI} – Source Index
+                \tabto{4.8cm} – \tabto{5.4cm}
+                forrás index
 
-		      \item \tc{DI} – Destination Index
-		            \tabto{4.8cm} – \tabto{5.4cm}
-		            cél index
-	      \end{itemize}
+          \item \tc{DI} – Destination Index
+                \tabto{4.8cm} – \tabto{5.4cm}
+                cél index
+        \end{itemize}
 
-	\item \kix{általános célú regiszter}[ek] -- \kix{adatregiszter}[ek]
-	      \begin{itemize}
-		      \item \tc{AX} – akkumulátor regiszter
-		            (\tc{AH}, \tc{AL})
+  \item \kix{általános célú regiszter}[ek] -- \kix{adatregiszter}[ek]
+        \begin{itemize}
+          \item \tc{AX} – akkumulátor regiszter
+                (\tc{AH}, \tc{AL})
 
-		      \item \tc{BX} – bázis regiszter
-		            (\tc{BH}, \tc{BL})
+          \item \tc{BX} – bázis regiszter
+                (\tc{BH}, \tc{BL})
 
-		      \item \tc{CX} – számláló regiszter
-		            (\tc{CH}, \tc{CL})
+          \item \tc{CX} – számláló regiszter
+                (\tc{CH}, \tc{CL})
 
-		      \item \tc{DX} – adatregiszter
-		            (\tc{DH}, \tc{DL})
+          \item \tc{DX} – adatregiszter
+                (\tc{DH}, \tc{DL})
 
-		      \item műveletvégzéskor az operandusok tárolására
-	      \end{itemize}
+          \item műveletvégzéskor az operandusok tárolására
+        \end{itemize}
 
-	\item \cix{flag}-ek – jelzőbitek, melyek\dots
-	      \begin{itemize}
-		      \item vagy a legutóbb elvégzett aritmetikai
-		            műveletek eredményétől függően vesznek fel értékeket,
-		            vagy az processzor állapotára utalnak
+  \item \cix{flag}-ek – jelzőbitek, melyek\dots
+        \begin{itemize}
+          \item vagy a legutóbb elvégzett aritmetikai
+                műveletek eredményétől függően vesznek fel értékeket,
+                vagy az processzor állapotára utalnak
 
-		      \item a \kix{feltételes ugró} utasítások
-		            a \cix{flag}-eket használják feltételre
+          \item a \kix{feltételes ugró} utasítások
+                a \cix{flag}-eket használják feltételre
 
-		      \item aritmetikai flag-ek:
-		            előjel flag (\cix{sign}),
-		            zéró flag (\cix{zero}),
-		            paritás flag (\cix{parity}),
-		            átvitel flag (\cix{carry})
-		            (legmagasabb helyiértéken képződött maradék)
+          \item aritmetikai flag-ek:
+                előjel flag (\cix{sign}),
+                zéró flag (\cix{zero}),
+                paritás flag (\cix{parity}),
+                átvitel flag (\cix{carry})
+                (legmagasabb helyiértéken képződött maradék)
 
-		      \item processzor állapotára utalóak:
-		            \cix{trap} flag (program utasításonkénti végrehajtása),
-		            \cix{interrupt} flag (megszakítás,
-		            a hardver egységek felől érkező megszakítások
-		            eljutnak-e a processzorhoz),
-		            \cix{overflow} flag (túlcsordulás),
-	      \end{itemize}
+          \item processzor állapotára utalóak:
+                \cix{trap} flag (program utasításonkénti végrehajtása),
+                \cix{interrupt} flag (megszakítás,
+                a hardver egységek felől érkező megszakítások
+                eljutnak-e a processzorhoz),
+                \cix{overflow} flag (túlcsordulás),
+        \end{itemize}
 
-	\item \cix{CPU} címzése:
-	      \begin{itemize}
-		      \item \kix{memóriacím}[ek]:
-		            a program utasításainak beolvasására,
-		            adatainak írására, olvasására
+  \item \cix{CPU} címzése:
+        \begin{itemize}
+          \item \kix{memóriacím}[ek]:
+                a program utasításainak beolvasására,
+                adatainak írására, olvasására
 
-		      \item \kix{IO cím}[ek]:
-		            a perifériákkal való kommunikációra
-	      \end{itemize}
+          \item \kix{IO cím}[ek]:
+                a perifériákkal való kommunikációra
+        \end{itemize}
 
-	\item \kix{Utasításkészlet}
-	      \begin{itemize}
-		      \item mikroprocesszorok egyik legfontosabb jellemzője,
-		            hogy milyen utasításokat ismernek, milyen a gépi nyelvük
+  \item \kix{Utasításkészlet}
+        \begin{itemize}
+          \item mikroprocesszorok egyik legfontosabb jellemzője,
+                hogy milyen utasításokat ismernek, milyen a gépi nyelvük
 
-		      \item a gépi utasítások \kix{bináris jelsorozat}[ok]
+          \item a gépi utasítások \kix{bináris jelsorozat}[ok]
 
-		      \item az \kix{assembly} nyelv a gépi utasításokat
-		            \kix{mnemonik}kal helyettesíti
-	      \end{itemize}
+          \item az \kix{assembly} nyelv a gépi utasításokat
+                \kix{mnemonik}kal helyettesíti
+        \end{itemize}
 
-	\item \kix{assembly} utasítások
-	      \begin{table}[htb]
-		      \centering
-		      \begin{tabular}{|l r|}
-			      \hline
-			      \bluec{MOV} & \hspace*{1em}adatmozgatás \\
-			      \bluec{ADD} & összeadás                 \\
-			      \bluec{SUB} & kivonás                   \\
-			      \bluec{MUL} & szorzás${}^{1}$           \\
-			      \bluec{DIV} & osztás${}^{1}$            \\
-			      \hline
-		      \end{tabular}
-		      \begin{tabular}{|l r|}
-			      \hline
-			      \bluec{JMP} \blackc{flag} & ugrás                            \\
-			      \bluec{JZ} \blackc{flag}  & ugrás${}^{2}$                    \\
-			      \bluec{CMP}               & összehasonlítás                  \\
-			      \bluec{PUSH}, \bluec{POP} & verem                            \\
-			      \bluec{LDA}, \bluec{STA}  & \hspace*{1em}akkumulátor${}^{3}$ \\
-			      \hline
-		      \end{tabular}
-		      \caption{Assembly utasítások}
-		      \label{table:assembly}
-	      \end{table}
-	      \begin{enumerate}
-		      \item \bluec{MUL} $\rightarrow$
-		            \blackc{AL}$\cdot$\blackc{XX}$=$\blackc{AX}
-		            \hspace{2em}
-		            \bluec{DIV} $\rightarrow$
-		            \blackc{AX}$/$\blackc{XX}$=$\blackc{AL}
+  \item \kix{assembly} utasítások
+        \begin{table}[htb]
+          \centering
+          \begin{tabular}{|l r|}
+            \hline
+            \bluec{MOV} & \hspace*{1em}adatmozgatás \\
+            \bluec{ADD} & összeadás                 \\
+            \bluec{SUB} & kivonás                   \\
+            \bluec{MUL} & szorzás${}^{1}$           \\
+            \bluec{DIV} & osztás${}^{1}$            \\
+            \hline
+          \end{tabular}
+          \begin{tabular}{|l r|}
+            \hline
+            \bluec{JMP} \blackc{flag} & ugrás                            \\
+            \bluec{JZ} \blackc{flag}  & ugrás${}^{2}$                    \\
+            \bluec{CMP}               & összehasonlítás                  \\
+            \bluec{PUSH}, \bluec{POP} & verem                            \\
+            \bluec{LDA}, \bluec{STA}  & \hspace*{1em}akkumulátor${}^{3}$ \\
+            \hline
+          \end{tabular}
+          \caption{Assembly utasítások}
+          \label{table:assembly}
+        \end{table}
+        \begin{enumerate}
+          \item \bluec{MUL} $\rightarrow$
+                \blackc{AL}$\cdot$\blackc{XX}$=$\blackc{AX}
+                \hspace{2em}
+                \bluec{DIV} $\rightarrow$
+                \blackc{AX}$/$\blackc{XX}$=$\blackc{AL}
 
-		      \item \bluec{JZ} $\rightarrow$
-		            akkor ugrik ha a \blackc{Zero} flag aktív
+          \item \bluec{JZ} $\rightarrow$
+                akkor ugrik ha a \blackc{Zero} flag aktív
 
-		      \item \bluec{LDA} $\rightarrow$
-		            2 byte-ot másol a memóriából az akkumulátorba
-		            (\tc{LoaD Accumulator})
-		            \\
-		            \bluec{STA} $\rightarrow$
-		            az akkumulátor tartalmát a memóriába másolja
-		            (\tc{STore Accumulator})
-	      \end{enumerate}
+          \item \bluec{LDA} $\rightarrow$
+                2 byte-ot másol a memóriából az akkumulátorba
+                (\tc{LoaD Accumulator})
+                \\
+                \bluec{STA} $\rightarrow$
+                az akkumulátor tartalmát a memóriába másolja
+                (\tc{STore Accumulator})
+        \end{enumerate}
 \end{itemize}
 
 \subsection{Utasítás ciklus}
 
 \begin{enumerate}
-	\item \cix{fetch} (elérés)
-	      \begin{itemize}
-		      \item utasítás kód beolvasása
-		      \item utasítás kód értelmezése (dekódolás)
-		      \item operandusok beolvasása
-	      \end{itemize}
-	\item \cix{execute} (végrehajtás)
-	      \begin{itemize}
-		      \item műveletvégzés (\cix{ALU})
-		      \item eredmény tárolása
-		      \item következő utasítás címének kiszámítása
-	      \end{itemize}
+  \item \cix{fetch} (elérés)
+        \begin{itemize}
+          \item utasítás kód beolvasása
+          \item utasítás kód értelmezése (dekódolás)
+          \item operandusok beolvasása
+        \end{itemize}
+  \item \cix{execute} (végrehajtás)
+        \begin{itemize}
+          \item műveletvégzés (\cix{ALU})
+          \item eredmény tárolása
+          \item következő utasítás címének kiszámítása
+        \end{itemize}
 \end{enumerate}
 
 \subsection{Szubrutinhívás}
@@ -481,12 +481,12 @@ mikroprocesszorban előforduló esemény. (zéróosztás)
 memóriába megtörtént) Program is tartalmazhat megszakítási utasítást.
 (oprendszeri szolgáltatás) Fő okai:
 \begin{itemize}
-	\item processzor megszakítás,
-	\item hardver megszakítás, (IRQ: interrupt request)
-	      \begin{itemize}
-		      \item lehet maszkolható, vagy nem maszkolható
-	      \end{itemize}
-	\item szoftveres megszakítás.
+  \item processzor megszakítás,
+  \item hardver megszakítás, (IRQ: interrupt request)
+        \begin{itemize}
+          \item lehet maszkolható, vagy nem maszkolható
+        \end{itemize}
+  \item szoftveres megszakítás.
 \end{itemize}
 A szubrutinhíváshoz hasonlóan az utasításszámláló értékét a \cix{stack}-be
 mentjük.

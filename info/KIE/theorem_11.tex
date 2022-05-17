@@ -5,8 +5,8 @@
 \section{A számítógép architektúrák alapjai I}
 
 \begin{fulltheorem}
-	A számítógép architektúrák alapjai. Boole függvények. Logikai kapuk.
-	Kombinációs logikai hálózatok. Szekvenciális logikai hálózatok. Flip-flop.
+  A számítógép architektúrák alapjai. Boole függvények. Logikai kapuk.
+  Kombinációs logikai hálózatok. Szekvenciális logikai hálózatok. Flip-flop.
 \end{fulltheorem}
 
 \subsection{Boole függvények}
@@ -28,131 +28,131 @@ logikai alapműveleteket valósítanak meg. Ezek kombinációjával
 további áramköröket tudunk felépíteni.
 
 \begin{figure}[H]
-	\centering
-	\begin{circuitikz}[american]
-		\node [and port](myand) at (0,0) {};
-		\node [below=4pt] (andnode) at (myand.south) {\cix{AND}};
+  \centering
+  \begin{circuitikz}[american]
+    \node [and port](myand) at (0,0) {};
+    \node [below=4pt] (andnode) at (myand.south) {\cix{AND}};
 
-		\node [nand port](mynand) at (2.5,0) {};
-		\node [below=4pt] (nandnode) at (mynand.south) {\cix{NAND}};
+    \node [nand port](mynand) at (2.5,0) {};
+    \node [below=4pt] (nandnode) at (mynand.south) {\cix{NAND}};
 
-		\node [or port](myor) at (5,0) {};
-		\node [below=4pt] (ornode) at (myor.south) {\cix{OR}};
+    \node [or port](myor) at (5,0) {};
+    \node [below=4pt] (ornode) at (myor.south) {\cix{OR}};
 
-		\node [nor port](mynor) at (7.5,0) {};
-		\node [below=4pt] (nornode) at (mynor.south) {\cix{NOR}};
+    \node [nor port](mynor) at (7.5,0) {};
+    \node [below=4pt] (nornode) at (mynor.south) {\cix{NOR}};
 
-		\node [xor port](myxor) at (10,0) {};
-		\node [below=4pt] (xornode) at (myxor.south) {\cix{XOR}};
+    \node [xor port](myxor) at (10,0) {};
+    \node [below=4pt] (xornode) at (myxor.south) {\cix{XOR}};
 
-		\node [not port](mynot) at (-3,0) {};
-		\node [below=4pt] (notnode) at (mynot.south) {\cix{NOT}};
-	\end{circuitikz}
-	\caption{A logikai kapuk}
-	\label{fig:logic-gates}
+    \node [not port](mynot) at (-3,0) {};
+    \node [below=4pt] (notnode) at (mynot.south) {\cix{NOT}};
+  \end{circuitikz}
+  \caption{A logikai kapuk}
+  \label{fig:logic-gates}
 \end{figure}
 
 \begin{table}[H]
-	\begin{minipage}[t]{0.166\textwidth}
-		\begin{center}
-			\begin{tabular}{|c|c|}
-				\hline
-				$in$ & $out$
-				\\ \hline \hline
-				0    & 1
-				\\ \hline
-				1    & 0
-				\\ \hline
-			\end{tabular}
-		\end{center}
-	\end{minipage}\hfill
-	\begin{minipage}[t]{0.166\textwidth}
-		\begin{center}
-			\begin{tabular}{|c|c|c|}
-				\hline
-				$i_1$ & $i_2$ & $o$
-				\\ \hline \hline
-				0     & 0     & 0
-				\\ \hline
-				0     & 1     & 0
-				\\ \hline
-				1     & 0     & 0
-				\\ \hline
-				1     & 1     & 1
-				\\ \hline
-			\end{tabular}
-		\end{center}
-	\end{minipage}\hfill
-	\begin{minipage}[t]{0.166\textwidth}
-		\begin{center}
-			\begin{tabular}{|c|c|c|}
-				\hline
-				$i_1$ & $i_2$ & $o$
-				\\ \hline \hline
-				0     & 0     & 1
-				\\ \hline
-				0     & 1     & 1
-				\\ \hline
-				1     & 0     & 1
-				\\ \hline
-				1     & 1     & 0
-				\\ \hline
-			\end{tabular}
-		\end{center}
-	\end{minipage}\hfill
-	\begin{minipage}[t]{0.166\textwidth}
-		\begin{center}
-			\begin{tabular}{|c|c|c|}
-				\hline
-				$i_1$ & $i_2$ & $o$
-				\\ \hline \hline
-				0     & 0     & 0
-				\\ \hline
-				0     & 1     & 1
-				\\ \hline
-				1     & 0     & 1
-				\\ \hline
-				1     & 1     & 1
-				\\ \hline
-			\end{tabular}
-		\end{center}
-	\end{minipage}\hfill
-	\begin{minipage}[t]{0.166\textwidth}
-		\begin{center}
-			\begin{tabular}{|c|c|c|}
-				\hline
-				$i_1$ & $i_2$ & $o$
-				\\ \hline \hline
-				0     & 0     & 1
-				\\ \hline
-				0     & 1     & 0
-				\\ \hline
-				1     & 0     & 0
-				\\ \hline
-				1     & 1     & 0
-				\\ \hline
-			\end{tabular}
-		\end{center}
-	\end{minipage}\hfill
-	\begin{minipage}[t]{0.166\textwidth}
-		\begin{center}
-			\begin{tabular}{|c|c|c|}
-				\hline
-				$i_1$ & $i_2$ & $o$
-				\\ \hline \hline
-				0     & 0     & 0
-				\\ \hline
-				0     & 1     & 1
-				\\ \hline
-				1     & 0     & 1
-				\\ \hline
-				1     & 1     & 0
-				\\ \hline
-			\end{tabular}
-		\end{center}
-	\end{minipage}\hfill
-	\caption{A logikai kapuk igazságtáblája}
-	\label{table:truth-tables}
+  \begin{minipage}[t]{0.166\textwidth}
+    \begin{center}
+      \begin{tabular}{|c|c|}
+        \hline
+        $in$ & $out$
+        \\ \hline \hline
+        0    & 1
+        \\ \hline
+        1    & 0
+        \\ \hline
+      \end{tabular}
+    \end{center}
+  \end{minipage}\hfill
+  \begin{minipage}[t]{0.166\textwidth}
+    \begin{center}
+      \begin{tabular}{|c|c|c|}
+        \hline
+        $i_1$ & $i_2$ & $o$
+        \\ \hline \hline
+        0     & 0     & 0
+        \\ \hline
+        0     & 1     & 0
+        \\ \hline
+        1     & 0     & 0
+        \\ \hline
+        1     & 1     & 1
+        \\ \hline
+      \end{tabular}
+    \end{center}
+  \end{minipage}\hfill
+  \begin{minipage}[t]{0.166\textwidth}
+    \begin{center}
+      \begin{tabular}{|c|c|c|}
+        \hline
+        $i_1$ & $i_2$ & $o$
+        \\ \hline \hline
+        0     & 0     & 1
+        \\ \hline
+        0     & 1     & 1
+        \\ \hline
+        1     & 0     & 1
+        \\ \hline
+        1     & 1     & 0
+        \\ \hline
+      \end{tabular}
+    \end{center}
+  \end{minipage}\hfill
+  \begin{minipage}[t]{0.166\textwidth}
+    \begin{center}
+      \begin{tabular}{|c|c|c|}
+        \hline
+        $i_1$ & $i_2$ & $o$
+        \\ \hline \hline
+        0     & 0     & 0
+        \\ \hline
+        0     & 1     & 1
+        \\ \hline
+        1     & 0     & 1
+        \\ \hline
+        1     & 1     & 1
+        \\ \hline
+      \end{tabular}
+    \end{center}
+  \end{minipage}\hfill
+  \begin{minipage}[t]{0.166\textwidth}
+    \begin{center}
+      \begin{tabular}{|c|c|c|}
+        \hline
+        $i_1$ & $i_2$ & $o$
+        \\ \hline \hline
+        0     & 0     & 1
+        \\ \hline
+        0     & 1     & 0
+        \\ \hline
+        1     & 0     & 0
+        \\ \hline
+        1     & 1     & 0
+        \\ \hline
+      \end{tabular}
+    \end{center}
+  \end{minipage}\hfill
+  \begin{minipage}[t]{0.166\textwidth}
+    \begin{center}
+      \begin{tabular}{|c|c|c|}
+        \hline
+        $i_1$ & $i_2$ & $o$
+        \\ \hline \hline
+        0     & 0     & 0
+        \\ \hline
+        0     & 1     & 1
+        \\ \hline
+        1     & 0     & 1
+        \\ \hline
+        1     & 1     & 0
+        \\ \hline
+      \end{tabular}
+    \end{center}
+  \end{minipage}\hfill
+  \caption{A logikai kapuk igazságtáblája}
+  \label{table:truth-tables}
 \end{table}
 
 \subsection{Kombinációs logikai hálózatok}
@@ -165,52 +165,52 @@ jelek pillanatnyi értékétől függenek. A kimenetek egy-egy függvénykapcsol
 
 Egy \cix{XOR} és \cix{AND} kapuval megvalósítható. Feladata 2 bit összeadása.
 \[
-	S = \overline{A}B + A\overline{B} = A \oplus B
-	\qquad \text{és} \qquad
-	C = AB
+  S = \overline{A}B + A\overline{B} = A \oplus B
+  \qquad \text{és} \qquad
+  C = AB
 \]
 
 \hfill
 \begin{minipage}[b]{0.45\textwidth}
-	\begin{figure}[H]
-		\centering
-		\begin{circuitikz}[american]
-			\draw (0, 4)node[xor port] (xorone){}
-			(0, 2)node[and port] (and){}
-			(xorone.in 1) node[left=1cm](a) {$A$}
-			(xorone.in 2) node[left=1cm](b) {$B$}
-			(xorone.out) node[right=.5cm](s) {$S$}
-			(and.out) node[right=.5cm](c) {$C$}
+  \begin{figure}[H]
+    \centering
+    \begin{circuitikz}[american]
+      \draw (0, 4)node[xor port] (xorone){}
+      (0, 2)node[and port] (and){}
+      (xorone.in 1) node[left=1cm](a) {$A$}
+      (xorone.in 2) node[left=1cm](b) {$B$}
+      (xorone.out) node[right=.5cm](s) {$S$}
+      (and.out) node[right=.5cm](c) {$C$}
 
-			(a.east) to[short,-*] (xorone.in 1) |- (and.in 1)
-			(b.east) to[short,-*] ($(b.east)!.5!(xorone.in 2)$) coordinate (branch) -- (xorone.in 2)
-			(c.west) to (and.out)
-			(s.west) to (xorone.out)
-			(branch) |- (and.in 2);
-		\end{circuitikz}
-		\caption{Félösszeadó megvalósítása}
-		\label{fig:half-adder}
-	\end{figure}
+      (a.east) to[short,-*] (xorone.in 1) |- (and.in 1)
+      (b.east) to[short,-*] ($(b.east)!.5!(xorone.in 2)$) coordinate (branch) -- (xorone.in 2)
+      (c.west) to (and.out)
+      (s.west) to (xorone.out)
+      (branch) |- (and.in 2);
+    \end{circuitikz}
+    \caption{Félösszeadó megvalósítása}
+    \label{fig:half-adder}
+  \end{figure}
 \end{minipage}\hfill
 \begin{minipage}[b]{0.5\textwidth}
-	\begin{table}[H]
-		\centering
-		\begin{tabular}{| c | c || c | c |}
-			\hline
-			$A$ & $B$ & $S$ & $C$
-			\\ \hline \hline
-			0   & 0   & 0   & 0
-			\\ \hline
-			0   & 1   & 1   & 0
-			\\ \hline
-			1   & 0   & 1   & 0
-			\\ \hline
-			1   & 1   & 0   & 1
-			\\ \hline
-		\end{tabular}
-		\caption{Félösszeadó igazsátáblája}
-		\label{table:half-adder}
-	\end{table}
+  \begin{table}[H]
+    \centering
+    \begin{tabular}{| c | c || c | c |}
+      \hline
+      $A$ & $B$ & $S$ & $C$
+      \\ \hline \hline
+      0   & 0   & 0   & 0
+      \\ \hline
+      0   & 1   & 1   & 0
+      \\ \hline
+      1   & 0   & 1   & 0
+      \\ \hline
+      1   & 1   & 0   & 1
+      \\ \hline
+    \end{tabular}
+    \caption{Félösszeadó igazsátáblája}
+    \label{table:half-adder}
+  \end{table}
 \end{minipage}
 \hfill
 
@@ -223,109 +223,109 @@ Bemenetei: $A$, $B$, $C_\text{in}$
 Kimenetei: $S$, $C_\text{out}$
 
 \[
-	S = A \oplus B \oplus C_\text{in}
-	\qquad \text{és} \qquad
-	C_\text{out} = AB + AC_\text{in} + BC_\text{in}
+  S = A \oplus B \oplus C_\text{in}
+  \qquad \text{és} \qquad
+  C_\text{out} = AB + AC_\text{in} + BC_\text{in}
 \]
 
 \begin{figure}[htpb]
-	\centering
-	\begin{circuitikz}[american,scale=.8]
-		\ctikzset{
-			tripoles/american xor port/height=1.2,
-			tripoles/american or port/height=1.2,
-			tripoles/american and port/height=.70,
-		}
-		\node[xor port, number inputs=3] (xor) at (0,0) {};
+  \centering
+  \begin{circuitikz}[american,scale=.8]
+    \ctikzset{
+      tripoles/american xor port/height=1.2,
+      tripoles/american or port/height=1.2,
+      tripoles/american and port/height=.70,
+    }
+    \node[xor port, number inputs=3] (xor) at (0,0) {};
 
-		\node[and port] (or1) at (0,-1.9) {};
-		\node[and port] (or2) at (0,-3.25) {};
-		\node[and port] (or3) at (0,-4.6) {};
+    \node[and port] (or1) at (0,-1.9) {};
+    \node[and port] (or2) at (0,-3.25) {};
+    \node[and port] (or3) at (0,-4.6) {};
 
-		\node[or port, number inputs=3] (and) at (3, -3.25) {};
+    \node[or port, number inputs=3] (and) at (3, -3.25) {};
 
-		\draw[]
-		(or1.out) -- ++(0.5,0) |- (and.in 1)
-		(or2.out) -- ++(0.5,0) |- (and.in 2)
-		(or3.out) -- ++(0.5,0) |- (and.in 3)
+    \draw[]
+    (or1.out) -- ++(0.5,0) |- (and.in 1)
+    (or2.out) -- ++(0.5,0) |- (and.in 2)
+    (or3.out) -- ++(0.5,0) |- (and.in 3)
 
-		(xor.out) to[short, -o] ++(4,0) node[above left] {$S$}
-		(and.out) to[short, -o] ++(1,0) node[above left] {$C_\text{out}$}
+    (xor.out) to[short, -o] ++(4,0) node[above left] {$S$}
+    (and.out) to[short, -o] ++(1,0) node[above left] {$C_\text{out}$}
 
-		(xor.in 1) to[short, -o] ++(-2,0) node[left] {$A$}
-		(xor.in 2) to[short, -o] ++(-2,0) node[left] {$B$}
-		(xor.in 3) to[short, -o] ++(-2,0) node[left] {$C_\text{in}$}
+    (xor.in 1) to[short, -o] ++(-2,0) node[left] {$A$}
+    (xor.in 2) to[short, -o] ++(-2,0) node[left] {$B$}
+    (xor.in 3) to[short, -o] ++(-2,0) node[left] {$C_\text{in}$}
 
-		(or1.in 1) to ++(-.5,0) coordinate(H) to[short, -*] (H|-xor.in 1)
-		(or2.in 1) to ++(-.5,0) coordinate(H) to[short, -*] (H|-xor.in 1)
+    (or1.in 1) to ++(-.5,0) coordinate(H) to[short, -*] (H|-xor.in 1)
+    (or2.in 1) to ++(-.5,0) coordinate(H) to[short, -*] (H|-xor.in 1)
 
-		(or1.in 2) to ++(-1,0) coordinate(H) to[short, -*] (H|-xor.in 2)
-		(or3.in 1) to ++(-1,0) coordinate(H) to[short, -*] (H|-xor.in 2)
+    (or1.in 2) to ++(-1,0) coordinate(H) to[short, -*] (H|-xor.in 2)
+    (or3.in 1) to ++(-1,0) coordinate(H) to[short, -*] (H|-xor.in 2)
 
-		(or2.in 2) to ++(-1.5,0) coordinate(H) to[short, -*] (H|-xor.in 3)
-		(or3.in 2) to ++(-1.5,0) coordinate(H) to[short, -*] (H|-xor.in 3)
-		;
-	\end{circuitikz}
-	\caption{Teljes összeadó megvalósítása}
-	\label{fig:full-adder}
+    (or2.in 2) to ++(-1.5,0) coordinate(H) to[short, -*] (H|-xor.in 3)
+    (or3.in 2) to ++(-1.5,0) coordinate(H) to[short, -*] (H|-xor.in 3)
+    ;
+  \end{circuitikz}
+  \caption{Teljes összeadó megvalósítása}
+  \label{fig:full-adder}
 \end{figure}
 
 \subsubsection*{Multiplexer}
 
 \hfill
 \begin{minipage}[b]{0.45\textwidth}
-	\begin{figure}[H]
-		\centering
-		\begin{circuitikz}[american]
-			\tikzset{mux 4by2/.style={muxdemux,
-						muxdemux def={Lh=5, NL=4, Rh=3,
-								NB=2, w=2, square pins=1}}}
+  \begin{figure}[H]
+    \centering
+    \begin{circuitikz}[american]
+      \tikzset{mux 4by2/.style={muxdemux,
+            muxdemux def={Lh=5, NL=4, Rh=3,
+                NB=2, w=2, square pins=1}}}
 
-			\draw (0,0) node [mux 4by2] (mux1) {\small\cix{MUX}}
+      \draw (0,0) node [mux 4by2] (mux1) {\small\cix{MUX}}
 
-			(mux1.lpin 1) node [left=6](in1) {$D_0$}
-			(mux1.lpin 2) node [left=6](in2) {$D_1$}
-			(mux1.lpin 3) node [left=6](in3) {$D_2$}
-			(mux1.lpin 4) node [left=6](in4) {$D_3$}
+      (mux1.lpin 1) node [left=6](in1) {$D_0$}
+      (mux1.lpin 2) node [left=6](in2) {$D_1$}
+      (mux1.lpin 3) node [left=6](in3) {$D_2$}
+      (mux1.lpin 4) node [left=6](in4) {$D_3$}
 
-			(mux1.rpin 1) node [right](y) {$Y$}
+      (mux1.rpin 1) node [right](y) {$Y$}
 
-			(mux1.bpin 1) node [below](a) {$A$}
-			(mux1.bpin 2) node [below](b) {$B$}
+      (mux1.bpin 1) node [below](a) {$A$}
+      (mux1.bpin 2) node [below](b) {$B$}
 
-			(in1.east) to (mux1.lpin 1)
-			(in2.east) to (mux1.lpin 2)
-			(in3.east) to (mux1.lpin 3)
-			(in4.east) to (mux1.lpin 4)
+      (in1.east) to (mux1.lpin 1)
+      (in2.east) to (mux1.lpin 2)
+      (in3.east) to (mux1.lpin 3)
+      (in4.east) to (mux1.lpin 4)
 
-			(a.north) to (mux1.bpin 1)
-			(b.north) to (mux1.bpin 2)
+      (a.north) to (mux1.bpin 1)
+      (b.north) to (mux1.bpin 2)
 
-			(y.west) to (mux1.rpin 1);
-		\end{circuitikz}
-		\caption{4 az 1-hez multiplexer}
-		\label{fig:mux}
-	\end{figure}
+      (y.west) to (mux1.rpin 1);
+    \end{circuitikz}
+    \caption{4 az 1-hez multiplexer}
+    \label{fig:mux}
+  \end{figure}
 \end{minipage}\hfill
 \begin{minipage}[b]{0.5\textwidth}
-	\begin{table}[H]
-		\centering
-		\begin{tabular}{|c|c|c|}
-			\hline
-			$A$ & $B$ & $Y$
-			\\ \hline \hline
-			0   & 0   & $D_0$
-			\\ \hline
-			0   & 1   & $D_1$
-			\\ \hline
-			1   & 0   & $D_2$
-			\\ \hline
-			1   & 1   & $D_3$
-			\\ \hline
-		\end{tabular}
-		\caption{Multiplexer igazságtáblája}
-		\label{table:mux}
-	\end{table}
+  \begin{table}[H]
+    \centering
+    \begin{tabular}{|c|c|c|}
+      \hline
+      $A$ & $B$ & $Y$
+      \\ \hline \hline
+      0   & 0   & $D_0$
+      \\ \hline
+      0   & 1   & $D_1$
+      \\ \hline
+      1   & 0   & $D_2$
+      \\ \hline
+      1   & 1   & $D_3$
+      \\ \hline
+    \end{tabular}
+    \caption{Multiplexer igazságtáblája}
+    \label{table:mux}
+  \end{table}
 \end{minipage}
 \hfill
 
@@ -342,58 +342,58 @@ Kimenetek: $1$ db
 
 \hfill
 \begin{minipage}[b]{0.45\textwidth}
-	\begin{figure}[H]
-		\centering
-		\begin{circuitikz}[american]
-			\tikzset{demux 2by4/.style={muxdemux,
-						muxdemux def={Lh=3, NL=1, Rh=5,
-								NR=4, NB=2, w=2, square pins=1}}}
+  \begin{figure}[H]
+    \centering
+    \begin{circuitikz}[american]
+      \tikzset{demux 2by4/.style={muxdemux,
+            muxdemux def={Lh=3, NL=1, Rh=5,
+                NR=4, NB=2, w=2, square pins=1}}}
 
-			\draw (0,0) node [demux 2by4] (demux1) {\small\cix{DEMUX}}
+      \draw (0,0) node [demux 2by4] (demux1) {\small\cix{DEMUX}}
 
-			(demux1.rpin 1) node [right=6](out1) {$D_0$}
-			(demux1.rpin 2) node [right=6](out2) {$D_1$}
-			(demux1.rpin 3) node [right=6](out3) {$D_2$}
-			(demux1.rpin 4) node [right=6](out4) {$D_3$}
+      (demux1.rpin 1) node [right=6](out1) {$D_0$}
+      (demux1.rpin 2) node [right=6](out2) {$D_1$}
+      (demux1.rpin 3) node [right=6](out3) {$D_2$}
+      (demux1.rpin 4) node [right=6](out4) {$D_3$}
 
-			(demux1.lpin 1) node [left](y) {$Y$}
+      (demux1.lpin 1) node [left](y) {$Y$}
 
-			(demux1.bpin 1) node [below](outa) {$A$}
-			(demux1.bpin 2) node [below](outb) {$B$}
+      (demux1.bpin 1) node [below](outa) {$A$}
+      (demux1.bpin 2) node [below](outb) {$B$}
 
-			(out1.west) to (demux1.rpin 1)
-			(out2.west) to (demux1.rpin 2)
-			(out3.west) to (demux1.rpin 3)
-			(out4.west) to (demux1.rpin 4)
+      (out1.west) to (demux1.rpin 1)
+      (out2.west) to (demux1.rpin 2)
+      (out3.west) to (demux1.rpin 3)
+      (out4.west) to (demux1.rpin 4)
 
-			(outa.north) to (demux1.bpin 1)
-			(outb.north) to (demux1.bpin 2)
+      (outa.north) to (demux1.bpin 1)
+      (outb.north) to (demux1.bpin 2)
 
-			(y.east) to (demux1.lpin 1);
-		\end{circuitikz}
-		\caption{1 az 4-hez demultiplexer}
-		\label{fig:demux}
-	\end{figure}
+      (y.east) to (demux1.lpin 1);
+    \end{circuitikz}
+    \caption{1 az 4-hez demultiplexer}
+    \label{fig:demux}
+  \end{figure}
 \end{minipage}\hfill
 \begin{minipage}[b]{0.5\textwidth}
-	\begin{table}[H]
-		\centering
-		\begin{tabular}{|c|c||c|c|c|c|}
-			\hline
-			$A$ & $B$ & $D_1$ & $D_2$ & $D_3$ & $D_4$
-			\\ \hline \hline
-			0   & 0   & $Y$   & 0     & 0     & 0
-			\\ \hline
-			0   & 1   & 0     & $Y$   & 0     & 0
-			\\ \hline
-			1   & 0   & 0     & 0     & $Y$   & 0
-			\\ \hline
-			1   & 1   & 0     & 0     & 0     & $Y$
-			\\ \hline
-		\end{tabular}
-		\caption{Demultiplexer igazságtáblája}
-		\label{table:demux}
-	\end{table}
+  \begin{table}[H]
+    \centering
+    \begin{tabular}{|c|c||c|c|c|c|}
+      \hline
+      $A$ & $B$ & $D_1$ & $D_2$ & $D_3$ & $D_4$
+      \\ \hline \hline
+      0   & 0   & $Y$   & 0     & 0     & 0
+      \\ \hline
+      0   & 1   & 0     & $Y$   & 0     & 0
+      \\ \hline
+      1   & 0   & 0     & 0     & $Y$   & 0
+      \\ \hline
+      1   & 1   & 0     & 0     & 0     & $Y$
+      \\ \hline
+    \end{tabular}
+    \caption{Demultiplexer igazságtáblája}
+    \label{table:demux}
+  \end{table}
 \end{minipage}\hfill
 
 Feladata egy jel kapcsolása választható kimenetre, valamint
@@ -409,59 +409,59 @@ Kimenetek: $2^n$ db
 
 \hfill
 \begin{minipage}[b]{0.45\textwidth}
-	\begin{figure}[H]
-		\centering
-		\begin{circuitikz}[american]
-			\tikzset{decoder/.style={muxdemux,
-						muxdemux def={Lh=7, NL=3, Rh=7,
-								NR=8, NB=0, w=3.5, square pins=1}}}
+  \begin{figure}[H]
+    \centering
+    \begin{circuitikz}[american]
+      \tikzset{decoder/.style={muxdemux,
+            muxdemux def={Lh=7, NL=3, Rh=7,
+                NR=8, NB=0, w=3.5, square pins=1}}}
 
-			\draw (0,0) node [decoder] (decoder1) {\small\cix{DECODER}}
+      \draw (0,0) node [decoder] (decoder1) {\small\cix{DECODER}}
 
-			(decoder1.lpin 1) node [left](in1) {$A$}
-			(decoder1.lpin 2) node [left](in2) {$B$}
-			(decoder1.lpin 3) node [left](in3) {$C$}
+      (decoder1.lpin 1) node [left](in1) {$A$}
+      (decoder1.lpin 2) node [left](in2) {$B$}
+      (decoder1.lpin 3) node [left](in3) {$C$}
 
-			(decoder1.rpin 1) node [right](out1) {\footnotesize $D_0$}
-			(decoder1.rpin 2) node [right](out2) {\footnotesize $D_1$}
-			(decoder1.rpin 3) node [right](out3) {\footnotesize $D_2$}
-			(decoder1.rpin 4) node [right](out4) {\footnotesize $D_3$}
-			(decoder1.rpin 5) node [right](out5) {\footnotesize $D_4$}
-			(decoder1.rpin 6) node [right](out6) {\footnotesize $D_5$}
-			(decoder1.rpin 7) node [right](out7) {\footnotesize $D_6$}
-			(decoder1.rpin 8) node [right](out8) {\footnotesize $D_7$};
-		\end{circuitikz}
-		\caption{3 bites Dekódoló}
-		\label{fig:decoder}
-	\end{figure}
+      (decoder1.rpin 1) node [right](out1) {\footnotesize $D_0$}
+      (decoder1.rpin 2) node [right](out2) {\footnotesize $D_1$}
+      (decoder1.rpin 3) node [right](out3) {\footnotesize $D_2$}
+      (decoder1.rpin 4) node [right](out4) {\footnotesize $D_3$}
+      (decoder1.rpin 5) node [right](out5) {\footnotesize $D_4$}
+      (decoder1.rpin 6) node [right](out6) {\footnotesize $D_5$}
+      (decoder1.rpin 7) node [right](out7) {\footnotesize $D_6$}
+      (decoder1.rpin 8) node [right](out8) {\footnotesize $D_7$};
+    \end{circuitikz}
+    \caption{3 bites Dekódoló}
+    \label{fig:decoder}
+  \end{figure}
 \end{minipage}\hfill
 \begin{minipage}[b]{0.5\textwidth}
-	\begin{table}[H]
-		\centering
-		\begin{tabular}{|c|c|c|c|}
-			\hline
-			$A$ & $B$ & $C$ & $Y$
-			\\ \hline \hline
-			0   & 0   & 0   & $D_0$
-			\\ \hline
-			0   & 0   & 1   & $D_1$
-			\\ \hline
-			0   & 1   & 0   & $D_2$
-			\\ \hline
-			0   & 1   & 1   & $D_3$
-			\\ \hline
-			1   & 0   & 0   & $D_4$
-			\\ \hline
-			1   & 0   & 1   & $D_5$
-			\\ \hline
-			1   & 1   & 0   & $D_6$
-			\\ \hline
-			1   & 1   & 1   & $D_7$
-			\\ \hline
-		\end{tabular}
-		\caption{Dekódoló igazságtáblája}
-		\label{table:decoder}
-	\end{table}
+  \begin{table}[H]
+    \centering
+    \begin{tabular}{|c|c|c|c|}
+      \hline
+      $A$ & $B$ & $C$ & $Y$
+      \\ \hline \hline
+      0   & 0   & 0   & $D_0$
+      \\ \hline
+      0   & 0   & 1   & $D_1$
+      \\ \hline
+      0   & 1   & 0   & $D_2$
+      \\ \hline
+      0   & 1   & 1   & $D_3$
+      \\ \hline
+      1   & 0   & 0   & $D_4$
+      \\ \hline
+      1   & 0   & 1   & $D_5$
+      \\ \hline
+      1   & 1   & 0   & $D_6$
+      \\ \hline
+      1   & 1   & 1   & $D_7$
+      \\ \hline
+    \end{tabular}
+    \caption{Dekódoló igazságtáblája}
+    \label{table:decoder}
+  \end{table}
 \end{minipage}\hfill
 
 Feladata cím dekódolása.
@@ -485,46 +485,46 @@ is szokták őket nevezni. \kix{SR flipflop} megvalósítása \cix{NOR} kapukkal
 
 \hfill
 \begin{minipage}[b]{0.3\textwidth}
-	\begin{figure}[H]
-		\centering
-		\begin{circuitikz}[american]
-			\ctikzset{american or shape=roundy}
+  \begin{figure}[H]
+    \centering
+    \begin{circuitikz}[american]
+      \ctikzset{american or shape=roundy}
 
-			\node[nor port] (nor1) at (0, 1.2) {};
-			\node[nor port] (nor2) at (0,-1.2) {};
+      \node[nor port] (nor1) at (0, 1.2) {};
+      \node[nor port] (nor2) at (0,-1.2) {};
 
-			\draw (nor1.in 2) -| ++ (-0.3,-0.5) -- ++(2.15,-0.8) coordinate(a)|- (nor2.out);
-			\draw (nor2.in 1) -| ++ (-0.3, 0.5) -- ++(2.15, 0.8) |- (nor1.out);
+      \draw (nor1.in 2) -| ++ (-0.3,-0.5) -- ++(2.15,-0.8) coordinate(a)|- (nor2.out);
+      \draw (nor2.in 1) -| ++ (-0.3, 0.5) -- ++(2.15, 0.8) |- (nor1.out);
 
-			\draw (nor1.out -| a) to [short, *-] ++(0.45,0) node[right]{$Q$};
-			\draw (nor2.out -| a) to [short, *-] ++(0.45,0) node[right]{$\overline{Q}$};
+      \draw (nor1.out -| a) to [short, *-] ++(0.45,0) node[right]{$Q$};
+      \draw (nor2.out -| a) to [short, *-] ++(0.45,0) node[right]{$\overline{Q}$};
 
-			\draw (nor1.in 1) -- ++ (-.5, 0) node[left]{$S$};
-			\draw (nor2.in 2) -- ++ (-.5, 0) node[left]{$R$};
-		\end{circuitikz}
-		\caption{SR flip-flop}
-		\label{fig:SR}
-	\end{figure}
+      \draw (nor1.in 1) -- ++ (-.5, 0) node[left]{$S$};
+      \draw (nor2.in 2) -- ++ (-.5, 0) node[left]{$R$};
+    \end{circuitikz}
+    \caption{SR flip-flop}
+    \label{fig:SR}
+  \end{figure}
 \end{minipage}\hfill
 \begin{minipage}[b]{0.5\textwidth}
-	\begin{table}[H]
-		\centering
-		\begin{tabular}{|c|c|c|}
-			\hline
-			$S$ & $R$ & $Q$
-			\\ \hline \hline
-			0   & 0   & $Q_0$
-			\\ \hline
-			0   & 1   & 0
-			\\ \hline
-			1   & 0   & 1
-			\\ \hline
-			1   & 1   & ?
-			\\ \hline
-		\end{tabular}
-		\caption{SR flip-flop igazságtáblája}
-		\label{table:SR}
-	\end{table}
+  \begin{table}[H]
+    \centering
+    \begin{tabular}{|c|c|c|}
+      \hline
+      $S$ & $R$ & $Q$
+      \\ \hline \hline
+      0   & 0   & $Q_0$
+      \\ \hline
+      0   & 1   & 0
+      \\ \hline
+      1   & 0   & 1
+      \\ \hline
+      1   & 1   & ?
+      \\ \hline
+    \end{tabular}
+    \caption{SR flip-flop igazságtáblája}
+    \label{table:SR}
+  \end{table}
 \end{minipage}\hfill
 
 \end{document}

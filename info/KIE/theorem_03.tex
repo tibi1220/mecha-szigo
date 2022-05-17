@@ -5,44 +5,44 @@
 \section{Az objektum-orientált programozás alapjai III}
 
 \begin{fulltheorem}
-	Az objektum-orientált programozás alapjai. Öröklődés. Egységbe zárás.
-	Protected osztálytagok. Kompozíció. Aggregáció. Többszörös öröklődés.
-	Barátság.
+  Az objektum-orientált programozás alapjai. Öröklődés. Egységbe zárás.
+  Protected osztálytagok. Kompozíció. Aggregáció. Többszörös öröklődés.
+  Barátság.
 \end{fulltheorem}
 
 \subsection{Öröklődés}
 
 \begin{table}[H]
-	\centering\begin{tabular}{| c || c | c | c |}
-		\hline
-		                    & \bluec{public}      & \orangec{protected} & \blackc{private} \\
-		\hline \hline
-		\bluec{public}      & \bluec{public}      & \orangec{protected} & \blackc{-}       \\
-		\hline
-		\orangec{protected} & \orangec{protected} & \orangec{protected} & \blackc{-}       \\
-		\hline
-		\redc{private}      & \redc{private}      & \redc{private}      & \blackc{-}       \\
-		\hline
-	\end{tabular}
+  \centering\begin{tabular}{| c || c | c | c |}
+    \hline
+                        & \bluec{public}      & \orangec{protected} & \blackc{private} \\
+    \hline \hline
+    \bluec{public}      & \bluec{public}      & \orangec{protected} & \blackc{-}       \\
+    \hline
+    \orangec{protected} & \orangec{protected} & \orangec{protected} & \blackc{-}       \\
+    \hline
+    \redc{private}      & \redc{private}      & \redc{private}      & \blackc{-}       \\
+    \hline
+  \end{tabular}
 \end{table}
 
 \begin{itemize}
-	\item Az \kix{osztály} más osztályok tulajdonságait/viselkedését
-	      is magába integrálja.
+  \item Az \kix{osztály} más osztályok tulajdonságait/viselkedését
+        is magába integrálja.
 
-	\item Módosított viselkedésű osztály az eredeti kód másolata,
-	      hivatkozása nélkül.
+  \item Módosított viselkedésű osztály az eredeti kód másolata,
+        hivatkozása nélkül.
 
-	\item Minden változás automatikusan végigmegy a hierarchián.
+  \item Minden változás automatikusan végigmegy a hierarchián.
 
-	\item Az ős neve a bázis osztály. (\tc{base/parent class})
+  \item Az ős neve a bázis osztály. (\tc{base/parent class})
 
-	\item Az utód neve leszármazott osztály. (\tc{derived/child class})
+  \item Az utód neve leszármazott osztály. (\tc{derived/child class})
 
-	\item A konstruktor, destruktor, barát függvények, illetve
-	      az \tc{operator=} túlterhelése nem öröklődnek,
-	      öröklődnek viszont az adattagok, tagfüggvények és
-	      a többi túlterhelt operátor.
+  \item A konstruktor, destruktor, barát függvények, illetve
+        az \tc{operator=} túlterhelése nem öröklődnek,
+        öröklődnek viszont az adattagok, tagfüggvények és
+        a többi túlterhelt operátor.
 \end{itemize}
 
 \subsection{Egységbe zárás}
