@@ -5,15 +5,49 @@
 \section{ARMA rendszerek}
 
 \begin{fulltheorem}
-	Ismertesse a következő fogalmakat!
-	(adja meg a definícióját és rövid értelmezését)
-	\begin{itemize}
-		\item ARMA rendszer
-		\item Eltolási operátor
-		\item Impulzus átviteli függvény
-	\end{itemize}
-	Mi és hol van kódolva az ARMA rendszerek paramétereiben?
-	Ismertesse a kapcsolatot az impulzus átviteli függvény és az átviteli függvény között.
+  Ismertesse a következő fogalmakat!
+  (adja meg a definícióját és rövid értelmezését)
+  \begin{itemize}
+    \item ARMA rendszer
+    \item Eltolási operátor
+    \item Impulzus átviteli függvény
+  \end{itemize}
+  Mi és hol van kódolva az ARMA rendszerek paramétereiben?
+  Ismertesse a kapcsolatot az impulzus átviteli függvény és az átviteli függvény között.
 \end{fulltheorem}
+
+\subsection{ARMA rendszer definíciója}
+
+Az \kix{ARMA rendszer}[ekben] (Autoregresszív Mozgó Átlag / AutoRegressive Moving
+Average) az \kw{AR} alrész arra utal, hogy a \kix{kimenőjel} korábbi értékei visszahatnak
+a kimenőjel korábbi értékeire (\kix{memóriajelleg}). Ezt \kix{visszacsatolás}[sal]
+valósítjuk meg. A \kw{MA} alrész pedig azt jelenti, hogy a \kix{bemenőjel} korábbi
+értékei (mozgó átlaga) is hatással lehet a jelenlegi jelre.
+
+Az \kix{ARMA} rendszer $a_i$ együtthatói a kimenőjelek, $b_i$ együtthatói a bemenőjelek
+hatását kódolják magukban. Az \kix{ARMA egyenlet} folytonos és diszkrét időben:
+\begin{alignat*}{9}
+   & \sum_{i=0}^n  a_i y^{(i)}(t) & = & \sum_{i=0}^r b_i u^{(i)}(t)
+  \\
+   & \sum_{i=0}^n  a_{di} y[k-i]  & = & \sum_{i=0}^r b_{di} u[k-i]
+\end{alignat*}
+
+\subsection{Eltolási operátor}
+
+\kix{Z-transzformáció} esetén a \kix{$z$ operátor} az időben való eltolást
+valósítja meg. Unilaterális Z-transzformáció definíciója:
+\[
+  X(z)=\mathcal Z \left\{ x[n] \right\} = \sum_{k=0}^{\infty} x[k]z^{-k}
+\]
+
+
+\subsection{Impulzus átviteli függvény}
+
+Az \kix{impulzus átviteli függvény} formális definíciója hasonlít az
+\kix{átviteli függvény}[éhez], a kimenő jel transzformáltját kell elosztanunk
+a bemenő jel transzformáltjával. Ez \kix{Z-transzformálás} esetén:
+\[
+  W(z) = \frac{Y(z)}{U(z)}
+\]
 
 \end{document}

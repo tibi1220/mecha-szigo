@@ -5,10 +5,178 @@
 \section{LTI rendszerek}
 
 \begin{fulltheorem}
-	Adja meg a lineáris idő invariáns rendszerek állapottér egyenletének
-	szokásos mátrixos alakját. Laplace transzformáció segítségével vezesse le
-	egy lineáris idő invariáns rendszer állapottér egyenletének megoldását az
-	időtartományban. Miként vehetők figyelembe a kezdeti értékek?
+  Adja meg a lineáris idő invariáns rendszerek állapottér egyenletének
+  szokásos mátrixos alakját. Laplace transzformáció segítségével vezesse le
+  egy lineáris idő invariáns rendszer állapottér egyenletének megoldását az
+  időtartományban. Miként vehetők figyelembe a kezdeti értékek?
 \end{fulltheorem}
+
+Az \kix{LTI} rendszerekre teljesül a \kix{szuperpozíció elve} (linearitás),
+valamint teljesül, hogy késleltetett bemenetre késleltetett választ ad.
+\begin{gather*}
+  u(t) \; \rightarrow \; y(t)
+  \qquad
+  u(t + \tau) \; \rightarrow \; y(t + \tau)
+  \\[2mm]
+  u_1(t) \;\rightarrow\; y_1(t)
+  \text{ és }
+  u_2(t) \;\rightarrow\; y_2(t)
+  \\
+  \lambda u_1(t) + \mu u_2(t)
+  \;\rightarrow\;
+  \lambda y_1(t) + \mu y_2(t)
+\end{gather*}
+
+\subsection{Diszkrét időben}
+
+A kimeneti és állapotegyenleteket rekurzió segítségével írhatjuk fel:
+\begin{alignat*}{9}
+   & \rvec x [k+1] & = & \rmat A_d \rvec x[k] & + & \rmat B_d \rvec u[k] \\
+   & \rvec y [k]   & = & \rmat C_d \rvec x[k] & + & \rmat D_d \rvec u[k]
+\end{alignat*}
+
+\begin{figure}[htb]
+  \centering
+  \begin{tikzpicture}[
+      thick,
+      arr/.style={ultra thick, draw=cyan!50!black},
+      box/.style={rectangle, minimum width=1.2cm, minimum  height=.75cm, draw=black, },
+      cross/.style={path picture={
+              \draw[black]
+              (path picture bounding box.south east) -- (path picture bounding box.north west) (path picture bounding
+              box.south west)
+              -- (path picture bounding box.north east);
+            }},
+      sum/.style={circle, minimum size=.75cm, draw=black, cross},
+    ]
+    \node[box] (z) at (0,0) {$z^{-1}$};
+    \node[box] (a) at (0,-1.5) {$\rmat A_d$};
+    \node[box] (b) at (-4,0) {$\rmat B_d$};
+    \node[box] (c) at (2.5,0) {$\rmat C_d$};
+    \node[box] (d) at (0,-3) {$\rmat D_d$};
+
+    \node[sum] (s1) at (-2,0) {};
+    \node[sum] (s2) at (4.5,0) {};
+
+    \draw[arr,to-] (b) -- ++(-2,0);
+    \draw[arr,-to] (b) -- (s1);
+    \draw[arr,-to] (s1) -- (z);
+    \draw[arr,-to] (z) -- (c);
+    \draw[arr,-to] (c) -- (s2);
+    \draw[arr,-to] (s2) --  ++(1.5,0);
+
+    \draw[arr,-to] (a) -| (s1);
+    \draw[arr,-to] (d) -| (s2);
+    \draw[arr,-to] ($(b)-(1.25,0)$) |- (d);
+    \draw[arr,-to] ($(c)-(1.25,0)$) |- (a);
+  \end{tikzpicture}
+  \caption{Állapottérmodell hatásvázlata diszkrét időben}
+  \label{fig:dstate}
+\end{figure}
+
+
+\subsection{Folytonos időben}
+
+A diszkrét modellből levezetve, a differenciahányadosaink
+differenciálhányadosokká alakulnak.
+\begin{alignat*}{9}
+   & \dot{\rvec x} (t) & = & \rmat A \rvec x(t) & + & \rmat B \rvec u(t) \\
+   & \rvec y (t)       & = & \rmat C \rvec x(t) & + & \rmat D \rvec u(t)
+\end{alignat*}
+
+\bgroup
+\def\arraystretch{1.2}
+\begin{table}[H]
+  \begin{center}
+    \begin{tabular}{| c | c |}
+      \hline
+      \begin{tabular}{ c c }
+        $\rvec x(t) \in \mathbb R^n$ & \kix{állapotvektor}   \\
+        $\rvec u(t) \in \mathbb R^m$ & \kix{bemeneti vektor} \\
+        $\rvec y(t) \in \mathbb R^p$ & \kix{kimeneti vektor} \\
+      \end{tabular}
+       &
+      \begin{tabular}{ c c }
+        $\rmat A \in \mathcal{M}_{n \times n}$ & \kix{rendszermátrix}        \\
+        $\rmat B \in \mathcal{M}_{n \times m}$ & \kix{bemeneti mátrix}       \\
+        $\rmat C \in \mathcal{M}_{p \times n}$ & \kix{kimeneti mátrix}       \\
+        $\rmat D \in \mathcal{M}_{p \times m}$ & \kix{előrecsatolási mátrix} \\
+      \end{tabular}
+      \\\hline
+    \end{tabular}
+  \end{center}
+  \caption{Az állapotegyenletekben szereplő mennyiségek}
+  \label{table:state-variables}
+\end{table}
+\egroup
+
+\begin{figure}[htb]
+  \centering
+  \begin{tikzpicture}[
+      thick,
+      arr/.style={ultra thick, draw=cyan!50!black},
+      box/.style={rectangle, minimum width=1.2cm, minimum  height=.75cm, draw=black, },
+      cross/.style={path picture={
+              \draw[black]
+              (path picture bounding box.south east) -- (path picture bounding box.north west) (path picture bounding
+              box.south west)
+              -- (path picture bounding box.north east);
+            }},
+      sum/.style={circle, minimum size=.75cm, draw=black, cross},
+    ]
+    \node[box] (z) at (0,0) {$\displaystyle\int$};
+    \node[box] (a) at (0,-1.5) {$\rmat A$};
+    \node[box] (b) at (-4,0) {$\rmat B$};
+    \node[box] (c) at (2.5,0) {$\rmat C$};
+    \node[box] (d) at (0,-3) {$\rmat D$};
+
+    \node[sum] (s1) at (-2,0) {};
+    \node[sum] (s2) at (4.5,0) {};
+
+    \draw[arr,to-] (b) -- ++(-2,0);
+    \draw[arr,-to] (b) -- (s1);
+    \draw[arr,-to] (s1) -- (z);
+    \draw[arr,-to] (z) -- (c);
+    \draw[arr,-to] (c) -- (s2);
+    \draw[arr,-to] (s2) --  ++(1.5,0);
+
+    \draw[arr,-to] (a) -| (s1);
+    \draw[arr,-to] (d) -| (s2);
+    \draw[arr,-to] ($(b)-(1.25,0)$) |- (d);
+    \draw[arr,-to] ($(c)-(1.25,0)$) |- (a);
+  \end{tikzpicture}
+  \caption{Állapottérmodell hatásvázlata folytonos időben}
+  \label{fig:cstate}
+\end{figure}
+
+A differenciálegyenlet-renszer megoldásához végezzük el a \kix{Laplace transzformáció}[t].
+\begin{alignat*}{9}
+  s & \rvec X(s) - \rvec x_0 & = & \rmat A \rvec X(s) & + & \rmat B \rvec U(s) \\
+    & \rvec Y (s)            & = & \rmat C \rvec X(s) & + & \rmat D \rvec U(s)
+\end{alignat*}
+\begin{gather*}
+  (s \rmat I - \rmat A) \rvec X(s) = \rvec x_0 + \rmat B \rvec U(s) \\
+  \rvec X(s) = (s \rmat I - \rmat A)^{-1} \rvec x_0 + (s \rmat I - \rmat A)^{-1} \rmat B \rvec U(s) \\
+  \rvec Y(s)
+  = \underbracket{\rmat C(s \rmat I - \rmat A)^{-1} \rvec x_0}_{\text{tranziens}}
+  +  \underbracket{\left( \rmat C ( s \rmat I - \rmat A )^{-1} \rmat B + \rmat D \right)}_{\rmat W(s) \text{ --
+      átviteli mátrix}} \rvec U(s)
+\end{gather*}
+
+\kix{SISO} rendszer esetén $W(s)$ átviteli függvényt kapunk. Ebből
+\kix{inverz Laplace transzformáció} segítségével meghatározható az
+\kix{időtartomány}[beli] megoldás. A \kix{kezdeti érték tétel}[lel]
+és a \kix{végértéktétel}[lel] meghatározhatjuk a kimenet kezdeti értékét
+és állandósult állapotát. (Utóbbi csak abban az esetben használható,
+ha $y(t)$ konvergens.)
+\begin{alignat*}{9}
+   & y(0)      & = & \lim_{s \to \infty} & s W(s) \\
+   & y(\infty) & = & \,\lim_{s \to 0}    & s W(s)
+\end{alignat*}
+
+Az egy- és kéttárolós tagok vizsgálójelekre adott válaszát a \ref{sec:3-14}
+fejezetben tárgyaljuk.
+
+
 
 \end{document}

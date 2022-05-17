@@ -2,16 +2,35 @@
 
 \begin{document}
 
-\section{Állapot, renszer}
+\section{Állapot, rendszer}
 
 \begin{fulltheorem}
-	Ismertesse a következő fogalmakat!
-	(Adja meg a definícióját és rövid értelmezését.)
-	\begin{itemize}
-		\item Állapot, állapotváltozó, állapotjelző
-		\item Állapot és kimeneti egyenlet
-		\item A rendszer dimenziója
-	\end{itemize}
+  Ismertesse a következő fogalmakat!
+  (Adja meg a definícióját és rövid értelmezését.)
+  \begin{itemize}
+    \item Állapot, állapotváltozó, állapotjelző
+    \item Állapot és kimeneti egyenlet
+    \item A rendszer dimenziója
+  \end{itemize}
 \end{fulltheorem}
+
+Az \kix{állapot} rendszerelméleti megközelítésénél a dinamikus rendszerek
+definíciójából indulunk ki, miszerint azok memória jelleggel rendelkeznek.
+Az állapot tehát a múlt összesített hatása. A rendszer állapotának a következő
+két tulajdonságokkal kell rendelkeznie:
+\begin{itemize}
+  \item Bármely $t$ időpillanatban a \kix{kimenőjel} az adott pillanatbeli
+        \kix{állapot} és \kix{bemenőjel} együttes ismeretében egyértelműen
+        meghatározható legyen. (\kix{állapotegyenlet})
+  \item Az állapot egy adott $t$ időpillanatban egyértelműen meghatározható
+        legyen a bemenőjel a $\tau \leq t$ időtartománybeli értékének
+        ismeretében. (\kix{kimeneti egyenlet})
+\end{itemize}
+
+Az \kix{állapotváltozó}[k] az \kix{állapot} egyértelmű leírására szolgálnak.
+Egy rendszer állapotának egyértelmű leírásához minimálisan szükséges
+állapotváltozók számát a \kw{rendszer dimenziójának}
+\index{renszer dimenziója} szokás nevezni. Az állapotváltozók szokásos jelölése:
+$\rvec x(t) \in \mathbb R^n$.
 
 \end{document}

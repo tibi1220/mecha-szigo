@@ -11,8 +11,10 @@
 \usepackage[magyar]{babel}
 
 \usepackage{amsmath}
+\usepackage{amssymb}
 \usepackage{unicode-math}
 \usepackage{fontspec}
+\usepackage[bb=ams]{mathalpha}
 
 % \setmainfont{TeX Gyre Termes}
 % \setsansfont[Scale=MatchUppercase]{TeX Gyre Heros}
@@ -32,8 +34,8 @@
 \usepackage[]{fancyhdr}
 \usepackage{lastpage}
 \pagestyle{fancy}
-\renewcommand{\headrulewidth}{1pt}
-\renewcommand{\footrulewidth}{1pt}
+\renewcommand{\headrulewidth}{2pt}
+\renewcommand{\footrulewidth}{2pt}
 \fancyfoot[RO,LE]{\thepage}
 \fancyfoot[RE,LO]{\textit{Készítette:} Sándor Tibor}
 \fancyfoot[C]{}
@@ -63,7 +65,8 @@ arrows, arrows.meta,
 decorations.markings,
 spy,
 backgrounds,
-calc
+calc,
+decorations, decorations.pathmorphing
 }
 \definecolor{dkgreen}{rgb}{0,0.6,0}
 \tikzset{multi attribute/.style={attribute,double distance=1.5pt}}
@@ -113,7 +116,8 @@ calc
 
 \definecolor{bgreen}{rgb}{0,0.471,0.52}
 \newcommand\tc[1]{{\color{bgreen}\texttt{#1}}}
-\newcommand\kw[1]{{\color{blue}#1}}
+% \newcommand\kw[1]{{\color{blue}#1}}
+\newcommand\kw[1]{{\textbf{#1}}}
 
 \newcommand{\redc}[1]{{\color{red}\texttt{#1}}}
 \newcommand{\blackc}[1]{{\texttt{#1}}}
@@ -145,7 +149,7 @@ calc
 %% ----- Custom settings ----- %%
 \author{Sándor Tibor}
 \title{Mechatronika szigorlat felkészülést segítő tételek kidolgozása}
-\date{\today}
+\date{\today\\[5mm]\texttt{v0.2.0}\\(1 $\checkmark$, 3 $\checkmark$, 2 TBD)}
 
 \setlength\parindent{0em}
 \setlength\parskip{.33em}

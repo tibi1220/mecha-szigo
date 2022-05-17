@@ -5,13 +5,74 @@
 \section{Rendszerek}
 
 \begin{fulltheorem}
-	Ismertesse a következő fogalmakat!
-	(adja meg a definícióját és rövid értelmezését)
-	\begin{itemize}
-		\item Valós fizikai rendszer
-		\item A jel
-		\item A be- és kimenetek
-	\end{itemize}
+  Ismertesse a következő fogalmakat!
+  (adja meg a definícióját és rövid értelmezését)
+  \begin{itemize}
+    \item Valós fizikai rendszer
+    \item A jel
+    \item A be- és kimenetek
+  \end{itemize}
 \end{fulltheorem}
+
+\subsection{Valós fizikai rendszerek}
+
+A \kix{valós fizikai rendszer} egy olyan fizikai objektum, amely mérhető külső
+kényszer hatására mérhető módon megváltozik.
+
+A \kix{rendszer} a fizikai valóság elkülönített része, amely bemenő mennyiségekből
+egy folyamat hatására kimenő mennyiségeket hoz létre úgy, hogy közben kapcsolatban
+van áll a környezettel.
+
+\begin{figure}[H]
+  \centering
+  \begin{tikzpicture}[thick]
+    \node[
+      ellipse,
+      minimum width=5cm, minimum height=3cm,
+      draw=black, fill=red!5, dashed,
+      decorate, decoration={random steps,segment length=3pt,amplitude=1pt},
+    ]
+    (k) at (0,0) {};
+    \node[
+      ellipse,
+      align=center,
+      draw=cyan!50!black, fill=yellow!10,
+      decorate, decoration={random steps,segment length=3pt,amplitude=1pt},
+    ]
+    (e) at (0,0) {rendszer \\ (folyamat)};
+
+    % noindent
+    \foreach \i/\j in {245/260,270/270,295/280}{
+        \draw[teal!50!gray, -{Latex[round]}, ultra thick]
+        (e.\i) -- ++(\j:1.5);
+      }
+    \foreach \i in {-15,0,15,165,180,195}{
+        \draw[yellow!50!black, {Latex[round]}-, ultra thick]
+        (e.\i) -- ++(\i:1.5);
+      }
+    % indent
+
+    \node[align=center] at (0,-3) {kimenő\\mennyiség};
+    \node at (0,1.1) {környezet};
+    \node[align=center] at (-4,0) {bemenő\\mennyiség};
+  \end{tikzpicture}
+  \caption{A rendszer definíciója grafikusan}
+  \label{fig:system}
+\end{figure}
+
+\subsection{A jel}
+
+A \kix{jel} egy változó \kix{fizikai mennyiség} absztrakt információ tartalma.
+
+\subsection{Be- és kimenetek}
+
+A valós fizikai rendszerre ható és időben változni képes kényszereket nevezzük
+\kix{fizikai bemenet}[eknek]. A bementek számunkra fontos, mérhető mennyiségek.
+Jele: $u(t)$.
+
+A valós fizikai rendszernek a fizikai kényszerek hatására bekövetkező bármely
+változása lehet \kix{fizikai kimenet}, ezek közül azt tekintjük
+\kix{fizikai kimenet}[nek], amelyet az adott vizsgálatban közvetlenül vagy
+közvetve mérünk. Jele: $y(t)$.
 
 \end{document}
