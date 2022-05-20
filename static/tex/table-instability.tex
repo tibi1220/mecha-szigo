@@ -1,0 +1,28 @@
+\documentclass{standalone}
+
+\usepackage{luacode}
+
+\begin{document}
+\begin{tabular}{|c|c|c|c|}
+  % noindent
+  \hline 
+  $n$ & $y_{n\rightarrow}$ & $y_{n\leftarrow}$
+  \\ \hline \hline
+  \luaexec{
+    e = math.exp(1)
+    y = e - 1
+    tex.print(0 .. "&" .. math.round(y*100000)/100000 .. "&" .. math.round(y*100000)/100000 .. "\\\\\\hline")
+    for n=1,20,1
+    do;
+      yb = 0
+      for b = 20,n+1,-1
+      do;
+        yb = (e - yb) / b
+      end
+      y = e - n * y
+    tex.print(n .. "&" .. math.round(y*100000)/100000 .. "&" .. math.round(yb*100000)/100000 .. "\\\\ \\hline")
+    end
+  }
+  % indent
+\end{tabular}
+\end{document}
