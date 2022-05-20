@@ -13,6 +13,7 @@
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{unicode-math}
+\usepackage{icomma}
 \usepackage{fontspec}
 \usepackage[bb=ams]{mathalpha}
 
@@ -22,13 +23,17 @@
 % \setmonofont[Scale=.7]{MonoLisa}
 
 \usepackage{graphicx}
-\usepackage{xcolor}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage[table]{xcolor}
+% \usepackage{tabu}
 \usepackage[
   % nottoc, notlof, notlot
 ]{tocbibind}
 \usepackage{tabto}
 \usepackage{adjustbox}
-
+\usepackage{fontawesome}
+\usepackage{cancel}
 
 %% ----- Pagestyle ----- %%
 \usepackage[]{fancyhdr}
@@ -54,10 +59,6 @@
 
 %% ----- TikZ ----- %%
 \usepackage{tikz}
-% \usepackage{bodeplot}
-
-% \pgfkeys{/pgf/plot/gnuplot call={cd build && gnuplot}}
-
 \usepackage[siunitx, RPvoltages]{circuitikz}
 \usetikzlibrary{
 er,
@@ -66,9 +67,10 @@ decorations.markings,
 spy,
 backgrounds,
 calc,
-decorations, decorations.pathmorphing
+decorations, decorations.pathmorphing,
+angles,
+quotes
 }
-\definecolor{dkgreen}{rgb}{0,0.6,0}
 \tikzset{multi attribute/.style={attribute,double distance=1.5pt}}
 \tikzset{derived attribute/.style={attribute ,dashed}}
 \tikzset{total/.style={double distance=1.5pt}}
@@ -85,36 +87,14 @@ decorations, decorations.pathmorphing
   bdot/.style = {dot=#1, fill=black},
   bdot/.default = 5pt, % size of the circle diameter 
 }
-% \pgfplotsset{
-%   freq/.style={
-%     xlabel={Frequency [1/s]}, ylabel={Phase [$^{\circ}$]},
-%     height=3cm, width=5cm,
-%     ytick distance=40,
-%     enlarge y limits,
-%     ytick distance=45,
-%   },
-%   amp/.style={
-%     xlabel={Frequency [1/s]}, ylabel={Gain [dB]},
-%     height=3cm, width=5cm,
-%     ytick distance=40,
-%     enlarge y limits=0.1,
-%     ytick distance=20,
-%   },
-% }
-\usepackage{cancel}
 
 %% ----- Indexing ----- %%
 \usepackage{xargs}
 \usepackage[texindy]{imakeidx}
-% \usepackage{luacode}
-% \begin{luacode*}
-% function toLower(s)
-%   tex.sprint(s:lower())
-% end
-% \end{luacode*}
-\makeindex[program=texindy, options=-C utf8 -L Hungarian] %[columns=2, options=-M texindy -L hungarian -C utf8]
+\makeindex[program=texindy, options=-C utf8 -L Hungarian]
 
 \definecolor{bgreen}{rgb}{0,0.471,0.52}
+\definecolor{dkgreen}{rgb}{0,0.6,0}
 \newcommand\tc[1]{{\color{bgreen}\texttt{#1}}}
 % \newcommand\kw[1]{{\color{blue}#1}}
 \newcommand\kw[1]{{\textbf{#1}}}
@@ -127,29 +107,35 @@ decorations, decorations.pathmorphing
 \newcommandx\cix[2][2=]{\tc{#1#2}\index{\texttt{Kódszavak}!\texttt{#1}}}
 \newcommandx\kix[2][2=]{\kw{#1#2}\lowercase{\def\temp{#1}}\index{\temp}}
 
-\newcommand{\rvec}[1]{\mathbfit{#1}}
-\newcommand{\uvec}[1]{\widehat{\mathbfit{#1}}}
-\newcommand{\rmat}[1]{\mathbf{#1}}
-
-\DeclareMathOperator\dist{d}
-\DeclareMathOperator\Laplace{\mathcal{L}}
-\newcommand\dirac{\delta}
-\newcommand\hc{\varepsilon}
-\newcommand\iu{\mathbf{j}}
 
 
 %% ----- Last in preamble ----- %%
+\usepackage{applekeys}
+\usepackage{luacode}
 \usepackage{subfiles}
 \usepackage[luatex]{hyperref}
 \usepackage[outputdir=build]{minted}
 \usemintedstyle{one-dark}
 \definecolor{bg}{rgb}{0.1,0.1,0.2}
 
+\begin{luacode*}
+  function round(num, numDecimalPlaces)
+    return tonumber(string.format("%." .. (numDecimalPlaces or 0) .. "f", num))
+  end
+  function prinTeX(num, unit, dec)
+    if(dec or dec == 0) and dec ~= "" then
+      num = round(num, dec)
+    end
+    tex.sprint([[\SI{]] .. num .. [[}{]] .. unit .. [[}]])
+  end
+\end{luacode*}
+
+
 
 %% ----- Custom settings ----- %%
 \author{Sándor Tibor}
 \title{Mechatronika szigorlat felkészülést segítő tételek kidolgozása}
-\date{\today\\[5mm]\texttt{v0.2.0}\\(1 $\checkmark$, 3 $\checkmark$, 2 TBD)}
+\date{\today\\[5mm]\texttt{v0.2.2}\\(1 $\checkmark$, 3 $\checkmark$, 2 \faSpinner)}
 
 \setlength\parindent{0em}
 \setlength\parskip{.33em}
@@ -158,14 +144,41 @@ decorations, decorations.pathmorphing
 
 
 
-%% ----- Custom environments ----- %%
+%% ----- Custom commands and environments ----- %%
+%% Environments
 \newenvironment{fulltheorem}{
   \color{gray!80!black}
   \sffamily
   \large
-}{\ignorespacesafterend\par\vspace{.75em}}
+}{\ignorespacesafterend\par\vspace*{.33em}}
+\newenvironment{rcases}
+  {\left.\begin{aligned}}
+  {\end{aligned}\right\rbrace}
 
 
+%% Math stuff
+\newcommand{\rvec}[1]{\mathbfit{#1}}
+\newcommand{\uvec}[1]{\widehat{\mathbfit{#1}}}
+\newcommand{\rmat}[1]{\mathbf{#1}}
+
+\DeclareMathOperator\dist{d}
+\DeclareMathOperator\Laplace{\mathcal{L}}
+\DeclareMathOperator{\Div}{div}
+\DeclareMathOperator{\Rot}{rot}
+\DeclareMathOperator{\Grad}{grad}
+\DeclareMathOperator{\core}{core}
+\DeclareMathOperator{\supp}{supp}
+\newcommand\dd{\mathrm{d}}
+\newcommand\dirac{\delta}
+\newcommand\hc{\varepsilon}
+\newcommand\iu{\mathbf{j}}
+
+
+%% Lua stuff
+\sisetup{locale = DE}
+\newcommandx{\SIlv}[3][2=]{\directlua{prinTeX(_G["#1"], "#3", "#2")}}
+\newcommandx{\Nlv}[2][2=]{\directlua{prinTeX(_G["#1"], "", "#2")}}
+\newcommand{\lv}[1]{\directlua{tex.sprint(_G["#1"])}}
 
 
 
