@@ -9,8 +9,8 @@ lookForAlignAt*Delims:
 modifyLineBreaks:
   preserveBlankLines: 1
   condenseMultipleBlankLinesInto: 0
-  textWrapOptions:
-    columns: 120
+  # textWrapOptions:
+  #   columns: 120
 
 # specialBeginEnd:
 #   path:
