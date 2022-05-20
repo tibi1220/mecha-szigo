@@ -2,10 +2,61 @@
 
 \begin{document}
 
+\newpage
+
 \section{Programozás I}
 
 \begin{fulltheorem}
-	Fuzzy halmazok alapjai, műveletek fuzzy halmazokon.
+  Fuzzy halmazok alapjai, műveletek fuzzy halmazokon.
 \end{fulltheorem}
+
+\subsection{Homokkupac paradoxon}
+\[
+  \mathrm{homokkupac - homokszem = homokkupac}
+\]
+Ebből az következik, hogy $\mathrm{homokkupac} = 0$.
+Ennek oka, hogy a homokkupacot nem definiáltuk elég pontosan.
+A gond az, hogy a matematikai precizitás nincsen összhangban a homokkupac
+hétköznapi fogalmával, vagyis a precíz matematika nem alkalmas pontatlan
+fogalmak formális kezelésére. A megoldás erre a \kix{fuzzy logika}.
+
+\subsection{A fuzzy halmazelmélet}
+
+A \kix{fuzzy halmazelmélet} Mamdahi és Zadeh nevéhez fűződik, a szó jelentése:
+homályos, életlen. A halmazok között \kix{elmosódott határ}[ok] vannak, pl.:
+magas emberek. A \kix{részleges tagság}[] 0 és 1 közötti értéket vehet fel,
+melyet a \kix{tagsági függvény}[] jellemez.
+
+\paragraph{Példa} Egy hallgatói csoport
+\begin{itemize}
+  \item Alaphalmaz: $X$ -- Összes hallgató
+  \item Részhalmaz: $A$ -- Hallgatók jogosítvánnyal
+  \item Karakterisztikus függvény: $\chi_A(X)$
+  \item Taggsági függvény: $\mu(X)$ -- Hallgatók, akik jól vezetnek
+\end{itemize}
+
+\paragraph{Tulajdonságok}
+
+A fuzzy halmazok az alábbi paraméterekkel jellemezhetőek:
+\begin{center}
+  \begin{tabular}{l l}
+    mag                    & $\core A = \left\{ x \in X | \mu_A(x) = 1 \right\}$          \\
+    tartó                  & $\supp A = \left\{ x \in X | \mu_A(x) > 0 \right\}$          \\
+    $\alpha$-vágat         & $A_\alpha = \left\{ x \in X | \mu_A(x) \geq \alpha \right\}$ \\
+    szigorú $\alpha$-vágat & $A_{\alpha+} = \left\{ x \in X | \mu_A(x) > \alpha \right\}$ \\
+    magasság               & $h(A) = \sup_{x \in X} \mu_A(x)$                             \\
+  \end{tabular}
+\end{center}
+
+\paragraph{Műveletek}
+A halmazokhoz hasonlóan a futtz halmazokon is végezhetünk matematikai
+műveleteket.
+\begin{center}
+  \begin{tabular}{l l}
+    Unió      & $\mu_{A \cup B}(x) = \max \left\{ \mu_A(x); \mu_B(x) \right\}$ \\
+    Metszet   & $\mu_{A \cap B}(x) = \min \left\{ \mu_A(x); \mu_B(x) \right\}$ \\
+    Különbség & $\mu_{\overline A}(x) = 1 - \mu_A(x)$                          \\
+  \end{tabular}
+\end{center}
 
 \end{document}

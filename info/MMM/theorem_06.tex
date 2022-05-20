@@ -2,10 +2,140 @@
 
 \begin{document}
 
-\section{Numerikus módszerek I}
+\section{Numerikus módszerek II}
 
 \begin{fulltheorem}
-	Hibafajták a numerikus módszerek esetén, érdekességek.
+  Hibafajták a numerikus módszerek esetén, érdekességek.
 \end{fulltheorem}
+
+{\color{red}\textbf{Disclamer:}} A következő fejezetekben írt konkrét számadatok
+\cix{lua} nyelvvel számolt numerikus adatok.
+(64-bites lebegőpontos ábrázolással (IEEE 754))
+
+\subsection{Hibafajták}
+
+Beszélhetünk relatív ($|x - a|$) egy abszolút ($|x - a| / a$) hibáról.
+A hibák okati lehetnek kerekítési-, öröklött-, vagy képlethiba.
+
+\subsubsection{Kiegyszerűsödés}
+
+Ez a jelenség akkor fordul elő, ha két, közel azonos számot vonunk ki egymásból.
+Ilyenkor az eredmény sokkal kevesebb értékes jegyből fog állni, ami
+információvesztést jelent. A deriváltak numerikus közelítésénél is ez a
+jelenség okozza a legtöbb gondot.
+\begin{luacode*}
+  d = math.sqrt(150000^2 - 4)
+  d2 = d/2
+  x1 = 75000 + d/2
+  x2 = 75000 - d/2
+  x3 = 1 / x1
+  s1 = x1^2 - 150000*x1 + 1
+  s2 = x2^2 - 150000*x2 + 1
+  s3 = x3^2 - 150000*x3 + 1
+\end{luacode*}
+\begin{gather*}
+  x^2  - 150000 x + 1 = 0 \\
+  x_{12} = 75000 \pm \Nlv{d2} = \begin{cases}
+    \Nlv{x1} \\
+    \Nlv{x2}
+  \end{cases}
+\end{gather*}
+Visszahelyettesítés után:
+\[
+  x_{12}^2 - 150000 x_{12} + 1 = \begin{cases}
+    \Nlv{s1}[0] \\
+    \Nlv{s2}
+  \end{cases}
+\]
+Ha az alábbi azonossággal számoljuk ki $x_2$-t, akkor elkerülhetjük a problémát.
+\[
+  x_1 x_2 = \frac{c}{a}
+  \quad \rightarrow \quad
+  x_2 = \Nlv{x3}
+\]
+Ha ezt helyettesítjük vissza, akkor láthatjuk, hogy a hiba el lett kerülve.
+\[
+  x_2^2 + 150000 x_2 + 1 = \Nlv{s3}[0]
+\]
+
+\subsubsection{Kiejtés}
+
+A kiejtés általában sorok összegzésekor fordul elő, akkor ha a részösszegek
+számításkor a kiegyszerűsödés jelenségével találkozunk. Tulajdonképpen úgy is
+felfoghatjuk, mint az előző fejezetben tárgyalt fogalom általánosítását.
+
+Leggyakrabban alternáló sorok összegzésekor találkozunk vele. Szemléltetésként
+nézzük a következő példát! Az $e^x$ függvény nulla körüli Taylor sora a
+következő:
+\[
+  e^x = \sum_{k=0}^\infty \frac{x^k}{k!}
+\]
+Negatív exponens esetén érdemes az abszolútértékével kiszámolni a sort, majd
+venni a reciprokát:
+\begin{luacode*}
+  function factorial(n)
+  fact = 1.0
+  for i = 1, n, 1
+  do
+  fact = fact * i
+  end
+  return fact
+  end
+  x1=-22; x2=22
+  s1=0; s2=0
+  for k=0,100,1
+  do;
+  s1 = s1 + x1^k / factorial(k)
+  s2 = s2 + x2^k / factorial(k)
+  end
+  s2 = 1 / s2
+\end{luacode*}
+\begin{align*}
+  e^{-22}     & = \Nlv{s1} \\
+  1 / e^{+22} & = \Nlv{s2}
+\end{align*}
+Itt nem csak az okozza az eltérést, hogy az előjelek alternáltak, hanem az is
+hogy a tagok nagyságrendje folyamatosan nőtt. ($k$=100-ig ment a \cix{for} ciklus)
+
+\subsubsection{Numerikus instabilitás}
+
+\kix{Instabilitás}[ról] akkor beszélünk, ha a közbenső hibák nagymértékben
+befolyásolják az eredményt.
+\begin{gather*}
+  y_n = \int_0^1 x^n \, e^x \, \dd x
+  \\
+  y_n
+  = \int_0^1 x^n \, e^x \, \dd x
+  = \left. x^n \, e^x \right|_0^1 - n \int_0^1 x^{n-1} \, e^x \, \dd x
+  = e - n \, y_{n-1}
+\end{gather*}
+
+Ha rekurzívan szeretnénk a határértéket kiszámolni, akkor hiba fog keletkezni,
+amely a visszafele számoláskor ki fog derülni, hiszen a rekurzív alak miatt
+a képlet az alábbi alakra írható át
+\[
+  y_n = e - n \, y_{n-1}
+  \quad \rightarrow \quad
+  y_{n-1} = \frac{e - y_n}{n}
+\]
+\begin{table}[htb]
+  \centering
+  \includegraphics{../../static/tex/build/table-instability.pdf}
+  \caption{Numerikus instabilitás szemléltetése}
+  \label{table:instability}
+\end{table}
+
+\subsubsection{Rosszul kondicionáltság}
+
+Egy feladatot akkor hívunk rosszul kondicionáltnak, ha a paramétereinek csekély
+megváltoztatása az eredmény nagymértékű módosulását eredményezi. Ilyen
+kismértékű változás a számítástechnikában szinte mindig előfordul, elég csak
+kerekítési hibákra gondolnunk.
+\begin{alignat*}{9}
+  (x - 1)^6 & = & 0       & \quad \rightarrow \quad & x = 1   \\
+  (x - 1)^6 & = & 10^{-6} & \quad \rightarrow \quad & x = 1,1
+\end{alignat*}
+Megfigyelhetjük, hogy a paraméterek kis változtatásával a végeredmény
+$10\%$-kal nőtt.
 
 \end{document}

@@ -2,10 +2,132 @@
 
 \begin{document}
 
-\section{Grafika V}
+\newpage
+
+\section{Numerikus módszerek I}
 
 \begin{fulltheorem}
-	Rendezés, keresés, interpoláció, regresszió.
+  Rendezés, keresés, interpoláció, regresszió.
 \end{fulltheorem}
+
+\subsection{Rendezés}
+
+Korábban tárgyaltuk (KIE).
+
+\subsection{Keresés}
+
+Korábban tárgyaltuk (KIE).
+
+\subsection{Térgörbék leírása}
+
+Megadási módok
+\begin{itemize}
+  \item Implicit megadás -- $f(x;y;z) = 0$
+  \item Explicit megadás -- $x(t) ; y(t); z(t)$
+\end{itemize}
+
+\subsubsection{Elsőfokú paraméteres görbeszakasz}
+\[
+  \rvec Q(t) = (1-t) \rvec P_0 + t \rvec P_1
+\]
+
+\subsubsection{Harmadfokú paraméteres görbeszakasz}
+
+Négy definiáló adat kell minden koordináta-függvényhez
+
+\paragraph{Hermite-féle görbeszakasz}
+\begin{gather*}
+  \rvec Q(t)
+  = \rvec P_1 + s_{P1}(t)
+  + \rvec P_4 + s_{P4}(t)
+  + \rvec R_1 + s_{R1}(t)
+  + \rvec R_4 + s_{R4}(t)
+  \\
+  s_{P1} = 2t^3 - 3t^2 + 1
+  \\
+  s_{P4} = -2t^3 + 3t
+  \\
+  s_{R1} = t^3 - 2t^2 + t
+  \\
+  s_{R4} = t^3 - t^2
+\end{gather*}
+
+\paragraph{Bezier-féle görbeszakasz}
+\begin{gather*}
+  \rvec Q(t)
+  = \rvec P_1 \cdot s_{P1}
+  + \rvec P_2 \cdot s_{P2}
+  + \rvec P_3 \cdot s_{P3}
+  + \rvec P_4 \cdot s_{P4}
+  \\
+  s_{P1} = (1-t)^3
+  \\
+  s_{P2} = 3t(1-t)^2
+  \\
+  s_{P3} = 3t^2(1-t)
+  \\
+  s_{P4} = t^3
+\end{gather*}
+
+\subsubsection{Teljes görbék közelítése}
+
+\begin{itemize}
+  \item Természetes spline
+  \item Kardinális spline
+  \item B spline
+\end{itemize}
+
+\subsection{Interpoláció}
+
+Egy adott $f$ valós függvény $x_i$ pontjaiban ismerjük $y_i$ függvényértékeket.
+Szeretnénk megtudni tetszőleges $x$ pontban a függvény értékét a lehető
+legpontosabban. Az ismert pontok elhelyezkedése lehet egyenközű, vagy változó
+távolságú. Az \kix{interpoláció}[t] felhasználhatjuk:
+\begin{itemize}
+  \item függvény közelítésére,
+  \item egyenletek megoldására,
+  \item differenciálegyenletek megoldására,
+  \item numerikus integrálás, deriválás esetén,
+  \item diszkrét adatsor folytonossá tevésére.
+\end{itemize}
+
+\subsubsection{Lineáris interpoláció}
+
+A \kix{lineáris interpoláció} a legegyszerűbb módszer. Két ismert függvényérték
+között számítja ki a keresett függvényértékeket. A függvényt az ismert pontok
+között lineárisnak feltételezi. Egyen- és váltakozó közű adatokra is működik.
+
+\subsubsection{Polinomiális interpoláció}
+
+A \kix{polinomiális interpoláció}[] során a függvényt a $x_0$ pont körül
+valamilyen $k$-adfokú polinommal szeretnénk közelíteni. Speciális esetben
+$k = 1$-nél lineáris interpolációt kapunk. A számításhot $k + 1$ darab
+ismert pontra van szükségünk $x_0$ körül. A polinom ezeken a pontokon
+boztosan át fog menni. Fajtái:
+\begin{itemize}
+  \item Lagrange-féle interpoláció
+  \item Newton-féle interpoláció
+  \item Hermite-féle interpoláció
+        \begin{itemize}
+          \item Ebben az esetben nem csak azt kívánjuk meg hogy az interpolációs
+                polinom átmenjen a pontokon, hanem a deriváltakra is vannak
+                megkötéseink.
+          \item A sima interpoláció esetén nulladrendű illeszkedésről beszélünk,
+                ha az első deriváltakat is figyelembe vesszük akkor elsőrendű,
+                és így tovább.
+        \end{itemize}
+  \item Természetes spline
+        \begin{itemize}
+          \item A Spline az angol neve annak az acélszalag vonalzónak, amellyel
+                a műszaki rajzolók előre kitűzött pontokon keresztül
+                görbevonalat rajzolnak.
+          \item Az így keletkező függvény folytonos, törésmentes görbülettel
+                rendelkezik és kétszer deriválható.
+        \end{itemize}
+\end{itemize}
+
+\subsection{Regresszió}
+
+\texttt{\cmdkey{} + f} -- Nincs találat \texttt{:(}
 
 \end{document}

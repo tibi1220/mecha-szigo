@@ -5,7 +5,35 @@
 \section{Programozás V}
 
 \begin{fulltheorem}
-	Felügyelet nélküli tanulás, K-means klaszterezés.
+  Felügyelet nélküli tanulás, K-means klaszterezés.
 \end{fulltheorem}
+
+\subsection{Klaszterezés}
+% http://www.cs.bme.hu/~csima/dm14/cluster.pdf
+
+A \kix{klaszterezés} célja valamilyen dolgokat úgy csoportokba osztani, hogy a
+hasonlók kerüljenek egy csoportba. A \kix{felügyelet nélküli tanulás} során
+is használhatunk klaszterezést. Ilyen tanulás során nincsen címkézés, amely
+segítene a besorolásban, az attribútumértékek egymáshoz való viszonya alapján
+kell csoportosítani.
+
+\subsection{K-means klaszterezés}
+
+A \kix{K-means klaszterezés} egy particionális (minden dolog egy klaszterbe
+kerülhet), prototípus-alapú (minden klaszternek van egy reprezentánsa, minden
+dolog abba a klaszterbe kerül, aminek a reprezentánsához a legközelebb van)
+
+\paragraph{K-means algoritmus}
+
+Adott egy $K$ szám, ennyi csoportot szeretnénk létrehozni.
+\begin{enumerate}
+  \item $K$ darab kezdő centroid (átlag, középpont) kiválasztása az $n$
+        dimenziós térből (nem feltétlenül adatpont).
+  \item Minden adatpont hozzácsatolása a hozzá legközelebb álló centroidhoz.
+  \item Kapott csoportokra újraszámoljuk a centroidokat.
+  \item (2)-es és (3)-as pont ismétlése, amíg már nincsen további változás
+\end{enumerate}
+
+
 
 \end{document}

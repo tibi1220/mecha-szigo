@@ -2,10 +2,151 @@
 
 \begin{document}
 
-\section{Numerikus módszerek IV}
+\section{Numerikus módszerek V}
 
 \begin{fulltheorem}
-	Numerikus integrálás.
+  Numerikus integrálás.
 \end{fulltheorem}
+
+Nincsen valós differenciáló tag, viszont integráló létezik.
+A differenciálegyenletek megoldása során is integrálunk.
+A differenciálás erőltetése kiegyszerűsödéssel áll bosszút.
+($\Delta t$ nagyságrendileg eltér a számítandó értékektől)
+
+Az határozott integrál matematikai definíciója:
+\[
+  \int_a^b f(t) \, \dd t = F(b) - F(a)
+\]
+
+A primitív függvény azonban nem mindig áll a rendelkezésünkre, vagy mert a
+matematikai ismereteink nem elégségesek a meghatározásához, vagy mert nem lehet
+előállítani. Ekkor numerikus módszereket alkalmazunk.
+
+\subsection{Numerikus integrálás során fellépő hibafajták}
+
+\paragraph{Kerekítési hiba}
+
+A számítógépes számábrázolásból adódó hiba.
+
+\paragraph{Csonkítási hiba}
+
+A függvény közelítéséből adódóan.
+
+\paragraph{Kumulatív hiba}
+
+Halmozott hiba, a kerekítési és csonkítási hiba eredője.
+Amennyiben ez a hibatípus nem korlátos, akkor az integrálási folyamat
+nem lesz stabil.
+
+\paragraph{A hiba felírása}
+\begin{enumerate}
+  \item Hiba felírása.
+  \item A függvényt Taylor-sorral közelítjük.
+  \item $H$-ra rendezve polinomsort kapunk
+  \item Az első $n$ elemet 0-nak vesszük, lineáris egyenletrendszert kapunk.
+  \item Megoldjuk az egyenletrendszert.
+  \item $H$ maradékának felhasználásával hibabecslést készítünk.
+\end{enumerate}
+\begin{gather*}
+  H
+  = \int_{t_0}^{t_m} y(t) \, \dd t
+  - \sum_{i=0}^n c_i y(t_i)
+  \\
+  T(t)
+  = \sum_{i=0}^\infty \frac{(t - t_k)^i}{i!}y^{(i)}(t_k)
+\end{gather*}
+
+\subsection{Zárt Newton-Cotes formulák}
+
+A \kix{Newton-Cotes} formulák az intervallum belső pontjait használják
+fel a közelítéshez.
+
+\paragraph{Trapéz}
+\[
+  y_{n + 1}
+  = \frac{y_n + y_{n + 1}}{2} \Delta t
+  - \frac{\ddot y(\xi)}{12} \Delta t^3
+\]
+
+\paragraph{Simson}
+\[
+  y_{n + 1}
+  = \frac{y_n +  4 y_{n + 1/2} + y_{n + 1}}{6} \Delta t
+  - \frac{\ddddot y(\xi)}{90} \Delta t^5
+\]
+
+\subsection{Adams-Bashforth formulák}
+
+Az \kix{Adams-Bashforth} formulák az intervallum előtti pontokat használják
+fel a közelítéshez.
+
+\paragraph{Téglány (AB1)}
+
+A \kix{téglány} a legegyszerűbb integrálközelítő módszer. Mivel egylépéses ezért
+önindító. Az első lépésben szokás használni, utána az eredménnyel magasabbrendű
+közelítő módszereket alkalmazunk.
+\[
+  y_{n + 1}
+  = y_n + \dot y_n \Delta t
+  + \frac{\dot y(\xi)}{2} \Delta t^2
+\]
+\begin{figure}[H]
+  \centering
+  \includegraphics{../../static/tex/build/AB1.pdf}
+  \caption{Integrálközelítés téglánnyal}
+  \label{fig:AB1}
+\end{figure}
+
+\paragraph{Trapéz (AB2)}
+
+Az AB2 \kix{trapéz formula} a téglánnyal hasonlóan csak az előző értékekre épít,
+ezért \kix{prediktor}[nak] is szokás nevezni, hiszen az ilyen formulák jósolnak.
+\[
+  y_{n+1}
+  = \frac{3 \dot y_n - \dot y_{n-1}}{2} \Delta t
+  + \frac{5 \ddot y(\xi)}{12} \Delta t^3
+\]
+Megfigyelhetjük, hogy a formula tulajdonképpen egy \kix{súlyozott átlag}.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics{../../static/tex/build/AB2.pdf}
+  \caption{Integrálközelítés trapézzal (AB2)}
+  \label{fig:AB2}
+\end{figure}
+
+\subsection{Adams-Multon formulák}
+
+Az \kix{Adams-Multon} formulák az intervallum vége és az az előtti pontokat
+használják fel a közelítéshez.
+
+\paragraph{Téglány}
+\[
+  y_{n + 1}
+  = y_{n + 1} + \dot y_n \Delta t
+  - \frac{\dot y(\xi)}{2} \Delta t^2
+\]
+
+\paragraph{Trapéz (AM2)}
+\[
+  y_{n + 1}
+  = \frac{y_n + y_{n + 1}}{2} \Delta t
+  - \frac{\ddot y(\xi)}{12} \Delta t^3
+\]
+
+\begin{figure}[H]
+  \centering
+  \includegraphics{../../static/tex/build/AM2.pdf}
+  \caption{Integrálközelítés trapézzal (AM2)}
+  \label{fig:AM2}
+\end{figure}
+
+
+\subsection{Runge-Kutta formulák}
+
+A \kix{Runge-Kutta} formulák csak a $\Delta t$ nagyságú intervallumokat
+használnak, viszont ezek belső pontjaira is szükségük van. A függvény
+közelítésére Taylor-polinomokat használnak. Mivel csak egy intervallumot
+használnak, ezért egylépéses módszernek is nevezik őket.
 
 \end{document}

@@ -2,10 +2,137 @@
 
 \begin{document}
 
-\section{Numerikus módszerek II}
+\section{Numerikus módszerek III}
 
 \begin{fulltheorem}
-	Gyökkeresés módszerei: polinomok, egyéb egyenletek, egyenletrendszerek esetén.
+  Gyökkeresés módszerei: polinomok, egyéb egyenletek, egyenletrendszerek esetén.
 \end{fulltheorem}
+
+\subsection{Intervallum keresés}
+
+Bolzano-tétel: $!f: \mathbb R \rightarrow \mathbb R$ folytonos függvény.
+Ha $f(a) f(b) < 0$, akkor $\exists \xi \in (a;b)$, hogy $f(\xi) = 0$,
+vagyis a függvénynek létezik ezen intervallumon zérushelye.
+
+\subsection{Általános algoritmusok}
+
+\paragraph{Intervallum-felezés}
+
+Talán ez a legegyszerűbb módszer. Előnye, hogy mindig használható, a gyök
+tetszőleges pontosságú megközelítésére biztosít lehetőséget. Hátránya a
+közelítés sebessége.
+\begin{gather*}
+  \xi_i = \frac{a_i + b_i}{2}
+  \\
+  a_{i+1} = \begin{cases}
+    a_i \text{, ha } f(a_i)f(\xi_i) < 0   \\
+    \xi_i \text{, ha } f(a_i)f(\xi_i) > 0 \\
+  \end{cases}
+  \qquad
+  b_{i+1} = \begin{cases}
+    b_i \text{, ha } f(b_i)f(\xi_i) > 0   \\
+    \xi_i \text{, ha } f(b_i)f(\xi_i) < 0 \\
+  \end{cases}
+\end{gather*}
+
+\paragraph{Húrmódszer}
+
+Az algoritmus lépései sokban hasonlítanak az előzőekben leírt
+intervallumfelezéshez, csak a $\xi_i$ pontok meghatározása történik másként.
+Húzzunk egyenest, amely átmegy a $(a_i; f(a_i))$ és $(b_i; f(b_i))$
+pontokon. $\xi_i$ pont legyen ennek az egyenesnek az $x$ tengelymetszete.
+\[
+  \xi_i = b_i - f(b_i) \frac{b_i - a_i}{f(b_i) - f(a_i)}
+\]
+Az új intervallumok meghatározása az előzőekhez analóg módon történik.
+
+\paragraph{Iteráció}
+
+Ez a módszer nem mindig konvergens, de könnyen használható és gyorsan eredményt
+ad. Az egyenlet $f(x) = 0$ alakban adott, a gyököket továbbra is az $(a; b)$
+intervallumon keressük.
+\begin{gather*}
+  f(x) + x = x \\
+  g(x):= f(x) + x = x \\
+  x_1 = g(x_0) \\
+  \vdots \\
+  x_n = g(x_{n-1}) \\
+  \vdots \\
+  x_\infty = x_\infty + f(x_\infty) \\
+  f(x_\infty) = 0
+\end{gather*}
+
+A konvergencia feltétele, hogy $|g'(x)| < 1$. $f(x) = 1 - \sin x$ esetén
+divergens.
+
+Az iteráció gyorsítható az intervallumban monoton növekvő függvény esetén.
+\begin{gather*}
+  f(x) = 0 \; \Rightarrow \alpha f(x) = 0 \\
+  f'(x) \; \Rightarrow \alpha f'(x) \\
+  |g'(x)| < 1 \; \Rightarrow |f'(x) + 1| < 1 \\
+  |f'(\xi)| = \max \left\{ f'(x); x \in (a;b) \right\} \\
+  M := f'(x) \quad \alpha := -1/m \\
+  \left| -\frac{f'(x)}{M} + 1 \right| < 1 \text{ mindig teljesül} \\
+  x_n = x_{n - 1} - \frac{f(x_{n-1})}{M}
+\end{gather*}
+
+\paragraph{Érintőmódszer (Newton--Rapson)}
+
+Vegyünk egy tetszőleges $x_0 \in (a; b)$ pontot az intervallumon és húzzuk
+be az érintőjét. Az érintő $x$ tengelymetszete lesz a következő pont,
+melynek a meredekségével iterálunk.
+\[
+  y - f(x_n) = f'(x_n)(x - x_n)
+  \quad \rightarrow \quad x_n = x_{n-1} - \frac{f(x_{n-1})}{f'(x_{n-1})}
+\]
+
+Probléma lehet a körbejárás, illetve felléphet az is, hogy kilépünk az
+intervallumból.
+
+\subsection{Polinomok}
+
+Mivel egy polinomot is kezelhetünk függvényként, az előző fejezetben közölt
+gyökkereső eljárások itt is alkalmazhatók, viszont a polinomoknak általában
+nem csak egy gyökre van szükségünk az adott környezetben, hanem az összesre.
+
+\paragraph{Horner-séma}
+
+Az egyik leggyakoribb tevékenység, amit egy polinommal el kell végeznünk,
+hogy meghatározzuk egy adott helyen a helyettesítési értékét. A Horner-séma
+ennek a számításnak a műveletek számára optimalizált eljárása, azaz itt kell a
+legkevesebbet számolnunk. Gyakorlatilag csak egy átrendezésről van szó.
+Legyen a polinom:
+\begin{gather*}
+  p(x)
+  = a_n x^n
+  + a_{n-1} x^{n-1}
+  + a_{n-2} x^{n-2}
+  + \dots
+  + a_1 x
+  + a_0
+  = 0
+  \\
+  p(x)
+  =
+  a_0 + x (
+  a_1 + x (
+  a_2 + \dots + (
+  a_{n-2} + x (
+  a_{n-1} + x a_n
+  )) \dots ))
+\end{gather*}
+
+\paragraph{A gyököket tartalmazó intervallum}
+
+Az alábbi egyenlőtlenség mindig teljesül:
+\begin{gather*}
+  A = \max{|a_i|; i = \{0;1;\dots;n-1\}} \\
+  B = \max{|a_i|; i = \{1;2;\dots;n\}} \\
+  \frac{1}{1 + B / |a_0|} < |x_i| < 1 + \frac{A}{|a_n|}
+\end{gather*}
+
+\subsection{Egyenletrendszerek}
+
+Későbbi tételben tárgyalva van. (Mátrixok)
 
 \end{document}

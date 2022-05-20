@@ -2,10 +2,76 @@
 
 \begin{document}
 
-\section{Numerikus módszerek III}
+\section{Numerikus módszerek IV}
 
 \begin{fulltheorem}
-	Numerikus deriválás alapjai.
+  Numerikus deriválás alapjai.
 \end{fulltheorem}
 
+A deriválás matematikai definíciója:
+\[
+  f'(a)
+  = \lim_{h \rightarrow 0} \frac{f(a + h) - f(a)}{h}
+  = \lim_{h \rightarrow 0} \frac{f(a) - f(a - h)}{h}
+\]
+
+Ezt a legkönnyebben a differenciahányadossal közelíthetjük:
+\[
+  f_i' \approx \frac{f_{i + 1} - f_i}{\Delta t}
+  \qquad
+  f_i' \approx \frac{f_i - f_{i - 1}}{\Delta t}
+\]
+
+Gyakran nem ismerjük a függvényt, viszont a mérés segítségével egy másodfokú
+polinommal tudjuk közelíteni:
+\[
+  f(x) = ax^2 + bx + c
+\]
+
+Ekkor a deriváltat az alábbi összefüggéssel közelíthetjük:
+\[
+  f_i' = \frac{f_{i+1} - f_{i-1}}{2 \Delta t}
+\]
+
+Taylor-sorok alapján is előállíthatóak formulák:
+\[
+  f(x)
+  = \sum_{k=0}^{n - 1} \frac{f^{(i)}(x_0)}{k!} (x - x_0)^k
+  = f(a)
+  + f'(a) (x - x_k)
+  + \frac{f''(a)}{2} (x - x_k)^2
+  + \ldots
+  + \frac{f^{(n)}(\xi)}{n!} (x - x_k)^n
+\]
+
+Másodrendű derivált a maradéktagok elhagyásával:
+\[
+  \begin{rcases}
+    f_{i-1} = f_i + f'(t_{i-1} - t_{i}) + \frac{f''_i}{2}(t_{i-1} - t_i) \\
+    f_{i+1} = f_i + f'(t_{i+1} - t_{i}) + \frac{f''_i}{2}(t_{i+1} - t_i)
+  \end{rcases} \Rightarrow \;
+  f_{i+1} + f_{i-1} \approx 2 f_i + f''_i \Delta t^2
+\]\[
+  f''_i = \frac{f_{i+1} - 2 f_{i} + f_{i-1}}{\Delta t^2}
+\]
+
+Ekkor a hibatag:
+\[
+  \begin{rcases}
+    f_{i-1}
+    = f_i
+    - f_i' \Delta t
+    + \frac{f_i''}{2} \Delta t^2
+    - \frac{f_i'''}{6} \Delta t^3
+    + \frac{f_i''''(\zeta)}{24} \Delta t^4
+    \\
+    f_{i+1}
+    = f_i
+    + f_i' \Delta t
+    + \frac{f_i''}{2} \Delta t^2
+    + \frac{f_i'''}{6} \Delta t^3
+    + \frac{f_i''''(\xi)}{24} \Delta t^4
+  \end{rcases} \Rightarrow \;
+  H(\eta \in (\zeta ; \xi)) = \frac{-f''''(\eta)}{12} \Delta t^2
+\]
 \end{document}

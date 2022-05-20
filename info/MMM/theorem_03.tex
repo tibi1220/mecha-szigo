@@ -5,7 +5,201 @@
 \section{Grafika III}
 
 \begin{fulltheorem}
-	Láthatóság, árnyalás, megvilágítás, színmodellek, anyagmodellek, konvolúció, élkeresés
+  Láthatóság, árnyalás, megvilágítás, színmodellek, anyagmodellek, konvolúció, élkeresés
 \end{fulltheorem}
+
+\subsection{Megjelenítési algoritmusok -- láthatóság}
+
+\subsubsection{Deapth Sort algoritmus}
+
+A mélységi rendezés (\kix{Depth Sort}) algoritmus lényege, hogy rendezzük a
+képernyőtől (leképezési sík) való távolságuk szerinti sorrendbe a kirajzolandó
+objektumok felületét alkotó háromszögeket, majd hátulról előre rajzoljuk
+ki őket. Így amit később rajzolunk ki az átfesti (takarja) a hátrébb lévő elemeket.
+
+A háromszögekkel közelített felület elemeit a megjelenítési síktól mért
+legtávolabbi pontjuk távolsága szerint rendezzük sorba. A sorrend megfelelő, ha:
+\begin{enumerate}
+  \item Ha $\triangle_A$ legtávolabbi pontja közelebb van a síkhoz, mint
+        $\triangle_B$ legközelebbi pontja.
+  \item A háromszögek befoglaló téglalapjai nem metszik egymást.
+  \item Az $\triangle_A$ vetített képe nem metszi $\triangle_B$ vetített képét.
+  \item a $\triangle_B$ mindhárom sarokpontja az $\triangle_A$ síkja mögött
+        helyezkedik el.
+\end{enumerate}
+Ha ezek egyike sem áll fenn, akkor az egyik háromszöget két részre kell vágni,
+és folytatni a módszert egészen addig, míg az összes háromszög sorbarendezhető.
+
+\subsubsection{Area subdivision}
+
+Az területfelosztásos (\kix{Area Subdivision}) technika lényege az, hogy a
+\kix{Viewport}[ot] négy egyenlő részre bontjuk. A levetített háromszögek
+vizsgálata során megállapíthatjuk, hogy készen vagyunk a takarással, ha:
+\begin{enumerate}
+  \item a részt egyetlen háromszög foglalja be,
+  \item egyetlen háromszög sincs a negyedben,
+  \item a negyed egyetlen háromszöget metsz, vagy foglal magában,
+  \item valamelyik háromszögről tudjuk, hogy takar.
+\end{enumerate}
+
+\subsubsection{Z-puffer}
+
+Manapság a takart részek eltávolításának legelterjedtebb módszere a
+\kix{Z-puffer} algoritmus. A grafikus kártyákba be van építve.
+Az algoritmus lényege, hogy minden képernyőpixelhez a Z-puffer tartalmaz
+egy mélységi adatot. Ha az aktuális pont távolsága kisebb mint a Z-pufferben
+tárolt érték, akkor a pont kifestődik, és a Z-pufferbe a z-koordináta lesz az
+új, aktuális érték.
+
+\subsection{Árnyalás}
+
+A különböző anyagok tükrözik, szétszórva visszaverik, megtörik vagy elnyelik a
+fénysugarakat. Az anyagok ilyen viselkedését modellezhetjük a kétirányú
+visszaverődés-eloszlás függvénnyel. Ennek angol rövidítése a \kix{BRDF}.
+
+\subsection{Megvilágítás}
+
+\subsubsection{Fényforrások}
+
+\begin{itemize}
+  \item Pontszerű fényforrás
+  \item Irányított fényforrás (iránya az intenzitással azonos)
+  \item Ambiens fényforrás (állandó intenzitású)
+  \item Szpotlámpa (határkúp, iránytól függő intenzitás)
+  \item Égboltfény (irány- és tárgyfüggő is lehet)
+\end{itemize}
+
+\subsection{Színmodellek}
+
+\begin{itemize}
+  \item \kix{RGB} -- Red, Green, Blue
+  \item \kix{CMY} -- Cyan, Magenta, Yellow
+  \item \kix{HSL} -- Hue, Saturation, Lightness
+\end{itemize}
+
+\subsection{Anyagmodellek}
+
+\paragraph*{Diffúz anyagok}
+A beérkező, adott hullámhosszú fénysugár esetén minden irányban egyforma
+fényáram távozik. Az, hogy mi mennyire látjuk a tárgyat világosnak, az csak
+attól függ, hogy honnan világítjuk meg. Ilyen anyag pl. a fal.
+A Lambert-törvény írja le a diffúz felületek megvilágítás hatására történő
+viselkedését. A diffúz felületek BRDF kifejezése adott hullámhosszon csak a
+fény hullámhosszától függ.
+\begin{figure}[H]
+  \centering
+  \includegraphics[]{../../static/tex/build/model-diff.pdf}
+  \caption{A diffúz anyagmodell}
+  \label{fig:model-diff}
+\end{figure}
+
+\paragraph*{Reflexív anyagok}
+Ha egy tükröt egy fénysugárral megvilágítunk, a tükör azt a fénysugarat úgy
+veri vissza, hogy a visszavert sugár benne fekszik a beeső fény és a beesési
+merőleges által meghatározott síkban és ugyanakkora szöget zár be a beesési
+merőlegessel, mint a bejövő fénysugár.
+\begin{figure}[H]
+  \centering
+  \includegraphics[]{../../static/tex/build/model-reflex.pdf}
+  \caption{A reflexív anyagmodell}
+  \label{fig:model-reflex}
+\end{figure}
+
+\paragraph*{Ideális fénytörés}
+A fénytörésről szóló Snellius-Descartes-törvény szerint a beeső fénysugár,
+a beesési merőleges és a megtört fénysugár egy síkban helyzkednek el.
+A merőlegesen beeső fénysugár nem törik meg.
+Végül a beesési szög szinuszának és a törési szög szinuszának aránya a
+közegekben mért terjedési sebességek arányával egyenlő, ami megegyezik a két
+közeg relatív törésmutatójával.
+\begin{figure}[H]
+  \centering
+  \includegraphics[]{../../static/tex/build/model-break.pdf}
+  \caption{Az ideális törés modellje}
+  \label{fig:model-break}
+\end{figure}
+
+\paragraph*{Spekuláris visszaverődés}
+A fényvisszaverő anyagok általában sem tisztán diffúz módon, sem tisztán
+reflexív módon verik vissza a fényt, hanem a kettő között valahogy. Az ilyen
+felületeket spekuláris felületeknek nevezzük, és a visszaverődés leírása
+Phong nevéhez köthető. Phong modellje szerint a visszaverődés nagy része az
+elméleti visszaverődés irányában és annak környezetében történik.
+\begin{figure}[H]
+  \centering
+  \includegraphics[]{../../static/tex/build/model-phong.pdf}
+  \caption{A Phong modell}
+  \label{fig:model-phong}
+\end{figure}
+
+
+\subsection{Konvolúció}
+
+A képpont és környezete világosságának súlyozott összege.
+\[
+  q(k; l)
+  = t \otimes g(k; l)
+  = \sum_{r=-R}^R \sum_{s=-S}^S t(r; s) \cdot g(k+r; l+s)
+\]
+
+\begin{center}
+  \begin{tabular}{c c l}
+    $g$ & -- & a képpont eredeti világossága
+    \\
+    $q$ & -- & a képpont új világossága
+    \\
+    $t$ & -- & a súlyok, rendszerint páratlanszámú sort és oszlopot tartalmaz
+  \end{tabular}
+\end{center}
+
+Tulajdonságai: szimmetrikus, asszociatív.
+
+Az \kix{elmosás} konvolúciós mátrixok segítségével valósítható meg.
+($\rmat K$ -- blur, $\rmat G$ -- Gauss blur)
+\[
+  \rmat K = \frac{1}{\mathrm{width} \cdot \mathrm{height}}
+  \begin{bmatrix}
+    1      & 1      & 1      & \cdots & 1      \\
+    1      & 1      & 1      & \cdots & 1      \\
+    1      & 1      & 1      & \cdots & 1      \\
+    \vdots & \vdots & \vdots & \ddots & \vdots \\
+    1      & 1      & 1      & \cdots & 1
+  \end{bmatrix}
+  \qquad
+  \rmat G = \frac{1}{159}
+  \begin{bmatrix}
+    2 & 4  & 5  & 4  & 2 \\
+    4 & 9  & 12 & 9  & 4 \\
+    5 & 12 & 15 & 12 & 9 \\
+    4 & 9  & 12 & 9  & 4 \\
+    2 & 4  & 5  & 4  & 2
+  \end{bmatrix}
+\]
+
+\subsection{Élkeresés}
+
+\paragraph{Élkeresés differencia kereséssel -- differential}
+
+Vízszintes és függőleges irányú változásokat a szürkeségi differencia képzésével
+emelhetjük ki.
+
+\paragraph{Másodrendű differencia -- gradient}
+
+Vízszintes és függőleges irányú változásokat (másodrendű) parciális differencia
+képzésével emelhetjük ki.
+
+\paragraph{Élkeresés a változás sebessége alapján -- Sobel}
+
+A változás sebessége a vízszintes és a függőleges irányban áltagoló
+differenciál operátorral.
+
+\paragraph{Élkeresés a változás gyorsulása alapján -- Laplace}
+
+A Laplace operátort használja élkeresésre. ($\Div \Grad f$)
+
+\paragraph{Élkeresés a Canny módszerével}
+
+Gauss zajszűrés, szürkeárnyalatos kép, vízszintes és függőleges gradiens
+komponensek, közeli nem maximumok eltűntetése, gradiens küszöb.
 
 \end{document}

@@ -5,7 +5,94 @@
 \section{Programozás IV}
 
 \begin{fulltheorem}
-	Mesterséges neurális hálózatok, felügyelt tanulás.
+  Mesterséges neurális hálózatok, felügyelt tanulás.
 \end{fulltheorem}
+
+\subsection{Mesterséges neurális hálózat}
+
+A \kix{mesterséges neurális hálózat}[ok] (\kix{ANN}) adat feldolgozó rendszerek,
+melyek nagy számú egyszerű, összekapcsolt feldolgozó elemek (mesterséges
+neuronok) architektúrája, melyet az agy komplex viselkedésre képes szerkezete
+inspirált.
+Az \kix{ANN}-ben a neuronok rétegek sorozatába vannak szervezve teljes vagy
+részleges kapcsolattal az egyes rétegek között.
+Az egyszerűség kedvéért, általában az ugyanabban a rétegben lévő neuronok
+aktivációs függvénye megegyezik.
+
+A mesterséges neurális hálókat sűrűségük szerint 2 csoportba sorolhatjuk be:
+\begin{itemize}
+  \item \kix{Tejlesen kapcsolt ANN}
+        \begin{itemize}
+          \item Egy adott réteg összes neuronja kapcsolatban áll a következő
+                réteg összes neuronjával.
+          \item Előnye: egyszerű felépítés,
+                lehetőségeket maximálisan kihasználja.
+          \item Hátránya: nagy memória és számítási igény.
+        \end{itemize}
+  \item \kix{Részlegesen kapcsolt ANN}
+        \begin{itemize}
+          \item Egy adott réteg összes neuronja a következő rétegből csak
+                néhány neuronnal áll kapcsolatban.
+        \end{itemize}
+\end{itemize}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[scale=1]{../../static/tex/build/ann-fully-connected.pdf}
+  \caption{Teljesen kapcsolt ANN}
+  \label{fig:ann-fc}
+\end{figure}
+
+
+Jelfolyam szerinti csoportosítás:
+\begin{enumerate}
+  \item \kix{Előrecsatolt}
+        \begin{itemize}
+          \item Időben független adatok gyors feldolgozása.
+          \item Időben függő adatok nem valós idejű pontos feldolgozása.
+        \end{itemize}
+  \item \kix{Celluláris}
+        \begin{itemize}
+          \item Csak a szomszédos egységek között van kapcsolat.
+          \item Főleg képfeldolgozásra használatos.
+        \end{itemize}
+  \item \kix{Visszacsatolt}
+        \begin{itemize}
+          \item Időben függő adatok gyors feldolgozása.
+        \end{itemize}
+\end{enumerate}
+
+\begin{figure}[H]
+  \centering
+  \hfill
+  \begin{subfigure}[c]{.35\textwidth}
+    \centering
+    \includegraphics[scale=.6]{../../static/tex/build/ann-forward.pdf}
+    \subcaption{1 -- előrecsatolt}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[c]{.25\textwidth}
+    \centering
+    \includegraphics[scale=.6]{../../static/tex/build/ann-cellular.pdf}
+    \subcaption{2 -- celluláris}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[c]{.35\textwidth}
+    \centering
+    \includegraphics[scale=.6]{../../static/tex/build/ann-backward.pdf}
+    \subcaption{3 -- visszacsatolt}
+  \end{subfigure}
+  \hfill
+  \caption{Jelfolyam szerinti csoportosítás}
+  \label{fig:ann-flow}
+\end{figure}
+
+\subsection{Teljesen kapcsolt ANN tanítása}
+
+Egy ciklusban $P$ számú bemenetet és kimenetet vizsgálunk.
+A kimenet és az elvárt kimeneter összehasonlítjuk, és definiálunk egy
+hibafüggvényt. A hiba visszaterjesztését rétegről rétegre végezzük visszafelé
+haladva kihasználva, hogy a segédparamétert iteratívan tudjuk számolni.
+
 
 \end{document}

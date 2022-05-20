@@ -5,7 +5,131 @@
 \section{Grafika I}
 
 \begin{fulltheorem}
-	Grafikusadattárolás (vektor, raszter)
+  Grafikusadattárolás (vektor, raszter)
 \end{fulltheorem}
+
+\subsection{Vektoros adattárolás}
+
+\kix{Vektoros adattárolás}[] esetén az adatokat geometriai alakzatok segítsével
+tároljuk (pl. egyenes, kör, négyszög, stb.) Ilyen adattárolási stratégiát használnak
+példáal a számítógépes \kix{betűtípus}[ok], (\cix{TTF} -- True Type Font)
+melyet az Apple Inc. fejlesztett ki az 1980-as évek elején.
+
+A geometriai alakzatokat többféle módszerrel tárolhatjuk:
+
+\begin{enumerate}
+  \item \kix{Lineáris lista}
+        \begin{table}[H]
+          \centering
+          \begin{tabular}{| c | c | c |}
+            \hline
+            Sorszám & $x$ & $y$
+            \\ \hline \hline
+            1       & 0   & 0
+            \\ \hline
+            2       & 40  & 0
+            \\ \hline
+            3       & 40  & 20
+            \\ \hline
+            4       & 0   & 20
+            \\ \hline
+            5       & 0   & 0
+            \\ \hline
+          \end{tabular}
+          \caption{Téglalap reprezentációja lineáris listával}
+          \label{table:rec-linlist}
+        \end{table}
+
+  \item \kix{Láncolt lista}
+        \begin{table}[H]
+          \centering
+          \begin{tabular}{| c | c | c | c |}
+            \hline
+            Sorszám & $x$ & $y$ & Következő csúcs
+            \\ \hline \hline
+            1       & 0   & 0   & 2
+            \\ \hline
+            2       & 40  & 0   & 3
+            \\ \hline
+            3       & 40  & 20  & 4
+            \\ \hline
+            4       & 0   & 20  & 5
+            \\ \hline
+            5       & 0   & 0   & 0
+            \\ \hline
+          \end{tabular}
+          \caption{Téglalap reprezentációja láncolt listával}
+          \label{table:rec-forwardlist}
+        \end{table}
+
+  \item \kix{Keresztláncolt lista}
+        \begin{table}[H]
+          \centering
+          \begin{tabular}{| c | c | c | c |}
+            \hline
+            Sorszám & $x$ & $y$ & Következő csúcs
+            \\ \hline \hline
+            1       & 0   & 0   & 2
+            \\ \hline
+            2       & 40  & 0   & 3
+            \\ \hline
+            3       & 40  & 20  & 4
+            \\ \hline
+            4       & 0   & 20  & 0
+            \\ \hline
+          \end{tabular}
+          \hspace{1em}
+          \begin{tabular}{| c | c | c | c |}
+            \hline
+            Sorszám & KP & VP & Következő él
+            \\ \hline \hline
+            1       & 1  & 2  & 2
+            \\ \hline
+            2       & 2  & 3  & 3
+            \\ \hline
+            3       & 3  & 4  & 4
+            \\ \hline
+            4       & 4  & 0  & 0
+            \\ \hline
+          \end{tabular}
+          \caption{Téglalap reprezentációja keresztláncolt listával}
+          \label{table:rec-crosslist}
+        \end{table}
+\end{enumerate}
+
+\subsection{Raszteres adattárolás}
+
+A \kix{raszteres adattárolás}[] során  nem geometriai alakzatokat, hanem
+képpontokat tárolunk el. A képontokat \kix{fa} segítségével tárolhatjuk.
+A 2D-s képeket 4-es fákkal, a 3D-s képeket nyolcas fákkal tárolhatjuk.
+
+Raszteres formátumok
+\begin{itemize}
+  \item \cix{JPEG} -- veszteséges tömörítés
+  \item \cix{BPM} -- veszteségmentes tömörítés
+  \item \cix{GIF} -- 256 bites színpalettával rendelkezik
+  \item \cix{PNG} -- tartalmazhat alfa csatornát is
+  \item \cix{RAW} -- adatok minimálisan vannak feldolgozva
+  \item \cix{XCF} -- GIMP saját formátuma
+\end{itemize}
+
+\subsection{Grafikus CAD tárgymodellek}
+
+\begin{enumerate}
+  % noindent
+  \item Pont \\
+        (sorszám, $x$, $y$, $z$, következő)
+  \item Él \\
+        (sorszám, él egyenlete, KP, VP, $z$, következő)
+  \item Felület \\
+        (sorszám, felület egyenlete, határélek, következő)
+  \item Boudary Representation \\
+        (sorszám, felület egyenlete, határélek, $n_x$, $n_y$, $n_z$, következő)
+  \item CSG (Constructive Solid Geometry) \\
+        (alaksajátosság, paraméteres elem, technológia (unió, metszet és különbség))
+  \item STL (Standard Tessallation Language) \\
+        (csúcsok, normális)
+  % indent
+\end{enumerate}
 
 \end{document}

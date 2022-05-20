@@ -5,7 +5,55 @@
 \section{Programozás VI}
 
 \begin{fulltheorem}
-	Evolúciós algoritmusok alapjai, genetikus algoritmusok.
+  Evolúciós algoritmusok alapjai, genetikus algoritmusok.
 \end{fulltheorem}
+
+\subsection{Evolúciós algoritmusok}
+
+Az \kix{evolúciós algoritmus}[ok] alapelve a megoldások egy populációján
+történő keresés, melyet a biológiából megismert törvényszerűségek vezérelnek:
+\begin{itemize}
+  \item A populáció egyedei a feladat egy-egy megoldását jelentik.
+  \item A populáció fejlődik, egyre jobb egyedeket kapunk.
+\end{itemize}
+
+\subsubsection{Alapfogalmak}
+
+\begin{itemize}
+  \item \kw{Gén} -- Funkcionális entitás, az egyed egy tulajdonságát kódolja.
+        (pl. hajszín)
+  \item \kw{Allél} -- A gén értéke. (pl. szőke)
+  \item \kw{Egyed} -- kromoszóma, egy megoldás jelölt a problémára.
+  \item \kw{Genotípus} -- Egy egyed alléljainak egy speciális kombinációja.
+  \item \kw{Fenotípus} -- Az egyed külső-belső tulajdonságainak összessége
+  \item \kw{Locus} -- Egy gén pozíciója a kromoszómán belül
+  \item \kw{Populáció} -- Egyszerre együtt élő egyedek összessége
+\end{itemize}
+
+\subsection{Genetikus algoritmusok}
+\begin{figure}[H]
+  \centering
+  \includegraphics{../../static/tex/build/genetic-algs.pdf}
+  \caption{A genetikus algoritmusok folyamata}
+  \label{fig:genalg}
+\end{figure}
+
+\subsubsection{Az egyedek rangsorolása}
+\begin{itemize}
+  \item \kix{Fitness érték} alapján
+        \begin{itemize}
+          \item Alkalmassági érték --  az egyedeket valamilyen kritérium
+                szerint értékeljük ki, aszerint, hogy mennyire jó megoldást
+                adnak a feladatra.
+          \item Jobb egyednek nagyobb a fitnesz értéke, és nagyobb eséllyel
+                éli túl.
+        \end{itemize}
+  \item Szelekciós módszerek
+        \begin{itemize}
+          \item Minél jobb az egyed, annál nagyobb az esély a kiválasztására.
+          \item Rulett kerék szelekció: a gurításnál a nagyobb fitnesz értékű
+                egyedek nagyobb eséllyel választódnak ki.
+        \end{itemize}
+\end{itemize}
 
 \end{document}

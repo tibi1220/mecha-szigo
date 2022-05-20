@@ -5,7 +5,133 @@
 \section{Grafika II}
 
 \begin{fulltheorem}
-	Képszintézis, axonometriák
+  Képszintézis, axonometriák
 \end{fulltheorem}
+
+\subsection{Axonometriák}
+
+Az \kix{axonometria} párhozamos sugarakkal való vetítést jelent.
+Az $xyz$ 3D-s koordináta\-renszerben lévő pontok párhozamosan vetített
+képét berajzoljuk a $\xi \eta$ kordináta\-rendszerű síkbeli lapra.
+Az új pontok koordinátái az alábbi egyenletekkel állapíthatóak meg:
+\begin{alignat*}{9}
+   & \xi  &  & = &  & - x \; q_x \cos \alpha + y \; q_y \cos \beta + z \; q_z \sin \gamma \\
+   & \eta &  & = &  & - x \; q_x \sin \alpha - y \; q_y \sin \beta + z \; q_z \cos \gamma
+\end{alignat*}
+
+\subsubsection{Izometrikus axonometria}
+
+Az \kix{izometrikus axonometria} egy olyan speciális eset, ahol $xyz$
+koordináta\-rendszerben a tengelyek egymással $120^\circ$-ot zárnak be
+egymással, valamint $z$ tengely $\eta$ tengellyel esik egybe. Ekkor a
+paraméterek az összefüggésben:
+\[
+  \alpha = \beta = 30^\circ
+  \quad
+  \gamma = 0^\circ
+  \quad
+  q_x = q_y = q_z = 1
+\]
+\begin{figure}[H]
+  \centering
+  \begin{tikzpicture}[very thick]
+    \coordinate (O) at (0,0);
+
+    \draw[ultra thick, -to, yellow!50!black]
+    (0,-1) -- ++(0,3.5) coordinate(eta) node[above right, black] {$\eta$};
+    \draw[ultra thick, -to, yellow!50!black]
+    (-2.5,0) coordinate (nxi) -- ++(5,0) coordinate(xi) node[above right, black] {$\xi$};
+
+    \foreach \i/\c/\l in {210/x/above left, 330/y/above right, 90/z/below right}{
+        \draw[-to, cyan!50!black] (\i:-.33) -- ++(\i:2.5)
+        coordinate(\c) node[black, \l] {$\c$};
+      }
+    \draw pic[
+        draw=red!50!black,
+        angle radius=1.2cm,
+        "$\beta$",
+        angle eccentricity=.75
+      ]{angle=y--O--xi};
+    \draw pic[
+        draw=red!50!black,
+        angle radius=1.2cm,
+        "$\alpha$",
+        angle eccentricity=.75
+      ]{angle=nxi--O--x};
+  \end{tikzpicture}
+  \caption{Az izometrikus axonometria}
+  \label{fig:isometric}
+\end{figure}
+
+\subsubsection{Cavalier axonometria}
+
+Az \kix{Cavalier axonometria} esetén $y$ tengely $\xi$ tengellyel, $z$ tengely
+pedig $\eta$ tengellyel esik egybe. $x$ tengely a másik kettővel $135^\circ$-ot
+zár be.Ekkor a paraméterek az összefüggésben:
+\[
+  \alpha = 45^\circ
+  \quad
+  \beta = \gamma = 0^\circ
+  \quad
+  q_x = 0,5
+  \quad
+  q_y = q_z = 1
+\]
+\begin{figure}[H]
+  \centering
+  \begin{tikzpicture}[very thick]
+    \coordinate (O) at (0,0);
+
+    \draw[ultra thick, -to, yellow!50!black]
+    (0,-1) -- ++(0,3.5) coordinate(eta) node[above right, black] {$\eta$};
+    \draw[ultra thick, -to, yellow!50!black]
+    (-2.5,0) coordinate (nxi) -- ++(5,0) coordinate(xi) node[above right, black] {$\xi$};
+
+    \foreach \i/\c/\l in {225/x/above left, 0/y/above left, 90/z/below right}{
+        \draw[-to, cyan!50!black] (\i:-.33) -- ++(\i:2.5)
+        coordinate(\c) node[black, \l] {$\c$};
+      }
+    \draw pic[
+        draw=red!50!black,
+        angle radius=1.2cm,
+        "$\alpha$",
+        angle eccentricity=.75
+      ]{angle=nxi--O--x};
+  \end{tikzpicture}
+  \caption{Az Cavalier axonometria}
+  \label{fig:cavalier}
+\end{figure}
+
+\subsection{Képszintézis}
+
+A \kix{képszintézis} a testek megvilágításával, árnyalásával foglalkozik.
+
+\subsubsection{Alapfogalmak}
+
+\paragraph*{\kix{Fluxus}}
+Egy adott felületen átáramló energia mennyisége, mértékegysége: Watt.
+A fénysűrűség jellemzésére nem jó, mert annak mértékét a fénysugár és a felület
+normálvektorának iránya, valamint a felület nagysága is befolyásolja.
+\[
+  \varPhi = \int_{A} \rvec v \; \dd \rvec A
+\]
+
+\paragraph*{\kix{Térszög}}
+Az egységgömb felületének része, mértékegysége: szteradián.
+
+\paragraph*{\kix{Látó-térszög}}
+\[
+  \dd \omega
+  = \frac{\dd F}{r^2}
+  = \frac{\dd A \cos \alpha}{r^2}
+\]
+
+\paragraph*{\kix{Intenzitás}}
+Egy felületelemet elhagyó energia a felületelem látható nagyságára és a
+térszögére vonatkoztatva, mértékegysége: $\mathrm{W m^{-2} sr^{-1}}$.
+\[
+  L = \frac{\dd^2 \varPhi}{\cos \alpha \, \dd  A \, \dd \omega}
+  \approx \frac{\varPhi}{A \, \omega \cos \alpha}
+\]
 
 \end{document}

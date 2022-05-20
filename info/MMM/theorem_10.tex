@@ -2,10 +2,182 @@
 
 \begin{document}
 
-\section{Numerikus módszerek V}
+\section{Numerikus módszerek VI}
 
 \begin{fulltheorem}
-	Mátrixokkal kapcsolatos numerikus módszerek.
+  Mátrixokkal kapcsolatos numerikus módszerek.
 \end{fulltheorem}
+
+\subsection{Lineáris egyenletrendszerek}
+
+A \kix{lineáris egyenletrendszer}[ek] általános alakja:
+\[
+  \rmat A \rvec x = \rvec b
+\]
+
+A legismertebb megoldási módszer a Gauss-elimináció. Probléma adódhat, ha
+zérus van a főátlóban, hiszen ekkor a determináns nulla (háromszög esetben),
+illtve ha rosszul kondícionált a mátrix, pl.:
+\begin{gather*}
+  \begin{bmatrix}
+    1     & 1 \\
+    1,001 & 1
+  \end{bmatrix} \begin{bmatrix}
+    x \\ y
+  \end{bmatrix} = \begin{bmatrix}
+    2 \\ 2,001
+  \end{bmatrix} \; \Rightarrow \; \begin{bmatrix}
+    x \\ y
+  \end{bmatrix} = \begin{bmatrix}
+    1 \\ 1
+  \end{bmatrix}
+  \\
+  \begin{bmatrix}
+    1     & 1 \\
+    0,999 & 1
+  \end{bmatrix} \begin{bmatrix}
+    x \\ y
+  \end{bmatrix} = \begin{bmatrix}
+    2 \\ 1,998
+  \end{bmatrix} \; \Rightarrow \; \begin{bmatrix}
+    x \\ y
+  \end{bmatrix} = \begin{bmatrix}
+    0 \\ 2
+  \end{bmatrix}
+\end{gather*}
+
+Megoldhatjuk a problémát iterációval:
+\begin{gather*}
+  \rmat A = \rmat B - \rmat C
+  \quad \rightarrow \quad
+  \rmat B \rvec x = \rmat C \rvec x + \rvec b
+  \\
+  \rvec x
+  = \rmat B^{-1} \rmat C \rvec x + \rmat B^{-1} \rvec b
+  = \rmat D \rvec x + \rvec d
+  \\
+  \text{Iteráció: }
+  \rvec x_{n+1} = \rmat D \rvec x_n + \rvec d
+\end{gather*}
+A módszer csak akkor használható, ha $\rmat B$ invertálható, azaz a normája
+kisebb, mint 1.
+
+\subsection{Determináns}
+
+Háromszög mátrix esetében a \kix{determináns}[] a főátlóban lévő elemek szorzata:
+\[
+  \begin{vmatrix}
+    \lambda_1 & \cdot     & \cdot     \\
+    0         & \lambda_2 & \cdot     \\
+    0         & 0         & \lambda_3
+  \end{vmatrix}
+  = \lambda_1 \, \lambda_2 \, \lambda_3
+\]
+
+\subsection{Mátrixinvertálás}
+
+A klasszikus \kix{mátrixinvertálás}[i] műveletek memóriaigénye ugrásszerűen nő,
+egy $12 \times 12$-es mátrix invertálásának memóriaigénye
+$12! / 2 \cdot 8 = 2\,\mathrm{GB}$.
+
+A Gauss eliminációhoz hasonló módszerrel fogunk invertálni. Itt egységmátrixokhoz
+hasonló transzlációs mátrixokkal fogunk szorozni. Pl.:
+\begin{gather*}
+  \rmat A = \begin{bmatrix}
+    1 & 3 \\ 2 & 5
+  \end{bmatrix}
+  \\
+  \begin{bmatrix}
+    1 & 0 \\ -2 & 1
+  \end{bmatrix} \rmat A = \begin{bmatrix}
+    1 & 3 \\ 0 & -1
+  \end{bmatrix}
+  \\
+  \begin{bmatrix}
+    1 & 3 \\ 0 & 1
+  \end{bmatrix} \rmat T_1 \rmat A = \begin{bmatrix}
+    1 & 0 \\ 0 & -1
+  \end{bmatrix}
+  \\
+  \begin{bmatrix}
+    1 & 0 \\ 0 & -1
+  \end{bmatrix} \rmat T_2 \rmat T_1 \rmat A = \begin{bmatrix}
+    1 & 0 \\ 0 & 1
+  \end{bmatrix}
+  \\[2mm]
+  \underbrace{\rmat T_3 \rmat T_2 \rmat T_1}_{\rmat A^{-1}} \rmat A = \rmat I
+\end{gather*}
+
+A lépések szövegesen:
+\begin{enumerate}
+  \item Hozzunk létre az $\rmat A$ mátrixszal azonos méretű egységmátrixot.
+  \item Sorozatos sorműveletekkel alakítsuk át az $\rmat A$ mátrixot felső
+        háromszög mátrixszá, mint a Gauss eliminációnál, és minden sorműveletet
+        végezzünk el az egységmátrixon is.
+  \item Ismételt sorműveletekkel elimináljuk a főátló feletti részt is, és
+        tegyünk ugyanígy az egységmátrixszal is.
+  \item Az $\rmat A$ mátrixban már csak a főátlóban vannak nem nulla értékek,
+        ezért osszuk végig a sorokat a főátló elemeivel, így végül megkapjuk
+        $\rmat A$-ban az egységmátrixot, az eredeti egységmátrix helyén pedig
+        az inverz mátrixot.
+\end{enumerate}
+
+\subsection{Bázisfaktorizáció}
+
+A \kix{bázisfaktorizáció} célja a független egyenletek, vagy független vektorok
+kigyűjtése. Itt is felső háromszög mátrix létrehozása a cél. A Purcell-módszerrel
+is lehet bázisfaktorizációt végezni, amely a projektor mátrixokra épít.
+
+\subsection{Nemlineáris egyenletrendszer}
+
+Megadási módjai:
+\[
+  \rvec f(\rvec x) = \mathbf{0}
+  \qquad
+  \rvec \varphi(\rvec x) = \rvec x
+\]
+
+A \kix{nemlineáris egyenletrendszer}[eket] szintén iterációval tudjuk megoldani.
+Az iterációs sorozat az alábbi alakban írható fel:
+\[
+  \rvec x_{n+1} = \rvec \varphi(\rvec x_n)
+\]
+
+feltéve, hogy $\rvec x_i$ vektorok benne maradnak $\rvec
+  \varphi$ értelmezési tartományában. A konvergencia feltétele:
+\[
+  \left\| \rvec \varphi(\rvec x_i) - \rvec \varphi(\rvec x_{i+1}) \right\|
+  \leq \left\| \rvec x_i - \rvec x_{i+1} \right\| \cdot q
+  \text{, ahol } q \in [0; 1).
+\]
+
+Ha leosztunk a jobb oldali normával, akkor az egyenlőtlenség
+differenciálhányadoshoz hasonló alakot vesz fel:
+\[
+  \left\| \rvec \varphi'(x) \right\| \leq q < 1
+\]
+
+Az iteráció ekkor az alábbi alakban írható fel:
+\[
+  \rvec x_{n+1}
+  = \rvec x_n
+  - \left( \rvec f'(\rvec x_0) \right)^{-1} \rvec f(\rvec x_n)
+\]
+
+Az érintőmódszer általánosításával: (ez nem mindig konvergens, és minden
+lépésben mátrixot kell invertálni, viszont ha konvergens, akkor gyors)
+\[
+  \rvec x_{n+1}
+  = \rvec x_n
+  - \left( \rvec f'(\rvec x_n) \right)^{-1} \rvec f(\rvec x_n)
+\]
+
+Az érintőmódszert tovább gyorsíthatjuk, ha lineáris egyenletrendszerként oldjuk
+meg.
+\begin{gather*}
+  \rmat A \rvec x_{n+1} = \rvec b \\
+  \rmat A = \rvec f'(\rvec x_n)   \\
+  \rvec b = \rvec f'(\rvec x_n) \rvec x_n - \rvec f(\rvec x_n)
+\end{gather*}
 
 \end{document}

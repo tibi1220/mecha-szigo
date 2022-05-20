@@ -5,7 +5,143 @@
 \section{Programozás III}
 
 \begin{fulltheorem}
-	Neurális hálózatok alapjai, a Perceptron, a Perceptron tanítása.
+  Neurális hálózatok alapjai, a Perceptron, a Perceptron tanítása.
 \end{fulltheorem}
+
+A \kix{neurális háló}[k] neuronjainak mintája az agyi neuronok viselkedése.
+Minták formájában reprezentált tudás megtanulására képesek. A tudás típusa
+lehet:
+\begin{itemize}
+  \item analitikus, (pl. matematikai egyenletek)
+  \item szabályalapú, (pl. fuzzy rendszerek)
+  \item tapasztalati. (minták, megfigyelések)
+\end{itemize}
+
+\subsection{Tanítási módszerek}
+
+\paragraph{Felügyeletlen tanulás}
+
+Ilyen eset pl. ha címkézetlen képek alapján kell azonosítani az állatok fajtáját.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics{../../static/tex/build/neural-learning-1.pdf}
+  \caption{Felügyelet nélküli tanulás}
+  \label{fig:learning1}
+\end{figure}
+
+\paragraph{Felügyelt tanulás}
+
+Ilyen eset pl. ha címkézett képek alapján kell azonosítani az állatok fajtáját.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics{../../static/tex/build/neural-learning-2.pdf}
+  \caption{Felügyelt tanulás}
+  \label{fig:learning2}
+\end{figure}
+
+\paragraph{Hagyományos tanulás}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics{../../static/tex/build/neural-learning-3.pdf}
+  \caption{Hagyományos tanulás}
+  \label{fig:learning3}
+\end{figure}
+
+\subsection{A mesterséges neuron}
+
+A \kix{mesterséges neuron}[] egy információ feldolgozó egység, amely alapvető
+szerepet játszik a mesterséges neurális hálózatokban. A biológiai neuront
+utánozó model. Matematikai leírása:
+\[
+  y = \varPhi \left( \sum_{i=0}^n x_i \, w_i \right)
+\]
+\begin{center}
+  \begin{tabular}{c c l}
+    $x_i$     & -- & bemenetek           \\
+    $w_i$     & -- & súlyok              \\
+    $y$       & -- & kimeneti jel        \\
+    $\sum$    & -- & összegző            \\
+    $\varPhi$ & -- & aktivációs függvény
+  \end{tabular}
+\end{center}
+\begin{figure}[H]
+  \centering
+  \includegraphics{../../static/tex/build/neuron.pdf}
+  \caption{Egy mesterséges neuron modellje}
+  \label{fig:neuron}
+\end{figure}
+
+\subsection{Aktivációs függvény}
+
+Az \kix{aktivációs függvény} behatárolja a kimenetet két aszimptota közé,
+és ezáltal a neuron kimenete mindig egy észszerű dinamikatartományban fog
+elhelyezkedni.
+
+\subsubsection{Szigmoid}
+\[
+  \sigma(x) = \frac{1}{1 + e^{-x}}
+  \qquad
+  \sigma'(x) = \sigma(x) \left( 1 - \sigma(x) \right)
+\]
+\begin{figure}[H]
+  \centering
+  \includegraphics{../../static/tex/build/sigmoid.pdf}
+  \caption{A szigmoid függvény és deriváltja}
+  \label{fig:sigmoid}
+\end{figure}
+
+\subsubsection{Rectifier Linear Unit}
+\[
+  \mathrm{ReLU}(x) = \begin{cases}
+    0 \text{, ha } x < 0 \\
+    x \text{, ha } x \geq 0
+  \end{cases}
+  \qquad
+  \mathrm{ReLU}'(x) = \begin{cases}
+    0 \text{, ha } x < 0 \\
+    1 \text{, ha } x \geq 0
+  \end{cases}
+\]
+\begin{figure}[H]
+  \centering
+  \includegraphics{../../static/tex/build/relu.pdf}
+  \caption{A ReLU függvény és deriváltja}
+  \label{fig:relu}
+\end{figure}
+
+\subsubsection{Hiperbolikus tangens}
+\[
+  \tanh(x) = \frac{e^{2x} - 1}{e^{2x} + 1}
+  \qquad
+  \tanh'(x) = 1 - \tanh^2(x)
+\]
+\begin{figure}[H]
+  \centering
+  \includegraphics{../../static/tex/build/tanh.pdf}
+  \caption{A $\tanh(x)$ függvény és deriváltja}
+  \label{fig:tanh}
+\end{figure}
+
+\subsubsection{Leaky ReLU}
+\[
+  \mathrm{LReLU}(x) = \begin{cases}
+    0,1x \text{, ha } x < 0 \\
+    x \text{, ha } x \geq 0
+  \end{cases}
+  \qquad
+  \mathrm{LReLU}'(x) = \begin{cases}
+    0,1 \text{, ha } x < 0 \\
+    1 \text{, ha } x \geq 0
+  \end{cases}
+\]
+\begin{figure}[H]
+  \centering
+  \includegraphics{../../static/tex/build/lrelu.pdf}
+  \caption{Az LReLU függvény és deriváltja}
+  \label{fig:lrelu}
+\end{figure}
 
 \end{document}
