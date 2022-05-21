@@ -5,7 +5,171 @@
 \section{Programozás VII}
 
 \begin{fulltheorem}
-	Evolúció stratégiák, bakteriális evolúciós algoritmusok, genetikus programozás.
+  Evolúció stratégiák, bakteriális evolúciós algoritmusok, genetikus programozás.
 \end{fulltheorem}
+
+\subsection{Evolúciós stratégiák}
+
+\subsubsection{Keresztezés -- Crossover}
+\begin{itemize}
+  \item Véletlenszerű keresztezési pont kiválasztása a két szülőn.
+  \item Utódok létrehozása az információ kicserélődésével a keresztezési
+        pont alapján.
+\end{itemize}
+\begin{table}[H]
+  \centering
+  \begin{tabular}{|*{20}{>{\centering\arraybackslash}p{.2cm}|}}
+    \hline
+    \rowcolor{gray!10}
+    \luaexec{for i=1,19,1 do tex.sprint(0 .. " & ") end} 0
+    \\ \hline
+    \luaexec{for i=1,19,1 do tex.sprint(1 .. " & ") end} 1
+    \\ \hline
+  \end{tabular}
+  \\[2mm]
+  $\Downarrow$
+  \\[2mm]
+  \begin{tabular}{|*{20}{>{\centering\arraybackslash}p{.2cm}|}}
+    % noindent
+    \hline
+    \luaexec{for i=1,5,1 do tex.sprint("\\cellcolor{gray!10}" .. 0 .. "&") end} \cellcolor{gray!10} 0
+    \luaexec{for i=1,14,1 do tex.sprint("&" .. 1) end}
+    \\ \hline
+    \luaexec{for i=1,5,1 do tex.sprint(1 .. "&") end} 1
+    \luaexec{for i=1,14,1 do tex.sprint("&\\cellcolor{gray!10}" .. 0) end}
+    \\ \hline
+    % indent
+  \end{tabular}
+  \caption{A keresztezés szemléltetése}
+  \label{table:crossover}
+\end{table}
+
+\subsubsection{Mutáció}
+A gén értékének megváltoztatása $p_m$ valószínűséggel. (mutációs arány)
+\begin{table}[H]
+  \centering
+  \begin{tabular}{|*{20}{>{\centering\arraybackslash}p{.2cm}|}}
+    \hline
+    \luaexec{for i=1,19,1 do tex.sprint(1 .. " & ") end} 1
+    \\ \hline
+  \end{tabular}
+  \\[2mm]
+  $\Downarrow$
+  \\[2mm]
+  \begin{tabular}{|*{20}{>{\centering\arraybackslash}p{.2cm}|}}
+    % noindent
+    \hline
+    \luaexec{
+      for i=1,19,1 do
+      if (math.fmod(i,3) == 0 or math.fmod(i,7) == 0) then
+        tex.sprint(1 .. "&") 
+      else
+        tex.sprint("\\cellcolor{gray!10}" .. 0 .. "&") 
+      end
+      end
+    } 1
+    \\ \hline
+    % indent
+  \end{tabular}
+  \caption{A mutáció szemléltetése}
+  \label{table:mutation}
+\end{table}
+
+\subsection{Bakteriális algoritmusok}
+
+A \kix{bakteriális algoritmus} egy természetből ellesett optimalizációs
+technika. A baktériumok evolúciós folyamatán alapul. Alkalmas bonyolult
+optimalizációs problémák megoldására. Az algoritmus lépései:
+\begin{itemize}
+  \item Kezdeti populáció véletlenszerű létrehozása.
+  \item Bakteriális mutáció végrehajtása minden egyeden.
+  \item Génátadás végrehajtása a populációban.
+  \item Ha megfelelő eredményt értünk el, akkor megállunk, különben folytatjuk
+        a bakteriális mutációs lépéssel.
+\end{itemize}
+
+A \kix{bakteriális mutáció} lépései:
+\begin{itemize}
+  \item Egy rész véletlenszerű kiválasztása.
+  \item Az $i$-edik részt változtatjuk az $N_\text{klón}$ számú másolatban,
+        de az eredeti baktériumban nem.
+  \item A legjobb baktérium átadja az $i$-edik részt a többi baktériumnak.
+  \item Ismételjük addig, amíg az összes részt ki nem választottuk.
+\end{itemize}
+
+A \kix{génátadás} módja:
+\begin{itemize}
+  \item A populációt 2 részre osztjuk, jó egyedekre, és rossz egyedekre.
+  \item Egy baktériumot véletlenszerűen kiválasztunk a jobbik alpopulációból
+        (forrásbaktérium) egy másikat pedig a rossz egyedek közül (célbaktérium).
+  \item A forrásbaktérium egy része felülírja a célbaktérium egy részét.
+  \item Ez az algoritmus ismétlődik $N_\text{inf}$-szer
+\end{itemize}
+
+Az algoritmus paraméterei:
+\begin{itemize}
+  \item $N_\text{gen}$: generációk száma.
+  \item $N_\text{ind}$: egyedek száma.
+  \item $N_\text{klón}$: másolatok (klónok) száma a bakteriális mutációban.
+  \item $N_\text{inf}$: génátadások (infekciók) száma a génátadásnál.
+\end{itemize}
+
+\subsection{Genetikus programozás}
+
+A \kix{genetikus programozás} John Koza nevéhez fűződik.
+A genetikus programozás a genetikus algoritmusok alapötletét alkalmazza a
+lehetséges programok terére. Különbözőnek tűnő problémák különböző területekről
+átfogalmazhatók egy számítógépes program-keresési feladattá.
+A genetikus operátorok:
+\begin{itemize}
+  \item Keresztetés
+  \item Mutáció
+  \item Reprodukció
+        \begin{itemize}
+          \item Szülő kiválasztása fitness érték alapján, majd válzottatás
+                nélküli lemásolása.
+        \end{itemize}
+\end{itemize}
+
+\paragraph{Példa} Véletlen programok létrehozása
+\begin{itemize}
+  \item Rendelkezésre álló függvények:
+        $F = \left\{ +, -, *, \%, \texttt{IF} \right\}$
+  \item Rendelkezésre álló terminánsok:
+        $T = \left\{ X, Y, \text{consts} \right\}$
+  \item A véletlen programok szintaktikailag érvényesek és végrehajthatóak.
+  \item A fák különböző méretűek és alakúak lehetnek.
+\end{itemize}
+
+\paragraph{Példa} Szimbolikus regresszió
+\begin{itemize}
+  \item Cél meghatározása.
+        \begin{itemize}
+          \item Találjunk egy egybemenetű ($X$ független változó) számítógépes
+                programot, amelynek a kimenete megegyezik a kívánt kimenettel.
+        \end{itemize}
+  \item A terminálisok halmazának meghatározása.
+        \begin{itemize}
+          \item $T = \left\{ X, \mathrm{consts} \right\}$
+        \end{itemize}
+  \item A függvények halmazának meghatározása.
+        \begin{itemize}
+          \item $F = \left\{ +, -, *, \% \right\}$
+        \end{itemize}
+  \item A fitness értékek meghatározása.
+        \begin{itemize}
+          \item A program kimenetei és a kívánt kimenetek közötti különbségek
+                abszolútértékeinek összege.
+        \end{itemize}
+  \item A futtatás paramétereinek meghatározása.
+        \begin{itemize}
+          \item A poluláció mérete -- $M = 4$.
+        \end{itemize}
+  \item A megállási feltétel meghatározása.
+        \begin{itemize}
+          \item Ha kialakul egy olyan egyed, amelynél az abszolút hibák összege
+                kisebb, mint $0,1$.
+        \end{itemize}
+\end{itemize}
 
 \end{document}

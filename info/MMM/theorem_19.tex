@@ -2,10 +2,53 @@
 
 \begin{document}
 
+\clearpage
+
 \section{LabView I}
 
 \begin{fulltheorem}
-	Adatfolyam programozás és problémái.
+  Adatfolyam programozás és problémái.
 \end{fulltheorem}
+
+\subsection{Az adatfolyam programozás}
+
+A \kix{Labview}[ban] használatos adatfolyam paradigma (néha G-nek is szokás nevezni)
+az adatok elérhetőségén alapul. Ha egy \kix{blokk} kiértékeléséhez elegendő adat áll
+rendelkezésre, akkor az ki is lesz értékelve. A végrehajtási sorrendet egy
+grafikus blokk-diagram (Labview Source Code) diktálja, melyen a blokkok
+vezetékekkel vannak összekötve. Ezek a \kix{vezeték}[ek] biztosítják a változók
+áramlását, hogy bármely blokk azonnal kiértékelésre kerüljön, amint minden
+bemenetére adat érkezett. Mivel egyszerre akár több blokk esetében is
+teljesülhet ez a feltétel, ezért a LabView képes a párhuzamos szálak futtatására.
+A Multi-processing és multi-threading hardvert automatikusan felhasználja a
+beépített ütemető, amely több operációsrendszer-szálat multiplexel a
+végrehajtásra váró blokkokra.
+
+\subsection{A LabView program és részei}
+
+A LabView programokat  virtuális műszereknek (\cix{VI} -- \kix{Virtual Instrument})
+szokás nevezni. Minden \tc{VI} 3 részből áll:
+\begin{itemize}
+  \item \tc{Front Panel} --
+        Bemenetekből (\tc{control}) és kimenetekből (\tc{indicator}) épül fel.
+  \item \tc{Block Diagram} --
+        A grafikus forráskódot tartalmazza. A \tc{Front Panelen} lévő változók
+        itt terminálként fognak megjelenni. Struktúrákat és függvényeket is
+        tartalmaz, melyek a \tc{Functions Palette}-en találhatóak.
+  \item \tc{Connector Pane} --
+        A \tc{VI} blokkdiagrammon való reprezentációját határozza meg.
+\end{itemize}
+
+\subsection{Problémák}
+
+LabView használata során az alábbi problémák merülhetnek fel:
+\begin{itemize}
+  \item A párhuzamos futás miatt nem tudhatjuk, hogy pontosan mikor,
+        melyik blokk lesz kiértékelve, akár egymást követő futások során
+        is más futási sorrendet kaphatunk.
+  \item Nehéz a vezetékeket esztétikusan elrendezni, ezen az auto-formatter
+        sem szokott segíteni.
+  \item Nem lehet nagyítani.
+\end{itemize}
 
 \end{document}

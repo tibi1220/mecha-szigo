@@ -115,22 +115,24 @@ Megfigyelhetjük, hogy a formula tulajdonképpen egy \kix{súlyozott átlag}.
   \label{fig:AB2}
 \end{figure}
 
-\subsection{Adams-Multon formulák}
+\subsection{Adams-Moulton formulák}
 
-Az \kix{Adams-Multon} formulák az intervallum vége és az az előtti pontokat
+Az \kix{Adams-Moulton} formulák az intervallum vége és az az előtti pontokat
 használják fel a közelítéshez.
 
 \paragraph{Téglány}
 \[
   y_{n + 1}
-  = y_{n + 1} + \dot y_n \Delta t
+  = y_n
+  + \dot y_{n + 1} \Delta t
   - \frac{\dot y(\xi)}{2} \Delta t^2
 \]
 
 \paragraph{Trapéz (AM2)}
 \[
   y_{n + 1}
-  = \frac{y_n + y_{n + 1}}{2} \Delta t
+  = y_n
+  + \frac{\dot y_n + \dot y_{n + 1}}{2} \Delta t
   - \frac{\ddot y(\xi)}{12} \Delta t^3
 \]
 
