@@ -89,9 +89,9 @@ public:
   ~MyClass() {}
 };
 
-MyClass* dinamic_instance = new MyClass();
+MyClass* dynamic_instance = new MyClass();
 MyClass static_instance();
-delete dinamic_instance;
+delete dynamic_instance;
 \end{minted}
 
 \subsection{Statikus tagok}
@@ -112,7 +112,7 @@ int MyClass::x = 42;
 \subsection{Friend függvények}
 
 A \cix{friend} függvények segítségével az osztály rejtett tagjai is elérhetőek.
-Lehet külső függvény, egy másik osztály függvénye, vagy akár egy mésik osztály
+Lehet külső függvény, egy másik osztály függvénye, vagy akár egy másik osztály
 is.
 
 \begin{minted}[bgcolor=bg, linenos]{cpp}

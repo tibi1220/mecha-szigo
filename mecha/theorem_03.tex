@@ -18,7 +18,7 @@
       box/.style={
           rectangle, draw=black, fill=yellow!5,
           minimum height=1.6cm, minimum width=3.2cm,
-          align=center,
+          align=center, rounded corners,
         },
       arr/.style={ultra thick, cyan!50!black},
       tr/.style={ultra thick, yellow!50!black},
@@ -68,7 +68,7 @@
     \draw[tr, to-] (-.75,-2.2) to[bend right]
     node[midway, below, black] {$\mathcal Z^{-1}$} ++(1.5,0);
 
-    \draw[tr, -to] (-6.75,-1) to[bend left]
+    \draw[tr, to-] (-6.75,-1) to[bend left]
     node[midway, right, black, align=center] {minta-\\vételezés} ++(0,2);
     \draw[tr, to-to] (6.75,-1) to[bend right]
     node[midway, left, black] {$z = e^{s \tau}$} ++(0,2);

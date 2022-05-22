@@ -41,7 +41,7 @@ Ilyen eset pl. ha címkézett képek alapján kell azonosítani az állatok fajt
   \label{fig:learning2}
 \end{figure}
 
-\paragraph{Hagyományos tanulás}
+\paragraph{Hagyományos tanulás}\;
 
 \begin{figure}[H]
   \centering
@@ -96,13 +96,13 @@ elhelyezkedni.
 \subsubsection{Rectifier Linear Unit}
 \[
   \mathrm{ReLU}(x) = \begin{cases}
-    0 \text{, ha } x < 0 \\
-    x \text{, ha } x \geq 0
+    0, & \text{ ha } x < 0    \\
+    x, & \text{ ha } x \geq 0
   \end{cases}
   \qquad
   \mathrm{ReLU}'(x) = \begin{cases}
-    0 \text{, ha } x < 0 \\
-    1 \text{, ha } x \geq 0
+    0, & \text{ ha } x < 0    \\
+    1, & \text{ ha } x \geq 0
   \end{cases}
 \]
 \begin{figure}[H]
@@ -128,13 +128,13 @@ elhelyezkedni.
 \subsubsection{Leaky ReLU}
 \[
   \mathrm{LReLU}(x) = \begin{cases}
-    0,1x \text{, ha } x < 0 \\
-    x \text{, ha } x \geq 0
+    x/10, & \text{ ha } x < 0    \\
+    x,    & \text{ ha } x \geq 0
   \end{cases}
   \qquad
   \mathrm{LReLU}'(x) = \begin{cases}
-    0,1 \text{, ha } x < 0 \\
-    1 \text{, ha } x \geq 0
+    1/10, & \text{ ha } x < 0    \\
+    1,    & \text{ ha } x \geq 0
   \end{cases}
 \]
 \begin{figure}[H]
