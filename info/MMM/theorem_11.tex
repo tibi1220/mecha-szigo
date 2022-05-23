@@ -49,6 +49,7 @@
 
 \bgroup
 \def\arraystretch{2}
+% \setlength\extrarowheight{1mm}
 \arrayrulecolor{cyan!20!black}
 \setlength{\arrayrulewidth}{1pt}
 \begin{table}[H]
@@ -59,13 +60,13 @@
     $i$ & $t_0$                  & $x_i$                                                 & $\dot x_i$                                                         & $\ddot x_i$
     \\ \hline
     $0$ & $t_0$                  & $x_0$                                                 & $\dot x_0$                                                         & $\ddot x_0 = \dfrac{F}{m} - \dfrac{b}{m} \dot x_0 - \dfrac{k}{m} x_0$
-    \\  \rowcolor{gray!10}
-    $1$ & $t_1 = t_0 + \Delta t$ & $x_1 = x_0 + \dfrac{\dot x_1 - \dot x_0}{2} \Delta t$ & $\dot x_1 = \dot x_0 + \ddot x_0 \Delta t$                         & $\ddot x_1 = \dfrac{F}{m} - \dfrac{b}{m} \dot x_1 - \dfrac{k}{m} x_1$
-    \\
-    $2$ & $t_2 = t_1 + \Delta t$ & $x_2 = x_1 + \dfrac{\dot x_2 - \dot x_1}{2} \Delta t$ & $\dot x_2 = \dot x_1 + \dfrac{3\ddot x_1 - \ddot x_0}{2} \Delta t$ & $\ddot x_2 = \dfrac{F}{m} - \dfrac{b}{m} \dot x_2 - \dfrac{k}{m} x_2$
-    \\  \rowcolor{gray!10}
-    $3$ & $t_3 = t_2 + \Delta t$ & $x_3 = x_2 + \dfrac{\dot x_3 - \dot x_2}{2} \Delta t$ & $\dot h_3 = \dot x_2 + \dfrac{3\ddot x_2 - \ddot x_1}{2} \Delta t$ & $\ddot x_3 = \dfrac{F}{m} - \dfrac{b}{m} \dot x_3 - \dfrac{k}{m} x_3$
-    \\ \hline
+    \\[1mm]  \rowcolor{gray!10}
+    $1$ & $t_1 = t_0 + \Delta t$ & $x_1 = x_0 + \dfrac{\dot x_1 + \dot x_0}{2} \Delta t$ & $\dot x_1 = \dot x_0 + \ddot x_0 \Delta t$                         & $\ddot x_1 = \dfrac{F}{m} - \dfrac{b}{m} \dot x_1 - \dfrac{k}{m} x_1$
+    \\[1mm]
+    $2$ & $t_2 = t_1 + \Delta t$ & $x_2 = x_1 + \dfrac{\dot x_2 + \dot x_1}{2} \Delta t$ & $\dot x_2 = \dot x_1 + \dfrac{3\ddot x_1 - \ddot x_0}{2} \Delta t$ & $\ddot x_2 = \dfrac{F}{m} - \dfrac{b}{m} \dot x_2 - \dfrac{k}{m} x_2$
+    \\[1mm]  \rowcolor{gray!10}
+    $3$ & $t_3 = t_2 + \Delta t$ & $x_3 = x_2 + \dfrac{\dot x_3 + \dot x_2}{2} \Delta t$ & $\dot x_3 = \dot x_2 + \dfrac{3\ddot x_2 - \ddot x_1}{2} \Delta t$ & $\ddot x_3 = \dfrac{F}{m} - \dfrac{b}{m} \dot x_3 - \dfrac{k}{m} x_3$
+    \\[1mm] \hline
   \end{tabular}
   \caption{Rezgő feladat megoldása közelítéssel}
   \label{fig:int2}

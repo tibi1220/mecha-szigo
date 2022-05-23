@@ -76,7 +76,7 @@ int factorial(int n){
   return n * factorial(n-1);
 }
 
-// Az aranymetszés
+// Az aranymetszés (20 esetén 13000+ függvényhívás)
 int golden_ratio(int n){
   if(n == 1 || n == 2) return 1;
   return golden_ratio(n-1) + golden_ratio(n-2);

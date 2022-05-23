@@ -276,10 +276,9 @@ Az utasításkészlete fontos jellemzője. A mikroprocesszor egy chipen kialakí
 \begin{itemize}
   \item \kix{ALU} -- aritmetikai és logikai műveletek végzése
         \begin{itemize}
-          \item összeadás, kivonás,
-                fixpontos szorzás, osztás (léptetések),
+          \item Összeadás, kivonás, fixpontos szorzás, osztás (léptetések),
                 lebegőpontos aritmetikai műveletek (korábban koprocesszor),
-                egyszerű logikai műveletek
+                egyszerű logikai műveletek.
         \end{itemize}
 
   \item \kix{Utasítás dekódoló és vezérlő egység}
@@ -292,8 +291,8 @@ Az utasításkészlete fontos jellemzője. A mikroprocesszor egy chipen kialakí
   \item \kix{Regiszter}[ek] --
         chipen belüli, közvetlen elérésű tároló elemek
         \begin{itemize}
-          \item feladatuk műveletvégzéskor az operandusok tárolása,
-                illetve a címek előállítása
+          \item Feladatuk műveletvégzéskor az operandusok tárolása,
+                illetve a címek előállítása.
         \end{itemize}
 \end{itemize}
 
@@ -467,19 +466,19 @@ Az utasításkészlete fontos jellemzője. A mikroprocesszor egy chipen kialakí
 
 \subsection{Szubrutinhívás}
 
-\kix{Szubrutinhívás} esetén a program máshol folytatódik. (alprogramra ugrunk)
+\kix{Szubrutinhívás} esetén a program máshol folytatódik (alprogramra ugrunk).
 \tc{CALL}, \tc{RET} utasításpár. Ahhoz, hogy vissza tudjunk térni a megfelelő
 helyre, el kell menteni a \tc{PC} (utasításszámláló) értékét a \cix{stack}-be
-(\tc{PUSH})
+(\tc{PUSH}).
 
 \subsection{Interrupt}
 
 A \kix{megszakítás} (\cix{interrupt}) egy erőltetett vezérlésátadás,
 ugrás egy megszakítást kezelő \kix{rutin}[ra]. Előidézheti egy
-mikroprocesszorban előforduló esemény. (zéróosztás)
-Érkezhet megszakítás egy hardver egység felől is. (adatok beolvasása a
-memóriába megtörtént) Program is tartalmazhat megszakítási utasítást.
-(oprendszeri szolgáltatás) Fő okai:
+mikroprocesszorban előforduló esemény (pl. zéróosztás).
+Érkezhet megszakítás egy hardver egység felől is. (Pl. adatok beolvasása a
+memóriába megtörtént.) Program is tartalmazhat megszakítási utasítást
+(pl. oprendszeri szolgáltatás). Fő okai:
 \begin{itemize}
   \item processzor megszakítás,
   \item hardver megszakítás, (IRQ: interrupt request)

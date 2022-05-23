@@ -89,9 +89,11 @@ public:
   ~MyClass() {}
 };
 
-MyClass* dynamic_instance = new MyClass();
-MyClass static_instance();
-delete dynamic_instance;
+int main() {
+  MyClass* dynamic_instance = new MyClass();
+  MyClass static_instance();
+  delete dynamic_instance; // dynamic instance destroyed here
+} // static instance destroyed here
 \end{minted}
 
 \subsection{Statikus tagok}

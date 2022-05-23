@@ -18,8 +18,7 @@ szimbólumokhoz más-más hosszúságú kódszavakat rendelnek,
 \kix{változó szóhosszúságú} kódoknak nevezzük.
 $f(A_i) = B^{(1)} \; B^{(2)} \; \dots \; B^{(\ell_i)}$
 $\mathcal{B}$-beli sorozat (kódszó) hossza: ${\ell_i}$.
-Egy $f$ kód \kix{átlagos szóhossz}[a] $\ell_i$,
-\kix{várható érték}[e]:
+Egy $f$ kód \kix{átlagos szóhossz}[a] $\ell_i$ \kix{várható érték}[e]:
 \[
   L(A) = \sum_{i=1}^n p(A_i) \cdot \ell_i =
   \sum_{i=1}^n p_i \cdot\ell_i
@@ -44,16 +43,16 @@ A jól tömöríthető eljárásokra igaz, hogy ha $p_i \geq p_j$,
 akkor $\ell_i \leq \ell_j$. Ha az $f$ \kix{bináris kód} \kix{prefix},
 akkor \dots
 \begin{itemize}
-  \item a leggyakoribb forrásábécébeli elemhez
-        fog a legrövidebb kódszó tartozni
+  \item A leggyakoribb forrásábécébeli elemhez
+        fog a legrövidebb kódszó tartozni.
 
-  \item a második leggyakoribbhoz eggyel hosszabb kódszó
+  \item A második leggyakoribbhoz eggyel hosszabb kódszó.
 
-  \item \dots
+  \item $\vdots$
 
-  \item a két legritkábban előforduló betűhöz
+  \item A két legritkábban előforduló betűhöz
         pedig azonosan hosszú kódszó fog tartozni,
-        és csak az utolsó karakterben fog e két szó különbözni
+        és csak az utolsó karakterben fog e két szó különbözni.
 \end{itemize}
 
 \subsection{Huffman-kód}
@@ -61,18 +60,18 @@ akkor \dots
 A \kix{Huffman-kód} a legrövidebb átlagos
 szóhosszú \kix{bináris prefix kód}.
 \begin{enumerate}
-  \item valószínűségek szerint sorba rendez
+  \item Valószínűségek szerint sorba rendez.
 
-  \item a két legkisebb valószínűséhű szimbólumot
+  \item A két legkisebb valószínűséhű szimbólumot
         összevonja. Az összevont szimbólum valószínűsége
         az eredeti két valószínűség összege.
 
-  \item az első 2 lépés ismételgetése
+  \item Az első 2 lépés ismételgetése.
 
-  \item a kapott gráf minden csomópontja előtti
-        két élt megcímkézi $0$-val és $1$-gyel
+  \item A kapott gráf minden csomópontja előtti
+        két élt megcímkézi $0$-val és $1$-gyel.
 
-  \item a kódfa gyökerétől elindulba megkeresi
+  \item A kódfa gyökerétől elindulba megkeresi
         az adott szimbólumhoz tartozó útvonalat, kiolvassa
         az éleknek megfelelő biteket. A kapott bitsorozatot
         rendeli a szimbólumhoz kódszóként.
